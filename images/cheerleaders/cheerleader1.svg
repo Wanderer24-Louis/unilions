@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <!-- 背景 -->
+  <rect width="300" height="300" fill="#ffebee"/>
+  
+  <!-- 拉拉隊員輪廓 -->
+  <circle cx="150" cy="100" r="60" fill="#FF6B00"/>
+  <path d="M90 160 L150 250 L210 160 Z" fill="#FF6B00"/>
+  
+  <!-- 服裝 -->
+  <path d="M90 160 L150 250 L210 160 Z" fill="#FF6B00"/>
+  <text x="150" y="200" font-family="Arial" font-size="30" text-anchor="middle" fill="white">UNI</text>
+  
+  <!-- 臉部特徵 -->
+  <circle cx="130" cy="90" r="5" fill="black"/>
+  <circle cx="170" cy="90" r="5" fill="black"/>
+  <path d="M130 120 Q150 130 170 120" fill="none" stroke="black" stroke-width="3"/>
+  
+  <!-- 頭髮 -->
+  <path d="M90 100 Q150 30 210 100" fill="none" stroke="black" stroke-width="5"/>
+</svg>
