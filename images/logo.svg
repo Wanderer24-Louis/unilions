@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- 獅子頭背景圓形 -->
+  <circle cx="100" cy="100" r="95" fill="#e60012"/>
+  <circle cx="100" cy="100" r="85" fill="#ffffff"/>
+  
+  <!-- 獅子頭 -->
+  <path d="M100,30 C65,30 40,55 40,90 C40,125 65,150 100,150 C135,150 160,125 160,90 C160,55 135,30 100,30 Z" fill="#e60012"/>
+  
+  <!-- 獅子眼睛 -->
+  <circle cx="75" cy="85" r="8" fill="#ffffff"/>
+  <circle cx="125" cy="85" r="8" fill="#ffffff"/>
+  <circle cx="75" cy="85" r="4" fill="#000000"/>
+  <circle cx="125" cy="85" r="4" fill="#000000"/>
+  
+  <!-- 獅子鼻子 -->
+  <path d="M100,95 C95,95 90,100 90,105 C90,110 95,115 100,115 C105,115 110,110 110,105 C110,100 105,95 100,95 Z" fill="#000000"/>
+  
+  <!-- 獅子嘴巴 -->
+  <path d="M85,120 C90,125 95,127 100,127 C105,127 110,125 115,120" stroke="#000000" stroke-width="3" fill="none"/>
+  
+  <!-- 獅子鬃毛 -->
+  <path d="M40,90 C35,80 35,70 40,60 C45,50 55,45 65,40" stroke="#e60012" stroke-width="8" fill="none"/>
+  <path d="M160,90 C165,80 165,70 160,60 C155,50 145,45 135,40" stroke="#e60012" stroke-width="8" fill="none"/>
+  <path d="M50,120 C45,130 45,140 50,150 C55,160 65,165 75,170" stroke="#e60012" stroke-width="8" fill="none"/>
+  <path d="M150,120 C155,130 155,140 150,150 C145,160 135,165 125,170" stroke="#e60012" stroke-width="8" fill="none"/>
+  
+  <!-- 文字：統一獅 -->
+  <text x="100" y="180" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#e60012">統一7-ELEVEn獅</text>
+</svg>
