@@ -23,6 +23,11 @@ function parseRSSXML(xmlData) {
     const descRegex = /<description[^>]*><!\[CDATA\[(.*?)\]\]><\/description>|<description[^>]*>(.*?)<\/description>/i;
     const pubDateRegex = /<pubDate[^>]*>(.*?)<\/pubDate>/i;
     
+    // 圖片相關的正則表達式
+    const enclosureRegex = /<enclosure[^>]*url=["']([^"']*\.(jpg|jpeg|png|gif|webp))[^"']*["'][^>]*>/i;
+    const mediaContentRegex = /<media:content[^>]*url=["']([^"']*\.(jpg|jpeg|png|gif|webp))[^"']*["'][^>]*>/i;
+    const imgRegex = /<img[^>]*src=["']([^"']*\.(jpg|jpeg|png|gif|webp))[^"']*["'][^>]*>/i;
+    
     let match;
     while ((match = itemRegex.exec(xmlData)) !== null) {
         const itemContent = match[1];
@@ -38,6 +43,27 @@ function parseRSSXML(xmlData) {
             const description = descMatch ? (descMatch[1] || descMatch[2] || '') : '';
             const pubDate = dateMatch ? dateMatch[1] : '';
             
+            // 嘗試從多個來源提取圖片URL
+            let imageUrl = "images/logo.png"; // 預設圖片
+            
+            // 1. 嘗試從 enclosure 標籤獲取圖片
+            const enclosureMatch = enclosureRegex.exec(itemContent);
+            if (enclosureMatch) {
+                imageUrl = enclosureMatch[1];
+            } else {
+                // 2. 嘗試從 media:content 標籤獲取圖片
+                const mediaMatch = mediaContentRegex.exec(itemContent);
+                if (mediaMatch) {
+                    imageUrl = mediaMatch[1];
+                } else {
+                    // 3. 嘗試從描述中的 img 標籤獲取圖片
+                    const imgMatch = imgRegex.exec(description);
+                    if (imgMatch) {
+                        imageUrl = imgMatch[1];
+                    }
+                }
+            }
+            
             // 統一獅相關關鍵字
             const unilionsKeywords = [
                 '統一', '獅', 'Uni-Lions', '統一7-ELEVEn獅', '統一獅',
@@ -52,12 +78,11 @@ function parseRSSXML(xmlData) {
             );
             
             if (isUnilionsRelated) {
-                
                 items.push({
                     title: title.trim(),
                     summary: description.replace(/<[^>]*>/g, '').trim().substring(0, 100) + '...',
                     date: pubDate ? new Date(pubDate).toLocaleDateString('zh-TW') : new Date().toLocaleDateString('zh-TW'),
-                    image: "images/logo.png", // 使用統一獅logo作為預設圖片
+                    image: imageUrl,
                     link: link.trim()
                 });
             }
