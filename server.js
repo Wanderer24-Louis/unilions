@@ -6,46 +6,142 @@ const url = require('url');
 
 const PORT = 3000;
 
-// 新聞爬蟲函數
-function fetchUnilionsNews() {
+// RSS新聞來源
+const RSS_SOURCES = [
+    'https://feeds.feedburner.com/rsscna/sport', // 中央社運動新聞
+    'https://news.ltn.com.tw/rss/sports.xml'     // 自由時報體育新聞
+];
+
+// 簡單的XML解析函數
+function parseRSSXML(xmlData) {
+    const items = [];
+    
+    // 使用正則表達式解析RSS項目
+    const itemRegex = /<item[^>]*>([\s\S]*?)<\/item>/gi;
+    const titleRegex = /<title[^>]*><!\[CDATA\[(.*?)\]\]><\/title>|<title[^>]*>(.*?)<\/title>/i;
+    const linkRegex = /<link[^>]*>(.*?)<\/link>/i;
+    const descRegex = /<description[^>]*><!\[CDATA\[(.*?)\]\]><\/description>|<description[^>]*>(.*?)<\/description>/i;
+    const pubDateRegex = /<pubDate[^>]*>(.*?)<\/pubDate>/i;
+    
+    let match;
+    while ((match = itemRegex.exec(xmlData)) !== null) {
+        const itemContent = match[1];
+        
+        const titleMatch = titleRegex.exec(itemContent);
+        const linkMatch = linkRegex.exec(itemContent);
+        const descMatch = descRegex.exec(itemContent);
+        const dateMatch = pubDateRegex.exec(itemContent);
+        
+        if (titleMatch && linkMatch) {
+            const title = titleMatch[1] || titleMatch[2] || '';
+            const link = linkMatch[1] || '';
+            const description = descMatch ? (descMatch[1] || descMatch[2] || '') : '';
+            const pubDate = dateMatch ? dateMatch[1] : '';
+            
+            // 過濾統一獅相關新聞
+            if (title.includes('統一') || title.includes('獅') || title.includes('Uni-Lions') || 
+                description.includes('統一') || description.includes('獅') || description.includes('Uni-Lions')) {
+                
+                items.push({
+                    title: title.trim(),
+                    summary: description.replace(/<[^>]*>/g, '').trim().substring(0, 100) + '...',
+                    date: pubDate ? new Date(pubDate).toLocaleDateString('zh-TW') : new Date().toLocaleDateString('zh-TW'),
+                    image: "images/logo.png", // 使用統一獅logo作為預設圖片
+                    link: link.trim()
+                });
+            }
+        }
+    }
+    
+    return items;
+}
+
+// 從RSS來源獲取新聞
+function fetchFromRSS(rssUrl) {
     return new Promise((resolve, reject) => {
-        // 模擬統一獅新聞數據（實際應用中可以爬取真實新聞網站）
-        const mockNews = [
+        const request = https.get(rssUrl, (response) => {
+            let data = '';
+            
+            response.on('data', (chunk) => {
+                data += chunk;
+            });
+            
+            response.on('end', () => {
+                try {
+                    const items = parseRSSXML(data);
+                    resolve(items);
+                } catch (error) {
+                    console.error(`解析RSS失敗 (${rssUrl}):`, error);
+                    resolve([]);
+                }
+            });
+        });
+        
+        request.on('error', (error) => {
+            console.error(`RSS請求失敗 (${rssUrl}):`, error);
+            resolve([]);
+        });
+        
+        request.setTimeout(10000, () => {
+            console.error(`RSS請求超時 (${rssUrl})`);
+            request.destroy();
+            resolve([]);
+        });
+    });
+}
+
+// 統一獅新聞爬蟲函數
+async function fetchUnilionsNews() {
+    try {
+        console.log('開始獲取統一獅新聞...');
+        
+        // 並行獲取所有RSS來源
+        const promises = RSS_SOURCES.map(source => fetchFromRSS(source));
+        const results = await Promise.all(promises);
+        
+        // 合併所有新聞並去重
+        let allNews = [];
+        results.forEach(newsArray => {
+            allNews = allNews.concat(newsArray);
+        });
+        
+        // 按日期排序並取前6則
+        allNews.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const uniqueNews = allNews.filter((news, index, self) => 
+            index === self.findIndex(n => n.title === news.title)
+        );
+        
+        console.log(`成功獲取 ${uniqueNews.length} 則統一獅新聞`);
+        
+        // 如果沒有找到相關新聞，返回一些備用新聞
+        if (uniqueNews.length === 0) {
+            return [
+                {
+                    title: "統一獅官方網站 - 最新消息",
+                    summary: "請關注統一獅官方網站獲取最新球隊動態和比賽資訊。",
+                    date: new Date().toLocaleDateString('zh-TW'),
+                    image: "images/logo.png",
+                    link: "https://www.uni-lions.com.tw/"
+                }
+            ];
+        }
+        
+        return uniqueNews.slice(0, 6);
+        
+    } catch (error) {
+        console.error('獲取新聞時發生錯誤:', error);
+        
+        // 返回備用新聞
+        return [
             {
-                title: "統一獅主場迎戰富邦悍將，力拼三連勝",
-                summary: "統一獅將在台南棒球場迎戰富邦悍將，球迷期待球隊延續勝利氣勢。",
+                title: "統一獅官方網站 - 最新消息",
+                summary: "請關注統一獅官方網站獲取最新球隊動態和比賽資訊。",
                 date: new Date().toLocaleDateString('zh-TW'),
-                image: "images/news1.jpg",
-                link: "#"
-            },
-            {
-                title: "陳傑憲單場雙響砲，助球隊逆轉勝",
-                summary: "統一獅隊長陳傑憲在昨日比賽中敲出兩支全壘打，帶領球隊完成大逆轉。",
-                date: new Date(Date.now() - 86400000).toLocaleDateString('zh-TW'),
-                image: "images/news2.jpg",
-                link: "#"
-            },
-            {
-                title: "Uni Girls推出新舞蹈，球迷熱烈回響",
-                summary: "統一獅啦啦隊Uni Girls推出全新應援舞蹈，在社群媒體上獲得廣大迴響。",
-                date: new Date(Date.now() - 172800000).toLocaleDateString('zh-TW'),
-                image: "images/news3.jpg",
-                link: "#"
-            },
-            {
-                title: "統一獅新秀投手表現亮眼，獲教練團肯定",
-                summary: "年輕投手在春訓中展現優異表現，有望成為球隊輪值投手。",
-                date: new Date(Date.now() - 259200000).toLocaleDateString('zh-TW'),
-                image: "images/news1.jpg",
-                link: "#"
+                image: "images/logo.png",
+                link: "https://www.uni-lions.com.tw/"
             }
         ];
-        
-        // 模擬網路延遲
-        setTimeout(() => {
-            resolve(mockNews);
-        }, 500);
-    });
+    }
 }
 
 const server = http.createServer(async (req, res) => {
