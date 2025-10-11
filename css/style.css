@@ -930,3 +930,77 @@ footer {
         flex-direction: column;
     }
 }
+
+/* 新聞載入狀態樣式 */
+.loading-news,
+.news-error {
+    text-align: center;
+    padding: 40px 20px;
+    grid-column: 1 / -1;
+}
+
+.loading-news i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.loading-news p {
+    color: var(--gray-color);
+    font-size: 1.1rem;
+}
+
+.news-error {
+    background-color: var(--light-color);
+    border-radius: 10px;
+    border: 2px dashed var(--gray-color);
+}
+
+.news-error i {
+    font-size: 2rem;
+    color: var(--danger-color);
+    margin-bottom: 15px;
+}
+
+.news-error p {
+    color: var(--gray-color);
+    margin-bottom: 20px;
+}
+
+.retry-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.retry-btn:hover {
+    background-color: #c50010;
+}
+
+/* 新聞元數據樣式 */
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.news-date {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+}
+
+.read-more {
+    color: var(--primary-color);
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: #c50010;
+}
