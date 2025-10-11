@@ -9,6 +9,47 @@
     <link rel="icon"href="images/icon.png">
     <link rel="apple-touch-icon" href="images/icon.png">
 </head>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>本網頁維護中</title>
+
+  <script>
+    // 等網頁載入後顯示提示，然後自動跳回首頁
+    window.onload = function() {
+      alert("本網頁維護中，將自動返回首頁。");
+      setTimeout(function() {
+        window.location.href = "/"; // 這裡是首頁網址，可改成你要導向的路徑
+      }, 1000); // 2秒後跳轉
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #f8f8f8;
+      font-family: "Microsoft JhengHei", sans-serif;
+      text-align: center;
+      padding-top: 20%;
+    }
+    h1 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>本網頁維護中</h1>
+  <p>請稍候，我們將自動帶您返回首頁。</p>
+
+  <!-- 原本的頁面內容都還可以留在下面 -->
+  <div style="display:none;">
+    <!-- 原本整個網頁內容（保留，但不顯示） -->
+    <!-- 例如： -->
+    <!-- <section class="hero">...</section> -->
+  
+
+
 <body>
     <header>
         <div class="logo-container">
@@ -375,5 +416,8 @@
     </footer>
 
     <script src="js/main.js"></script>
+</body>
+</html>
+</div>
 </body>
 </html>
