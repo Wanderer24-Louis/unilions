@@ -38,9 +38,20 @@ function parseRSSXML(xmlData) {
             const description = descMatch ? (descMatch[1] || descMatch[2] || '') : '';
             const pubDate = dateMatch ? dateMatch[1] : '';
             
+            // 統一獅相關關鍵字
+            const unilionsKeywords = [
+                '統一', '獅', 'Uni-Lions', '統一7-ELEVEn獅', '統一獅',
+                '陳傑憲', '蘇智傑', '林靖凱', '高國輝', '鄭鈞仁',
+                '台南', '澄清湖', 'Uni Girls', '啦啦隊',
+                '中華職棒', 'CPBL', '職棒', '棒球'
+            ];
+            
             // 過濾統一獅相關新聞
-            if (title.includes('統一') || title.includes('獅') || title.includes('Uni-Lions') || 
-                description.includes('統一') || description.includes('獅') || description.includes('Uni-Lions')) {
+            const isUnilionsRelated = unilionsKeywords.some(keyword => 
+                title.includes(keyword) || description.includes(keyword)
+            );
+            
+            if (isUnilionsRelated) {
                 
                 items.push({
                     title: title.trim(),
