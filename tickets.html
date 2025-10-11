@@ -20,7 +20,13 @@
                 <li><a href="players.html">球員</a></li>
                 <li><a href="cheerleaders.html">啦啦隊員</a></li>
                 <li><a href="tickets.html" class="active">售票資訊</a></li>
-                <li><a href="#">新聞</a></li>
+                <li><a href="#"onclick="showMessage(event)">新聞</a></li>
+                 <script>
+  function showMessage(event) {
+    event.preventDefault(); // 🔹 阻止 <a> 的預設跳轉行為
+    alert("暫不開放！");
+  }
+</script>
                 <li><a href="#">賽程</a></li>
             </ul>
         </nav>
@@ -65,7 +71,7 @@
 
         <section class="ticket-prices">
             <div class="container">
-                <h2>票價資訊</h2>
+                <h2>票價資訊(請依售票網為準)</h2>
                 <div class="price-table-container">
                     <table class="price-table">
                         <thead>
@@ -122,9 +128,10 @@
             </div>
         </section>
 
+        <div id="stadium-info" >
         <section class="stadium-info">
-            <div class="container">
-                <h2>球場資訊</h2>
+           <div class="container">
+             <h2>球場資訊</h2>
                 <div class="stadium-container">
                     <div class="stadium-map">
                         <img src="images/stadium-map.jpeg" alt="台南棒球場座位圖">
