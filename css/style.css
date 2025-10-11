@@ -156,12 +156,12 @@ nav {
 
 /* 首頁樣式 */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/hero.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/group.jpg');
     background-size: cover;
     background-position: center;
     color: white;
     text-align: center;
-    padding: 150px 20px;
+    padding: 500px 20px;
 }
 
 .hero h1 {
@@ -1003,25 +1003,4 @@ footer {
 
 .read-more:hover {
     color: #c50010;
-}
-.banner {
-  background-image: url('images/group.jpg');
-  background-size: cover;
-  background-position: center;
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
-  position: relative;
-}
-
-.banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4); /* 黑色半透明遮罩 */
-}
-
-.banner h1, .banner p {
-  position: relative; /* 讓文字浮在遮罩上面 */
-  z-index: 1;
 }
