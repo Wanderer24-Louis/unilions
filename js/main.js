@@ -51,4 +51,66 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // 動態載入統一獅新聞
+    loadUnilionsNews();
 });
+
+// 載入統一獅新聞的函數
+async function loadUnilionsNews() {
+    const newsContainer = document.querySelector('.news-container');
+    
+    if (!newsContainer) {
+        return; // 如果不在首頁，就不執行
+    }
+
+    try {
+        // 顯示載入中的狀態
+        newsContainer.innerHTML = `
+            <div class="loading-news">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>正在載入最新消息...</p>
+            </div>
+        `;
+
+        // 從API獲取新聞
+        const response = await fetch('/api/news');
+        const news = await response.json();
+
+        if (response.ok && news.length > 0) {
+            // 清空容器並顯示新聞
+            newsContainer.innerHTML = '';
+            
+            // 只顯示前3則新聞
+            const displayNews = news.slice(0, 3);
+            
+            displayNews.forEach(article => {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'news-card';
+                newsCard.innerHTML = `
+                    <img src="${article.image}" alt="${article.title}" onerror="this.src='images/logo.png'">
+                    <div class="news-content">
+                        <h3>${article.title}</h3>
+                        <p>${article.summary}</p>
+                        <div class="news-meta">
+                            <span class="news-date">${article.date}</span>
+                            <a href="${article.link}" class="read-more">閱讀更多</a>
+                        </div>
+                    </div>
+                `;
+                newsContainer.appendChild(newsCard);
+            });
+        } else {
+            throw new Error('無法載入新聞');
+        }
+    } catch (error) {
+        console.error('載入新聞時發生錯誤:', error);
+        newsContainer.innerHTML = `
+            <div class="news-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>暫時無法載入最新消息，請稍後再試</p>
+                <button onclick="loadUnilionsNews()" class="retry-btn">重新載入</button>
+            </div>
+        `;
+    }
+}
