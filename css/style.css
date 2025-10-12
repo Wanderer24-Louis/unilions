@@ -1075,3 +1075,243 @@ footer {
 .read-more:hover {
     color: #c50010;
 }
+
+/* 賽程頁面樣式 */
+.schedule-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.schedule-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.schedule-title {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.schedule-subtitle {
+    color: var(--gray-color);
+    font-size: 1.1rem;
+}
+
+/* 賽季選擇標籤 */
+.season-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+}
+
+.season-tab {
+    padding: 12px 24px;
+    margin: 0 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--gray-color);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.season-tab:hover {
+    color: var(--primary-color);
+}
+
+.season-tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* 賽程表格樣式 */
+.schedule-table-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.schedule-table th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 10px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid #c50010;
+}
+
+.schedule-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.schedule-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.schedule-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* 球隊名稱樣式 */
+.team-name {
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.team-name.uni-lions {
+    color: var(--primary-color);
+}
+
+/* 比賽狀態樣式 */
+.game-status {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.game-status.upcoming {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.game-status.live {
+    background-color: #ffebee;
+    color: var(--primary-color);
+    animation: pulse 2s infinite;
+}
+
+.game-status.finished {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* 場地資訊樣式 */
+.venue-info {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+}
+
+/* 載入和錯誤狀態 */
+.schedule-loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--gray-color);
+}
+
+.schedule-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+.schedule-error {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--danger-color);
+}
+
+.schedule-error .error-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.schedule-retry-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.schedule-retry-btn:hover {
+    background-color: #c50010;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .schedule-title {
+        font-size: 2rem;
+    }
+    
+    .season-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .season-tab {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .schedule-table {
+        font-size: 0.85rem;
+    }
+    
+    .schedule-table th,
+    .schedule-table td {
+        padding: 8px 6px;
+    }
+    
+    .schedule-table th {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .schedule-container {
+        padding: 15px;
+    }
+    
+    .schedule-title {
+        font-size: 1.8rem;
+    }
+    
+    .schedule-table {
+        font-size: 0.8rem;
+    }
+    
+    .schedule-table th,
+    .schedule-table td {
+        padding: 6px 4px;
+    }
+    
+    .team-name {
+        font-size: 0.85rem;
+    }
+    
+    .venue-info {
+        font-size: 0.8rem;
+    }
+}

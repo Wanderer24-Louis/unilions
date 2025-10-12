@@ -9,7 +9,8 @@ const PORT = process.env.PORT || 3000;
 // RSS新聞來源
 const RSS_SOURCES = [
     'https://feeds.feedburner.com/rsscna/sport', // 中央社運動新聞
-    'https://news.ltn.com.tw/rss/sports.xml'     // 自由時報體育新聞
+    'https://news.ltn.com.tw/rss/sports.xml',     // 自由時報體育新聞
+    'https://www.ttv.com.tw/rss/RSSHandler.ashx?d=news&t=J' // 台視體育新聞
 ];
 
 // 簡單的XML解析函數
@@ -67,9 +68,9 @@ function parseRSSXML(xmlData) {
             // 統一獅相關關鍵字
             const unilionsKeywords = [
                 '統一', '獅', 'Uni-Lions', '統一7-ELEVEn獅', '統一獅',
-                '陳傑憲', '蘇智傑', '林靖凱', '高國輝', '鄭鈞仁',
+                '陳傑憲', '蘇智傑', '林靖凱', '高塩', '胡智為',
                 '台南', '澄清湖', 'Uni Girls', '啦啦隊',
-                '中華職棒', 'CPBL', '職棒', '棒球'
+                '中華職棒', 'CPBL', '中職', '林佳緯'
             ];
             
             // 過濾統一獅相關新聞
@@ -185,6 +186,192 @@ async function fetchUnilionsNews() {
     }
 }
 
+// 獲取 CPBL 賽程資料
+async function fetchCPBLSchedule(season = '2024') {
+    return new Promise((resolve, reject) => {
+        const options = {
+            hostname: 'www.cpbl.com.tw',
+            port: 443,
+            path: `/schedule/index?year=${season}`,
+            method: 'GET',
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+        };
+
+        const req = https.request(options, (res) => {
+            let data = '';
+
+            res.on('data', (chunk) => {
+                data += chunk;
+            });
+
+            res.on('end', () => {
+                try {
+                    const scheduleData = parseCPBLSchedule(data, season);
+                    resolve(scheduleData);
+                } catch (error) {
+                    console.error('解析賽程資料失敗:', error);
+                    resolve(getDefaultScheduleData(season));
+                }
+            });
+        });
+
+        req.on('error', (error) => {
+            console.error('獲取賽程資料失敗:', error);
+            resolve(getDefaultScheduleData(season));
+        });
+
+        req.setTimeout(10000, () => {
+            req.abort();
+            console.error('獲取賽程資料超時');
+            resolve(getDefaultScheduleData(season));
+        });
+
+        req.end();
+    });
+}
+
+// 解析 CPBL 賽程 HTML
+function parseCPBLSchedule(html, season) {
+    const scheduleData = {
+        season: season,
+        games: [],
+        lastUpdated: new Date().toISOString()
+    };
+
+    try {
+        // 使用正則表達式提取賽程表格資料
+        const tableRegex = /<table[^>]*class="[^"]*schedule[^"]*"[^>]*>(.*?)<\/table>/gis;
+        const rowRegex = /<tr[^>]*>(.*?)<\/tr>/gis;
+        const cellRegex = /<t[dh][^>]*>(.*?)<\/t[dh]>/gis;
+
+        const tableMatch = tableRegex.exec(html);
+        if (tableMatch) {
+            const tableContent = tableMatch[1];
+            let rowMatch;
+            
+            while ((rowMatch = rowRegex.exec(tableContent)) !== null) {
+                const rowContent = rowMatch[1];
+                const cells = [];
+                let cellMatch;
+                
+                while ((cellMatch = cellRegex.exec(rowContent)) !== null) {
+                    const cellText = cellMatch[1]
+                        .replace(/<[^>]*>/g, '') // 移除 HTML 標籤
+                        .replace(/&nbsp;/g, ' ') // 替換 &nbsp;
+                        .trim();
+                    cells.push(cellText);
+                }
+                
+                // 如果有足夠的欄位，解析為比賽資料
+                if (cells.length >= 5 && cells[0] && cells[1] && cells[2]) {
+                    const game = {
+                        date: cells[0],
+                        time: cells[1],
+                        homeTeam: cells[2],
+                        awayTeam: cells[3],
+                        venue: cells[4] || '',
+                        status: cells[5] || '未開始'
+                    };
+                    
+                    // 過濾掉標題行
+                    if (game.date !== '日期' && game.time !== '時間') {
+                        scheduleData.games.push(game);
+                    }
+                }
+            }
+        }
+
+        console.log(`成功解析 ${scheduleData.games.length} 場比賽資料`);
+        
+        // 如果沒有解析到任何比賽資料，拋出錯誤以使用預設資料
+        if (scheduleData.games.length === 0) {
+            throw new Error('未能解析到任何比賽資料');
+        }
+        
+        return scheduleData;
+        
+    } catch (error) {
+        console.error('解析賽程 HTML 失敗:', error);
+        return getDefaultScheduleData(season);
+    }
+}
+
+// 獲取預設賽程資料
+function getDefaultScheduleData(season) {
+    return {
+        season: season,
+        games: [
+            {
+                date: '2024-03-23',
+                time: '18:35',
+                homeTeam: '統一獅',
+                awayTeam: '樂天桃猿',
+                venue: '台南棒球場',
+                status: '已結束'
+            },
+            {
+                date: '2024-03-24',
+                time: '17:05',
+                homeTeam: '中信兄弟',
+                awayTeam: '統一獅',
+                venue: '洲際棒球場',
+                status: '已結束'
+            },
+            {
+                date: '2024-03-26',
+                time: '18:35',
+                homeTeam: '統一獅',
+                awayTeam: '富邦悍將',
+                venue: '台南棒球場',
+                status: '進行中'
+            },
+            {
+                date: '2024-03-28',
+                time: '18:35',
+                homeTeam: '味全龍',
+                awayTeam: '統一獅',
+                venue: '天母棒球場',
+                status: '未開始'
+            },
+            {
+                date: '2024-03-30',
+                time: '17:05',
+                homeTeam: '統一獅',
+                awayTeam: '中信兄弟',
+                venue: '台南棒球場',
+                status: '未開始'
+            },
+            {
+                date: '2024-04-02',
+                time: '18:35',
+                homeTeam: '樂天桃猿',
+                awayTeam: '統一獅',
+                venue: '桃園棒球場',
+                status: '未開始'
+            },
+            {
+                date: '2024-04-05',
+                time: '18:35',
+                homeTeam: '統一獅',
+                awayTeam: '味全龍',
+                venue: '台南棒球場',
+                status: '未開始'
+            },
+            {
+                date: '2024-04-07',
+                time: '17:05',
+                homeTeam: '富邦悍將',
+                awayTeam: '統一獅',
+                venue: '新莊棒球場',
+                status: '未開始'
+            }
+        ],
+        lastUpdated: new Date().toISOString()
+    };
+}
+
 const server = http.createServer(async (req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
@@ -202,6 +389,24 @@ const server = http.createServer(async (req, res) => {
         } catch (error) {
             res.writeHead(500, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: '無法獲取新聞資料' }));
+            return;
+        }
+    }
+    
+    // API端點：獲取賽程資料
+    if (pathname === '/api/schedule' && req.method === 'GET') {
+        try {
+            const season = parsedUrl.query.season || '2024';
+            const schedule = await fetchCPBLSchedule(season);
+            res.writeHead(200, { 
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            });
+            res.end(JSON.stringify(schedule));
+            return;
+        } catch (error) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: '無法獲取賽程資料' }));
             return;
         }
     }

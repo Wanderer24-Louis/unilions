@@ -150,3 +150,29 @@ function toggleNewsContent(cardId) {
         collapseText.style.display = 'none';
     }
 }
+//篩選球員
+document.addEventListener("DOMContentLoaded", function () {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const playerCards = document.querySelectorAll(".player-card");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      // 移除所有按鈕的 active 樣式
+      filterButtons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      const filterValue = button.getAttribute("data-filter");
+
+      // 篩選球員卡
+      playerCards.forEach((card) => {
+        const category = card.getAttribute("data-category");
+
+        if (filterValue === "all" || category === filterValue) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  });
+});

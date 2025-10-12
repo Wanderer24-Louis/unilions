@@ -9,47 +9,6 @@
     <link rel="icon"href="images/icon.png">
     <link rel="apple-touch-icon" href="images/icon.png">
 </head>
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>本網頁維護中</title>
-
-  <script>
-    // 等網頁載入後顯示提示，然後自動跳回首頁
-    window.onload = function() {
-      alert("本網頁維護中，將自動返回首頁。");
-      setTimeout(function() {
-        window.location.href = "/index.html"; // 這裡是首頁網址，可改成你要導向的路徑
-      }, 1000); // 2秒後跳轉
-    };
-  </script>
-
-  <style>
-    body {
-      background-color: #f8f8f8;
-      font-family: "Microsoft JhengHei", sans-serif;
-      text-align: center;
-      padding-top: 20%;
-    }
-    h1 {
-      color: #333;
-    }
-  </style>
-</head>
-<body>
-  <h1>本網頁維護中</h1>
-  <p>請稍候，我們將自動帶您返回首頁。</p>
-
-  <!-- 原本的頁面內容都還可以留在下面 -->
-  <div style="display:none;">
-    <!-- 原本整個網頁內容（保留，但不顯示） -->
-    <!-- 例如： -->
-    <!-- <section class="hero">...</section> -->
-  
-
-
 <body>
     <header>
         <div class="logo-container">
@@ -70,7 +29,7 @@
     alert("暫不開放！");
   }
 </script>
-                <li><a href="#">賽程</a></li>
+                <li><a href="schedule.html">賽程</a></li>
                 <li><a href="https://lioncrew.uni-lions.com.tw/"target="_blank">萊恩酷商城</a></li>
             </ul>
         </nav>
@@ -90,6 +49,7 @@
         <section class="player-filter">
             <div class="filter-container">
                 <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="coach">教練</button>
                 <button class="filter-btn" data-filter="pitcher">投手</button>
                 <button class="filter-btn" data-filter="catcher">捕手</button>
                 <button class="filter-btn" data-filter="infielder">內野手</button>
@@ -100,28 +60,81 @@
         <section class="players-section">
             <div class="players-container">
                 <!-- 教練 -->
-                <div class="player-card" data-category="coach">
-                    <div class="player-image">
-                        <img src="images/players/coach.jpg" alt="一軍總教練">
-                    </div>
-                    <div class="player-info">
-                        <div class="player-number">11</div>
-                        <h3>林岳平</h3>
-                        <p class="player-position">一軍總教練</p>
-                        <div class="player-stats">
-                            <div class="stat">
-                                <span class="stat-label">職位</span>
-                                <span class="stat-value">總教練</span>
-                            </div>
-                        </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
-                    </div>
-                </div>
+<div class="player-card" data-category="coach">
+  <div class="player-image">
+    <img src="images/players/coach.jpg" alt="一軍總教練">
+  </div>
+  <div class="player-info">
+    <div class="player-number">11</div>
+    <h3>林岳平</h3>
+    <p class="player-position">一軍總教練</p>
+    <div class="player-stats">
+      <div class="stat">
+        <span class="stat-label">職位</span>
+        <span class="stat-value">總教練</span>
+      </div>
+    </div>
+        
+  </div>
+</div>
+
+<div class="player-card" data-category="coach">
+  <div class="player-image">
+    <img src="images/players/34.jpg" alt="首席教練">
+  </div>
+  <div class="player-info">
+    <div class="player-number">34</div>
+    <h3>高志綱</h3>
+    <p class="player-position">首席教練</p>
+    <div class="player-stats">
+      <div class="stat">
+        <span class="stat-label">職位</span>
+        <span class="stat-value">首席教練</span>
+      </div>
+    </div>
+        
+  </div>
+</div>
+
+<div class="player-card" data-category="coach">
+  <div class="player-image">
+    <img src="images/players/3.webp" alt="打擊教練">
+  </div>
+  <div class="player-info">
+    <div class="player-number">22</div>
+    <h3>馬修爾</h3>
+    <p class="player-position">打擊教練</p>
+    <div class="player-stats">
+      <div class="stat">
+        <span class="stat-label">職位</span>
+        <span class="stat-value">打擊教練</span>
+      </div>
+    </div>
+    </div>
+</div>
+
+<div class="player-card" data-category="coach">
+  <div class="player-image">
+    <img src="images/players/4.webp" alt="一軍投手教練">
+  </div>
+  <div class="player-info">
+    <div class="player-number">98</div>
+    <h3>霍斯曼</h3>
+    <p class="player-position">投手教練</p>
+    <div class="player-stats">
+      <div class="stat">
+        <span class="stat-label">職位</span>
+        <span class="stat-value">投手教練</span>
+      </div>
+    </div>
+    </div>
+</div>
+
 
                 <!-- 投手 -->
                 <div class="player-card" data-category="pitcher">
                     <div class="player-image">
-                        <img src="images/players/player1.svg" alt="陳韻文">
+                        <img src="images/players/wen.jpg" alt="陳韻文">
                     </div>
                     <div class="player-info">
                         <div class="player-number">12</div>
@@ -134,28 +147,28 @@
                             </div>
                             <div class="stat">
                                 <span class="stat-label">身高</span>
-                                <span class="stat-value">185 cm</span>
+                                <span class="stat-value">183 cm</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-label">體重</span>
-                                <span class="stat-value">85 kg</span>
+                                <span class="stat-value">97 kg</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-label">投打</span>
                                 <span class="stat-value">右投右打</span>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
+                        <a href="https://www.cpbl.com.tw/team/person?Acnt=0000002688" class="btn btn-secondary">詳細資料</a>
                     </div>
                 </div>
                 
                 <div class="player-card" data-category="pitcher">
                     <div class="player-image">
-                        <img src="images/players/player1.svg" alt="江承峰">
+                        <img src="images/players/21.jpg" alt="蒙德茲">
                     </div>
                     <div class="player-info">
                         <div class="player-number">21</div>
-                        <h3>江承峰</h3>
+                        <h3>蒙德茲</h3>
                         <p class="player-position">投手</p>
                         <div class="player-stats">
                             <div class="stat">
@@ -164,94 +177,33 @@
                             </div>
                             <div class="stat">
                                 <span class="stat-label">身高</span>
-                                <span class="stat-value">188 cm</span>
+                                <span class="stat-value">193 cm</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-label">體重</span>
-                                <span class="stat-value">90 kg</span>
+                                <span class="stat-value">112 kg</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-label">投打</span>
                                 <span class="stat-value">左投左打</span>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
+                        <a href="https://www.cpbl.com.tw/team/person?Acnt=0000007559" class="btn btn-secondary">詳細資料</a>
                     </div>
                 </div>
 
                 <div class="player-card" data-category="pitcher">
                     <div class="player-image">
-                        <img src="images/players/player1.svg" alt="林子崴">
+                        <img src="images/players/28.jpg" alt="髙塩將樹">
                     </div>
                     <div class="player-info">
-                        <div class="player-number">26</div>
-                        <h3>林子崴</h3>
+                        <div class="player-number">28</div>
+                        <h3>髙塩將樹</h3>
                         <p class="player-position">投手</p>
                         <div class="player-stats">
                             <div class="stat">
                                 <span class="stat-label">背號</span>
-                                <span class="stat-value">26</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">身高</span>
-                                <span class="stat-value">182 cm</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">體重</span>
-                                <span class="stat-value">83 kg</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">投打</span>
-                                <span class="stat-value">右投右打</span>
-                            </div>
-                        </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
-                    </div>
-                </div>
-
-                <!-- 捕手 -->
-                <div class="player-card" data-category="catcher">
-                    <div class="player-image">
-                        <img src="images/players/player1.svg" alt="林祐樂">
-                    </div>
-                    <div class="player-info">
-                        <div class="player-number">31</div>
-                        <h3>林祐樂</h3>
-                        <p class="player-position">捕手</p>
-                        <div class="player-stats">
-                            <div class="stat">
-                                <span class="stat-label">背號</span>
-                                <span class="stat-value">31</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">身高</span>
-                                <span class="stat-value">178 cm</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">體重</span>
-                                <span class="stat-value">82 kg</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">打擊率</span>
-                                <span class="stat-value">.275</span>
-                            </div>
-                        </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
-                    </div>
-                </div>
-
-                <div class="player-card" data-category="catcher">
-                    <div class="player-image">
-                        <img src="images/players/player1.svg" alt="陳重羽">
-                    </div>
-                    <div class="player-info">
-                        <div class="player-number">36</div>
-                        <h3>陳重羽</h3>
-                        <p class="player-position">捕手</p>
-                        <div class="player-stats">
-                            <div class="stat">
-                                <span class="stat-label">背號</span>
-                                <span class="stat-value">36</span>
+                                <span class="stat-value">28</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-label">身高</span>
@@ -262,22 +214,83 @@
                                 <span class="stat-value">85 kg</span>
                             </div>
                             <div class="stat">
+                                <span class="stat-label">投打</span>
+                                <span class="stat-value">右投右打</span>
+                            </div>
+                        </div>
+                        <a href="https://www.cpbl.com.tw/team/person?Acnt=0000006818" class="btn btn-secondary">詳細資料</a>
+                    </div>
+                </div>
+
+                <!-- 捕手 -->
+                <div class="player-card" data-category="catcher">
+                    <div class="player-image">
+                        <img src="images/players/an.jpg" alt="林祐樂">
+                    </div>
+                    <div class="player-info">
+                        <div class="player-number">31</div>
+                        <h3>林岱安</h3>
+                        <p class="player-position">捕手</p>
+                        <div class="player-stats">
+                            <div class="stat">
+                                <span class="stat-label">背號</span>
+                                <span class="stat-value">31</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">身高</span>
+                                <span class="stat-value">175 cm</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">體重</span>
+                                <span class="stat-value">90 kg</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">打擊率</span>
+                                <span class="stat-value">.246</span>
+                            </div>
+                        </div>
+                        <a href="https://www.cpbl.com.tw/team/person?Acnt=0000001606" class="btn btn-secondary">詳細資料</a>
+                    </div>
+                </div>
+
+                <div class="player-card" data-category="catcher">
+                    <div class="player-image">
+                        <img src="images/players/65.jpg" alt="陳重羽">
+                    </div>
+                    <div class="player-info">
+                        <div class="player-number">65</div>
+                        <h3>陳重羽</h3>
+                        <p class="player-position">捕手</p>
+                        <div class="player-stats">
+                            <div class="stat">
+                                <span class="stat-label">背號</span>
+                                <span class="stat-value">65</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">身高</span>
+                                <span class="stat-value">183 cm</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">體重</span>
+                                <span class="stat-value">83 kg</span>
+                            </div>
+                            <div class="stat">
                                 <span class="stat-label">打擊率</span>
                                 <span class="stat-value">.268</span>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
+                        <a href="https://www.cpbl.com.tw/team/person?Acnt=0000002298" class="btn btn-secondary">詳細資料</a>
                     </div>
                 </div>
 
                 <!-- 內野手 -->
                 <div class="player-card" data-category="infielder">
                     <div class="player-image">
-                        <img src="images/players/player1.svg" alt="林安可">
+                        <img src="images/players/2.jpg" alt="林子豪">
                     </div>
                     <div class="player-info">
                         <div class="player-number">2</div>
-                        <h3>林安可</h3>
+                        <h3>林子豪</h3>
                         <p class="player-position">三壘手</p>
                         <div class="player-stats">
                             <div class="stat">
@@ -286,28 +299,28 @@
                             </div>
                             <div class="stat">
                                 <span class="stat-label">身高</span>
-                                <span class="stat-value">183 cm</span>
+                                <span class="stat-value">185 cm</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-label">體重</span>
-                                <span class="stat-value">80 kg</span>
+                                <span class="stat-value">73 kg</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-label">打擊率</span>
-                                <span class="stat-value">.302</span>
+                                <span class="stat-value">.331</span>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
+                        <a href="https://www.cpbl.com.tw/team/person?Acnt=0000006223" class="btn btn-secondary">詳細資料</a>
                     </div>
                 </div>
 
                 <div class="player-card" data-category="infielder">
                     <div class="player-image">
-                        <img src="images/players/player1.svg" alt="陳傑憲">
+                        <img src="images/players/10.jpg" alt="許哲晏">
                     </div>
                     <div class="player-info">
                         <div class="player-number">10</div>
-                        <h3>陳傑憲</h3>
+                        <h3>許哲晏</h3>
                         <p class="player-position">游擊手</p>
                         <div class="player-stats">
                             <div class="stat">
@@ -316,7 +329,7 @@
                             </div>
                             <div class="stat">
                                 <span class="stat-label">身高</span>
-                                <span class="stat-value">177 cm</span>
+                                <span class="stat-value">176 cm</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-label">體重</span>
@@ -324,55 +337,75 @@
                             </div>
                             <div class="stat">
                                 <span class="stat-label">打擊率</span>
-                                <span class="stat-value">.315</span>
+                                <span class="stat-value">.218</span>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
+                        <a href="https://www.cpbl.com.tw/team/person?Acnt=0000005306" class="btn btn-secondary">詳細資料</a>
                     </div>
                 </div>
 
                 <!-- 外野手 -->
                 <div class="player-card" data-category="outfielder">
                     <div class="player-image">
-                        <img src="images/player8.jpg" alt="左外野手">
+                        <img src="images/players/24.jpg" alt="陳傑憲">
                     </div>
                     <div class="player-info">
-                        <div class="player-number">8</div>
-                        <h3>左外野手</h3>
-                        <p class="player-position">左外野手</p>
+                        <div class="player-number">24</div>
+                         <h3>陳傑憲</h3>
+                        <p class="player-position">外野手</p>
                         <div class="player-stats">
                             <div class="stat">
                                 <span class="stat-label">背號</span>
-                                <span class="stat-value">8</span>
+                                <span class="stat-value">24</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">身高</span>
+                                <span class="stat-value">173 cm</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">體重</span>
+                                <span class="stat-value">73 kg</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">打擊率</span>
+                                <span class="stat-value">.337</span>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
+                        <a href="https://www.cpbl.com.tw/team/person?Acnt=0000001804" class="btn btn-secondary">詳細資料</a>
                     </div>
                 </div>
 
                 <div class="player-card" data-category="outfielder">
                     <div class="player-image">
-                        <img src="images/player9.jpg" alt="右外野手">
+                        <img src="images/players/14.jpg" alt="右外野手">
                     </div>
                     <div class="player-info">
                         <div class="player-number">14</div>
-                        <h3>右外野手</h3>
-                        <p class="player-position">右外野手</p>
+                        <h3>邱智呈</h3>
+                        <p class="player-position">外野手</p>
                         <div class="player-stats">
                             <div class="stat">
                                 <span class="stat-label">背號</span>
                                 <span class="stat-value">14</span>
                             </div>
-                        </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
-                    </div>
-                </div>
                             <div class="stat">
-                                <span class="stat-label">打點</span>
-                                <span class="stat-value">68</span>
+                                <span class="stat-label">身高</span>
+                                <span class="stat-value">168 cm</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">體重</span>
+                                <span class="stat-value">80 kg</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">打擊率</span>
+                                <span class="stat-value">.371</span>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-secondary">詳細資料</a>
+                        <a href="https://www.cpbl.com.tw/team/person?Acnt=0000005531" class="btn btn-secondary">詳細資料</a>
+                    </div>
+                </div>
+                    </div>
+                        
                     </div>
                 </div>
             </div>
@@ -382,8 +415,8 @@
     <footer>
         <div class="footer-container">
             <div class="footer-logo">
-                <img src="images/logo.svg" alt="統一獅隊徽" class="logo">
-                <p>統一7-ELEVEn獅 © 2023</p>
+                <img src="images/logo.png" alt="統一獅隊徽" class="logo">
+                <p>統一7-ELEVEn獅 © 2025</p>
             </div>
             <div class="footer-links">
                 <h4>快速連結</h4>
@@ -399,10 +432,10 @@
             <div class="footer-social">
                 <h4>關注我們</h4>
                 <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/unilions"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/unilions_official/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/user/unilionsteam"><i class="fab fa-youtube"></i></a>
+                    <a href="https://lin.ee/sbQyj7V"><i class="fab fa-line"></i></a>
                 </div>
             </div>
             <div class="footer-contact">
@@ -417,9 +450,6 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
-</body>
-</html>
-</div>
+   <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>賽程表 - 統一7-ELEVEn獅</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="images/icon.png">
+    <link rel="apple-touch-icon" href="images/icon.png">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="images/logo.png" alt="統一獅隊徽" class="logo">
+            </a>
+        </div>
+        <nav>
+            <ul class="main-menu">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="players.html">球員</a></li>
+                <li><a href="cheerleaders.html">啦啦隊員</a></li>
+                <li><a href="tickets.html">售票資訊</a></li>
+                <li><a href="#" onclick="showMessage(event)">新聞</a></li>
+                <script>
+                    function showMessage(event) {
+                        event.preventDefault();
+                        alert("暫不開放！");
+                    }
+                </script>
+                <li><a href="schedule.html" class="active">賽程</a></li>
+                <li><a href="https://lioncrew.uni-lions.com.tw/" target="_blank">萊恩酷商城</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <main>
+        <div class="schedule-container">
+            <!-- 賽程頁面標題 -->
+            <div class="schedule-header">
+                <h1 class="schedule-title">
+                    <i class="fas fa-calendar-alt"></i> 中華職棒賽程表
+                </h1>
+                <p class="schedule-subtitle">統一7-ELEVEn獅 2024年賽程資訊</p>
+            </div>
+
+            <!-- 賽季選擇標籤 -->
+            <div class="season-tabs">
+                <button class="season-tab active" data-season="2024">2024年</button>
+                <button class="season-tab" data-season="2023">2023年</button>
+                <button class="season-tab" data-season="2022">2022年</button>
+            </div>
+
+            <!-- 賽程內容區域 -->
+            <div id="schedule-content">
+                <!-- 賽程表格將由 JavaScript 動態載入 -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>聯絡資訊</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 台南市安南區</p>
+                    <p><i class="fas fa-phone"></i> (06) 000-0000</p>
+                    <p><i class="fas fa-envelope"></i> info@uni-lions.com.tw</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速連結</h3>
+                    <ul>
+                        <li><a href="index.html">首頁</a></li>
+                        <li><a href="players.html">球員</a></li>
+                        <li><a href="cheerleaders.html">啦啦隊員</a></li>
+                        <li><a href="tickets.html">售票資訊</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>關注我們</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 統一7-ELEVEn獅. 版權所有.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/schedule.js"></script>
+</body>
+</html>
