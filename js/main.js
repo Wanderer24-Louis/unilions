@@ -84,17 +84,30 @@ async function loadUnilionsNews() {
             // 只顯示前3則新聞
             const displayNews = news.slice(0, 3);
             
-            displayNews.forEach(article => {
+            displayNews.forEach((article, index) => {
                 const newsCard = document.createElement('div');
                 newsCard.className = 'news-card';
+                const cardId = `news-card-${index}`;
+                
                 newsCard.innerHTML = `
-                    <img src="${article.image}" alt="${article.title}" onerror="this.src='images/logo.png'">
+                    <div class="news-image-container">
+                        <img src="${article.image}" alt="${article.title}" onerror="this.src='images/logo.png'">
+                    </div>
                     <div class="news-content">
                         <h3>${article.title}</h3>
-                        <p>${article.summary}</p>
+                        <div class="news-summary">
+                            <p>${article.summary}</p>
+                        </div>
+                        <div class="news-full-content" id="content-${cardId}" style="display: none;">
+                            <p>${article.content || article.summary}</p>
+                        </div>
                         <div class="news-meta">
                             <span class="news-date">${article.date}</span>
-                            <a href="${article.link}" class="read-more">閱讀更多</a>
+                            <button class="toggle-content-btn" onclick="toggleNewsContent('${cardId}')">
+                                <span class="expand-text">展開全文</span>
+                                <span class="collapse-text" style="display: none;">收起</span>
+                            </button>
+                            <a href="${article.link}" class="read-more" target="_blank">原文連結</a>
                         </div>
                     </div>
                 `;
@@ -112,5 +125,28 @@ async function loadUnilionsNews() {
                 <button onclick="loadUnilionsNews()" class="retry-btn">重新載入</button>
             </div>
         `;
+    }
+}
+
+// 展開/收起新聞內容功能
+function toggleNewsContent(cardId) {
+    const summaryElement = document.querySelector(`#content-${cardId}`).parentElement.querySelector('.news-summary');
+    const fullContentElement = document.getElementById(`content-${cardId}`);
+    const toggleBtn = document.querySelector(`button[onclick="toggleNewsContent('${cardId}')"]`);
+    const expandText = toggleBtn.querySelector('.expand-text');
+    const collapseText = toggleBtn.querySelector('.collapse-text');
+    
+    if (fullContentElement.style.display === 'none') {
+        // 展開全文
+        summaryElement.style.display = 'none';
+        fullContentElement.style.display = 'block';
+        expandText.style.display = 'none';
+        collapseText.style.display = 'inline';
+    } else {
+        // 收起全文
+        summaryElement.style.display = 'block';
+        fullContentElement.style.display = 'none';
+        expandText.style.display = 'inline';
+        collapseText.style.display = 'none';
     }
 }

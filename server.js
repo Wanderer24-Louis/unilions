@@ -78,9 +78,14 @@ function parseRSSXML(xmlData) {
             );
             
             if (isUnilionsRelated) {
+                // 清理並保留完整的描述內容
+                const fullContent = description.replace(/<[^>]*>/g, '').trim();
+                const summary = fullContent.length > 150 ? fullContent.substring(0, 150) + '...' : fullContent;
+                
                 items.push({
                     title: title.trim(),
-                    summary: description.replace(/<[^>]*>/g, '').trim().substring(0, 100) + '...',
+                    summary: summary, // 保留摘要用於卡片顯示
+                    content: fullContent, // 新增完整內容
                     date: pubDate ? new Date(pubDate).toLocaleDateString('zh-TW') : new Date().toLocaleDateString('zh-TW'),
                     image: imageUrl,
                     link: link.trim()
