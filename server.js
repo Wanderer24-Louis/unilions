@@ -67,10 +67,10 @@ function parseRSSXML(xmlData) {
             
             // 統一獅相關關鍵字
             const unilionsKeywords = [
-                '統一', '獅', 'Uni-Lions', '統一7-ELEVEn獅', '統一獅',
+                '統一獅隊', 'Uni-Lions', '統一7-ELEVEn獅', '統一獅',
                 '陳傑憲', '蘇智傑', '林靖凱', '高塩', '胡智為',
                 '台南', '澄清湖', 'Uni Girls', '統一獅啦啦隊',
-                '林佳緯','UG女孩'
+                '林佳緯','UG女孩','林安可'
             ];
             
             // 過濾統一獅相關新聞
