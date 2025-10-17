@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 3000;
 const RSS_SOURCES = [
     'https://feeds.feedburner.com/rsscna/sport', // 中央社運動新聞
     'https://news.ltn.com.tw/rss/sports.xml',     // 自由時報體育新聞
-    'https://www.ttv.com.tw/rss/RSSHandler.ashx?d=news&t=J', // 台視體育新聞
-    'https://tw.news.yahoo.com/rss/', //Yahoo新聞
+    'https://www.ttv.com.tw/rss/RSSHandler.ashx?d=news&t=J',  // 台視體育新聞
+    'https://tw.sports.yahoo.com/rss',   //Yahoo新聞
 ];
 
 // 簡單的XML解析函數
