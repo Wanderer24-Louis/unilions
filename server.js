@@ -10,7 +10,9 @@ const PORT = process.env.PORT || 3000;
 const RSS_SOURCES = [
     'https://feeds.feedburner.com/rsscna/sport', // 中央社運動新聞
     'https://news.ltn.com.tw/rss/sports.xml',     // 自由時報體育新聞
-    'https://www.ttv.com.tw/rss/RSSHandler.ashx?d=news&t=J' // 台視體育新聞
+    'https://www.ttv.com.tw/rss/RSSHandler.ashx?d=news&t=J',  // 台視體育新聞
+    'https://tw.sports.yahoo.com/rss',   //Yahoo新聞
+    'https://www.sportsv.net/feed',  //運動視界
 ];
 
 // 簡單的XML解析函數
@@ -67,10 +69,10 @@ function parseRSSXML(xmlData) {
             
             // 統一獅相關關鍵字
             const unilionsKeywords = [
-                '統一', '獅', 'Uni-Lions', '統一7-ELEVEn獅', '統一獅',
-                '陳傑憲', '蘇智傑', '林靖凱', '高塩', '胡智為',
-                '台南', '澄清湖', 'Uni Girls', '啦啦隊',
-                '中華職棒', 'CPBL', '中職', '林佳緯'
+                '統一獅隊', 'Uni-Lions', '統一7-ELEVEn獅', '統一獅',
+                '陳傑憲', '蘇智傑', '林靖凱', '髙塩將樹', '胡智為',
+                '許哲晏', '台南棒球場', 'Uni Girls', '統一獅啦啦隊',
+                '林佳緯', 'UG女孩', '林安可', '林岳平'
             ];
             
             // 過濾統一獅相關新聞
