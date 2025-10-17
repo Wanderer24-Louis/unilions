@@ -12,6 +12,7 @@ const RSS_SOURCES = [
     'https://news.ltn.com.tw/rss/sports.xml',     // 自由時報體育新聞
     'https://www.ttv.com.tw/rss/RSSHandler.ashx?d=news&t=J',  // 台視體育新聞
     'https://tw.sports.yahoo.com/rss',   //Yahoo新聞
+    'https://www.sportsv.net/feed',  //運動視界
 ];
 
 // 簡單的XML解析函數
