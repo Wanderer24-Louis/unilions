@@ -187,49 +187,117 @@ async function fetchUnilionsNews() {
 }
 
 // 獲取 CPBL 賽程資料
-async function fetchCPBLSchedule(season = '2024') {
-    return new Promise((resolve, reject) => {
-        const options = {
-            hostname: 'www.cpbl.com.tw',
-            port: 443,
-            path: `/schedule/index?year=${season}`,
-            method: 'GET',
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            }
-        };
-
-        const req = https.request(options, (res) => {
-            let data = '';
-
-            res.on('data', (chunk) => {
-                data += chunk;
-            });
-
-            res.on('end', () => {
-                try {
-                    const scheduleData = parseCPBLSchedule(data, season);
-                    resolve(scheduleData);
-                } catch (error) {
-                    console.error('解析賽程資料失敗:', error);
-                    resolve(getDefaultScheduleData(season));
+async function fetchCPBLSchedule(season = new Date().getFullYear().toString()) {
+    // 以官方 AJAX 端點抓取資料，並轉為本地結構
+    async function getVerificationToken() {
+        return new Promise((resolve, reject) => {
+            const options = {
+                hostname: 'www.cpbl.com.tw',
+                port: 443,
+                path: '/schedule',
+                method: 'GET',
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
                 }
+            };
+            const req = https.request(options, (res) => {
+                let html = '';
+                res.setEncoding('utf8');
+                res.on('data', (chunk) => html += chunk);
+                res.on('end', () => {
+                    const match = html.match(/RequestVerificationToken:\s*'([^']+)'/);
+                    if (match && match[1]) {
+                        resolve(match[1]);
+                    } else {
+                        reject(new Error('未能取得驗證 Token'));
+                    }
+                });
             });
+            req.on('error', reject);
+            req.setTimeout(10000, () => { req.abort(); reject(new Error('取得 Token 超時')); });
+            req.end();
         });
+    }
 
-        req.on('error', (error) => {
-            console.error('獲取賽程資料失敗:', error);
-            resolve(getDefaultScheduleData(season));
+    async function fetchGameDatas(token, kindCode = 'A', location = '') {
+        return new Promise((resolve, reject) => {
+            const postData = `calendar=${encodeURIComponent(`${season}/01/01`)}&location=${encodeURIComponent(location)}&kindCode=${encodeURIComponent(kindCode)}`;
+            const options = {
+                hostname: 'www.cpbl.com.tw',
+                port: 443,
+                path: '/schedule/getgamedatas',
+                method: 'POST',
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Length': Buffer.byteLength(postData),
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'RequestVerificationToken': token
+                }
+            };
+            const req = https.request(options, (res) => {
+                let body = '';
+                res.setEncoding('utf8');
+                res.on('data', (chunk) => body += chunk);
+                res.on('end', () => {
+                    try {
+                        const outer = JSON.parse(body);
+                        const gameArr = outer.GameDatas ? JSON.parse(outer.GameDatas) : [];
+                        resolve(gameArr);
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
+            });
+            req.on('error', reject);
+            req.setTimeout(15000, () => { req.abort(); reject(new Error('抓取 GameDatas 超時')); });
+            req.write(postData);
+            req.end();
         });
+    }
 
-        req.setTimeout(10000, () => {
-            req.abort();
-            console.error('獲取賽程資料超時');
-            resolve(getDefaultScheduleData(season));
+    function toLocalSchema(rows) {
+        const pad2 = (n) => String(n).padStart(2, '0');
+        return rows.map(r => {
+            const dateObj = new Date(r.GameDate);
+            const start = r.GameDateTimeS ? new Date(r.GameDateTimeS) : null;
+            const status = r.GameDateTimeE ? '已結束' : (r.IsPlayBall === 'Y' ? '進行中' : '未開始');
+            const dateStr = `${dateObj.getFullYear()}-${pad2(dateObj.getMonth()+1)}-${pad2(dateObj.getDate())}`;
+            const timeStr = start ? `${pad2(start.getHours())}:${pad2(start.getMinutes())}` : '';
+            return {
+                date: dateStr,
+                time: timeStr,
+                homeTeam: r.HomeTeamName || '',
+                awayTeam: r.VisitingTeamName || '',
+                venue: r.FieldAbbe || '',
+                status
+            };
         });
+    }
 
-        req.end();
-    });
+    try {
+        const token = await getVerificationToken();
+        const gameRows = await fetchGameDatas(token, 'A', '');
+        let schedule = {
+            season: season,
+            games: toLocalSchema(gameRows),
+            lastUpdated: new Date().toISOString()
+        };
+        if (!schedule.games || schedule.games.length === 0) {
+            schedule = getDefaultScheduleData(season);
+        }
+        // 自動更新本地檔
+        try {
+            const dataFile = path.join(__dirname, 'data', `schedule-${season}.json`);
+            fs.writeFileSync(dataFile, JSON.stringify(schedule, null, 2), 'utf8');
+        } catch (e) {
+            console.error('寫入本地賽程檔失敗:', e);
+        }
+        return schedule;
+    } catch (error) {
+        console.error('CPBL AJAX 抓取失敗，回退至預設/本地：', error);
+        return getDefaultScheduleData(season);
+    }
 }
 
 // 解析 CPBL 賽程 HTML
@@ -393,15 +461,36 @@ const server = http.createServer(async (req, res) => {
         }
     }
     
-    // API端點：獲取賽程資料
+    // API端點：獲取賽程資料（僅提供 2024 年，優先回應本地檔）
+    // 變更：預設當年度，優先回應本地檔，過期時自動刷新
     if (pathname === '/api/schedule' && req.method === 'GET') {
         try {
-            const season = parsedUrl.query.season || '2024';
+            const reqSeason = parsedUrl.query.season || new Date().getFullYear().toString();
+            const season = reqSeason;
+            const dataFile = path.join(__dirname, 'data', `schedule-${season}.json`);
+            let shouldRefresh = true;
+            if (fs.existsSync(dataFile)) {
+                try {
+                    const fileContent = fs.readFileSync(dataFile, 'utf8');
+                    const localData = JSON.parse(fileContent);
+                    if (localData.lastUpdated) {
+                        const ageMs = Date.now() - new Date(localData.lastUpdated).getTime();
+                        // 一天內不刷新，直接回本地
+                        if (ageMs < 24 * 60 * 60 * 1000 && Array.isArray(localData.games) && localData.games.length > 0) {
+                            shouldRefresh = false;
+                            res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+                            res.end(JSON.stringify(localData));
+                            return;
+                        }
+                    }
+                } catch {}
+            }
+            // 刷新或不存在：抓取官方，並寫入本地
             const schedule = await fetchCPBLSchedule(season);
-            res.writeHead(200, { 
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            });
+            try {
+                fs.writeFileSync(dataFile, JSON.stringify(schedule, null, 2), 'utf8');
+            } catch (e) { console.error('更新本地檔失敗:', e); }
+            res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             res.end(JSON.stringify(schedule));
             return;
         } catch (error) {

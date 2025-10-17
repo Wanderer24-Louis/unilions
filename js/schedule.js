@@ -1,6 +1,5 @@
 // 賽程頁面 JavaScript 功能
 
-let currentSeason = '2024';
 let scheduleData = null;
 
 // 頁面載入完成後初始化
@@ -10,56 +9,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 初始化賽程頁面
 function initializeSchedulePage() {
-    setupSeasonTabs();
-    loadScheduleData(currentSeason);
+    const currentYear = new Date().getFullYear().toString();
+    updateScheduleHeader(currentYear);
+    loadScheduleData(currentYear); // 改為當年度
 }
 
-// 設置賽季標籤
-function setupSeasonTabs() {
-    const seasonTabs = document.querySelectorAll('.season-tab');
-    
-    seasonTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const season = this.dataset.season;
-            
-            // 移除所有標籤的 active 類別
-            seasonTabs.forEach(t => t.classList.remove('active'));
-            
-            // 為當前標籤添加 active 類別
-            this.classList.add('active');
-            
-            // 載入對應賽季的資料
-            currentSeason = season;
-            loadScheduleData(season);
-        });
-    });
-    
-    // 設置預設的 active 標籤
-    const defaultTab = document.querySelector(`[data-season="${currentSeason}"]`);
-    if (defaultTab) {
-        defaultTab.classList.add('active');
+// 新增：動態更新標題年份
+function updateScheduleHeader(year) {
+    const header = document.querySelector('.schedule-header h1');
+    if (header) {
+        header.textContent = `統一獅 ${year} 年賽程表`;
     }
 }
 
 // 載入賽程資料
-async function loadScheduleData(season = '2025') {
+async function loadScheduleData(season = new Date().getFullYear().toString()) {
     const scheduleContent = document.getElementById('schedule-content');
-    
     // 顯示載入狀態
     showLoadingState();
-    
     try {
         const response = await fetch(`/api/schedule?season=${season}`);
-        
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
         scheduleData = await response.json();
-        
-        // 顯示賽程表格
         displayScheduleTable(scheduleData);
-        
     } catch (error) {
         console.error('載入賽程資料失敗:', error);
         showErrorState();
@@ -85,7 +59,7 @@ function showErrorState() {
             <div class="error-icon">⚠️</div>
             <h3>載入失敗</h3>
             <p>無法載入賽程資料，請檢查網路連線或稍後再試。</p>
-            <button class="schedule-retry-btn" onclick="loadScheduleData('${currentSeason}')">
+            <button class="schedule-retry-btn" onclick="reloadSchedule()">
                 重新載入
             </button>
         </div>
@@ -216,7 +190,8 @@ function formatDateTime(dateTimeString) {
 
 // 重新載入賽程資料
 function reloadSchedule() {
-    loadScheduleData(currentSeason);
+    const currentYear = new Date().getFullYear().toString();
+    loadScheduleData(currentYear);
 }
 
 // 導出函數供全域使用
