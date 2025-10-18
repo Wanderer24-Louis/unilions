@@ -1,7 +1,7 @@
 // 賽程頁面 JavaScript 功能
 
 let scheduleData = null;
-let showAllSchedule = false; // 新增：是否顯示完整賽程（預設一個月內）
+let filterMode = 'month'; // 週: 'week'、月: 'month'、全部: 'all'
 
 // 頁面載入完成後初始化
 document.addEventListener('DOMContentLoaded', function() {
@@ -76,6 +76,8 @@ function displayScheduleTable(data) {
     const now = new Date();
     const oneMonthLater = new Date(now.getTime());
     oneMonthLater.setDate(oneMonthLater.getDate() + 31);
+    const oneWeekLater = new Date(now.getTime());
+    oneWeekLater.setDate(oneWeekLater.getDate() + 7);
 
     // 僅顯示統一獅相關比賽（主隊或客隊）的基礎集合
     const gamesAll = Array.isArray(data.games) ? data.games.filter(g => isLions(g.homeTeam) || isLions(g.awayTeam)) : [];
@@ -85,30 +87,47 @@ function displayScheduleTable(data) {
         const dt = toDT(g);
         return dt >= now && dt <= oneMonthLater;
     };
+    // 一周內（未來7天）的過濾條件
+    const withinOneWeek = (g) => {
+        const dt = toDT(g);
+        return dt >= now && dt <= oneWeekLater;
+    };
 
-    // 根據切換選擇集合
-    let games = showAllSchedule ? gamesAll.slice() : gamesAll.filter(withinOneMonth);
+    // 根據模式選擇集合
+    let games;
+    switch (filterMode) {
+        case 'all':
+            games = gamesAll.slice();
+            break;
+        case 'week':
+            games = gamesAll.filter(withinOneWeek);
+            break;
+        case 'month':
+        default:
+            games = gamesAll.filter(withinOneMonth);
+            break;
+    }
 
     if (!games || games.length === 0) {
         scheduleContent.innerHTML = `
             <div class="schedule-error">
                 <div class="error-icon">📅</div>
                 <h3>暫無賽程</h3>
-                <p>${data.season} 年僅顯示統一獅相關比賽，${showAllSchedule ? '目前沒有資料。' : '一個月內目前沒有資料。'}</p>
+                <p>${data.season} 年僅顯示統一獅相關比賽，${filterMode === 'all' ? '目前沒有資料。' : (filterMode === 'week' ? '近一周內目前沒有資料。' : '一個月內目前沒有資料。')}</p>
                 <div class="schedule-controls">
-                    <button class="schedule-toggle-btn" onclick="toggleShowAll()">${showAllSchedule ? '顯示一個月內' : '查看更多（完整賽程）'}</button>
+                    ${renderControls()}
                 </div>
             </div>
         `;
         return;
     }
 
-    // 新增：依日期時間排序（降序，最晚的在最上）
+    // 依日期時間排序（降序，最晚的在最上）
     games = games.sort((a, b) => toDT(b) - toDT(a));
 
     const tableHTML = `
         <div class="schedule-controls">
-            <button class="schedule-toggle-btn" onclick="toggleShowAll()">${showAllSchedule ? '顯示一個月內' : '查看更多（完整賽程）'}</button>
+            ${renderControls()}
         </div>
         <div class="schedule-table-container">
             <table class="schedule-table">
@@ -130,10 +149,28 @@ function displayScheduleTable(data) {
         </div>
         <div class="schedule-info">
             <p>最後更新時間: ${formatDateTime(data.lastUpdated)}</p>
-            <p>僅顯示統一獅相關比賽，${showAllSchedule ? '完整賽程' : '一個月內'} 共 ${games.length} 場</p>
+            <p>僅顯示統一獅相關比賽，${filterMode === 'all' ? '完整賽程' : (filterMode === 'week' ? '近一周內' : '一個月內')} 共 ${games.length} 場</p>
         </div>
     `;
     scheduleContent.innerHTML = tableHTML;
+}
+
+function renderControls() {
+    const weekActive = filterMode === 'week' ? 'active' : '';
+    const monthActive = filterMode === 'month' ? 'active' : '';
+    const allActive = filterMode === 'all' ? 'active' : '';
+    return `
+        <button class="schedule-toggle-btn ${weekActive}" onclick="switchFilter('week')">近一周內</button>
+        <button class="schedule-toggle-btn ${monthActive}" onclick="switchFilter('month')">一個月內</button>
+        <button class="schedule-toggle-btn ${allActive}" onclick="switchFilter('all')">完整賽程</button>
+    `;
+}
+
+function switchFilter(mode) {
+    filterMode = mode;
+    if (scheduleData) {
+        displayScheduleTable(scheduleData);
+    }
 }
 
 function createGameRow(game) {
@@ -210,14 +247,6 @@ function formatDateTime(dateTimeString) {
     }
 }
 
-// 切換是否顯示完整賽程
-function toggleShowAll() {
-    showAllSchedule = !showAllSchedule;
-    if (scheduleData) {
-        displayScheduleTable(scheduleData);
-    }
-}
-
 // 重新載入賽程資料
 function reloadSchedule() {
     const currentYear = new Date().getFullYear().toString();
@@ -227,4 +256,4 @@ function reloadSchedule() {
 // 導出函數供全域使用
 window.loadScheduleData = loadScheduleData;
 window.reloadSchedule = reloadSchedule;
-window.toggleShowAll = toggleShowAll;
+window.switchFilter = switchFilter;
