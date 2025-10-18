@@ -1,6 +1,7 @@
 // 賽程頁面 JavaScript 功能
 
 let scheduleData = null;
+let showAllSchedule = false; // 新增：是否顯示完整賽程（預設一個月內）
 
 // 頁面載入完成後初始化
 document.addEventListener('DOMContentLoaded', function() {
@@ -71,21 +72,44 @@ function showErrorState() {
 function displayScheduleTable(data) {
     const scheduleContent = document.getElementById('schedule-content');
     const isLions = (name) => !!name && /統一.*獅/.test(name);
-    let games = Array.isArray(data.games) ? data.games.filter(g => isLions(g.homeTeam) || isLions(g.awayTeam)) : [];
-    // 新增：依日期時間排序（升序）
     const toDT = (g) => new Date(`${g.date} ${g.time || '00:00'}`);
-    games = games.sort((a, b) => toDT(a) - toDT(b));
+    const now = new Date();
+    const oneMonthLater = new Date(now.getTime());
+    oneMonthLater.setDate(oneMonthLater.getDate() + 31);
+
+    // 僅顯示統一獅相關比賽（主隊或客隊）的基礎集合
+    const gamesAll = Array.isArray(data.games) ? data.games.filter(g => isLions(g.homeTeam) || isLions(g.awayTeam)) : [];
+
+    // 一個月內（未來31天）的過濾條件
+    const withinOneMonth = (g) => {
+        const dt = toDT(g);
+        return dt >= now && dt <= oneMonthLater;
+    };
+
+    // 根據切換選擇集合
+    let games = showAllSchedule ? gamesAll.slice() : gamesAll.filter(withinOneMonth);
+
     if (!games || games.length === 0) {
         scheduleContent.innerHTML = `
             <div class="schedule-error">
                 <div class="error-icon">📅</div>
                 <h3>暫無賽程</h3>
-                <p>${data.season} 年僅顯示統一獅相關比賽，目前沒有資料。</p>
+                <p>${data.season} 年僅顯示統一獅相關比賽，${showAllSchedule ? '目前沒有資料。' : '一個月內目前沒有資料。'}</p>
+                <div class="schedule-controls">
+                    <button class="schedule-toggle-btn" onclick="toggleShowAll()">${showAllSchedule ? '顯示一個月內' : '查看更多（完整賽程）'}</button>
+                </div>
             </div>
         `;
         return;
     }
+
+    // 新增：依日期時間排序（降序，最晚的在最上）
+    games = games.sort((a, b) => toDT(b) - toDT(a));
+
     const tableHTML = `
+        <div class="schedule-controls">
+            <button class="schedule-toggle-btn" onclick="toggleShowAll()">${showAllSchedule ? '顯示一個月內' : '查看更多（完整賽程）'}</button>
+        </div>
         <div class="schedule-table-container">
             <table class="schedule-table">
                 <thead>
@@ -106,13 +130,12 @@ function displayScheduleTable(data) {
         </div>
         <div class="schedule-info">
             <p>最後更新時間: ${formatDateTime(data.lastUpdated)}</p>
-            <p>僅顯示統一獅相關比賽，共 ${games.length} 場</p>
+            <p>僅顯示統一獅相關比賽，${showAllSchedule ? '完整賽程' : '一個月內'} 共 ${games.length} 場</p>
         </div>
     `;
     scheduleContent.innerHTML = tableHTML;
 }
 
-// 建立比賽行
 function createGameRow(game) {
     const homeTeamClass = game.homeTeam.includes('統一獅') ? 'team-name uni-lions' : 'team-name';
     const awayTeamClass = game.awayTeam.includes('統一獅') ? 'team-name uni-lions' : 'team-name';
@@ -164,18 +187,11 @@ function getGameStatusText(status) {
 }
 
 // 格式化日期
-function formatDate(dateString) {
+function formatDate(dateStr) {
     try {
-        const date = new Date(dateString);
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const day = date.getDate().toString().padStart(2, '0');
-        const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
-        const weekday = weekdays[date.getDay()];
-        
-        return `${month}/${day} (${weekday})`;
-    } catch (error) {
-        return dateString;
-    }
+        const d = new Date(dateStr);
+        return d.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    } catch (e) { return dateStr; }
 }
 
 // 格式化日期時間
@@ -194,6 +210,14 @@ function formatDateTime(dateTimeString) {
     }
 }
 
+// 切換是否顯示完整賽程
+function toggleShowAll() {
+    showAllSchedule = !showAllSchedule;
+    if (scheduleData) {
+        displayScheduleTable(scheduleData);
+    }
+}
+
 // 重新載入賽程資料
 function reloadSchedule() {
     const currentYear = new Date().getFullYear().toString();
@@ -203,3 +227,4 @@ function reloadSchedule() {
 // 導出函數供全域使用
 window.loadScheduleData = loadScheduleData;
 window.reloadSchedule = reloadSchedule;
+window.toggleShowAll = toggleShowAll;
