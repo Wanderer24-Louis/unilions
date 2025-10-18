@@ -23,12 +23,13 @@ function updateScheduleHeader(year) {
 }
 
 // 載入賽程資料
-async function loadScheduleData(season = new Date().getFullYear().toString()) {
+async function loadScheduleData(season = new Date().getFullYear().toString(), refresh = false) {
     const scheduleContent = document.getElementById('schedule-content');
     // 顯示載入狀態
     showLoadingState();
     try {
-        const response = await fetch(`/api/schedule?season=${season}`);
+        const url = refresh ? `/api/schedule?season=${season}&refresh=1` : `/api/schedule?season=${season}`;
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -196,7 +197,7 @@ function formatDateTime(dateTimeString) {
 // 重新載入賽程資料
 function reloadSchedule() {
     const currentYear = new Date().getFullYear().toString();
-    loadScheduleData(currentYear);
+    loadScheduleData(currentYear, true);
 }
 
 // 導出函數供全域使用

@@ -7,7 +7,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 8
     },
     {
       "date": "2025-03-30",
@@ -15,15 +17,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "樂天桃園",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-28",
-      "time": "17:05",
-      "homeTeam": "樂天桃猿",
-      "awayTeam": "味全龍",
-      "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-03-30",
@@ -31,7 +27,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "富邦悍將",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 3
     },
     {
       "date": "2025-03-30",
@@ -39,7 +37,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 3
     },
     {
       "date": "2025-04-02",
@@ -47,7 +47,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "date": "2025-04-02",
@@ -55,7 +57,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 3
     },
     {
       "date": "2025-04-02",
@@ -63,7 +67,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 11,
+      "awayScore": 5
     },
     {
       "date": "2025-04-03",
@@ -71,15 +77,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "台南",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-04-03",
-      "time": "17:05",
-      "homeTeam": "味全龍",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 2
     },
     {
       "date": "2025-04-03",
@@ -87,7 +87,19 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 0
+    },
+    {
+      "date": "2025-04-03",
+      "time": "17:05",
+      "homeTeam": "味全龍",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "天母",
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 1
     },
     {
       "date": "2025-04-04",
@@ -95,7 +107,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
     },
     {
       "date": "2025-04-04",
@@ -103,7 +117,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 2
     },
     {
       "date": "2025-04-04",
@@ -111,7 +127,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "date": "2025-04-05",
@@ -119,7 +137,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 2
     },
     {
       "date": "2025-04-05",
@@ -127,7 +147,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 11,
+      "awayScore": 3
     },
     {
       "date": "2025-04-05",
@@ -135,7 +157,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
     },
     {
       "date": "2025-04-06",
@@ -143,7 +167,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 0
     },
     {
       "date": "2025-04-06",
@@ -151,7 +177,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 5
     },
     {
       "date": "2025-04-06",
@@ -159,7 +187,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 6
     },
     {
       "date": "2025-04-08",
@@ -167,7 +197,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 3
     },
     {
       "date": "2025-04-08",
@@ -175,7 +207,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
     },
     {
       "date": "2025-04-09",
@@ -183,7 +217,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 2
     },
     {
       "date": "2025-04-09",
@@ -191,7 +227,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 7
     },
     {
       "date": "2025-04-09",
@@ -199,7 +237,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-04-10",
@@ -207,7 +247,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
     },
     {
       "date": "2025-04-11",
@@ -215,7 +257,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 15
     },
     {
       "date": "2025-04-11",
@@ -223,7 +267,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
     },
     {
       "date": "2025-04-11",
@@ -231,7 +277,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 15
     },
     {
       "date": "2025-04-12",
@@ -239,7 +287,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 1
     },
     {
       "date": "2025-04-12",
@@ -247,7 +297,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 3
     },
     {
       "date": "2025-04-12",
@@ -255,7 +307,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 3
     },
     {
       "date": "2025-04-13",
@@ -263,7 +317,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 2
     },
     {
       "date": "2025-04-13",
@@ -271,7 +327,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 1
     },
     {
       "date": "2025-04-13",
@@ -279,7 +337,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 4
     },
     {
       "date": "2025-04-15",
@@ -287,7 +347,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
     },
     {
       "date": "2025-04-15",
@@ -295,7 +357,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 1
     },
     {
       "date": "2025-04-16",
@@ -303,7 +367,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 0
     },
     {
       "date": "2025-04-16",
@@ -311,7 +377,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 4
     },
     {
       "date": "2025-04-16",
@@ -319,7 +387,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 3
     },
     {
       "date": "2025-04-17",
@@ -327,7 +397,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 0
     },
     {
       "date": "2025-04-18",
@@ -335,7 +407,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "富邦悍將",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 0
     },
     {
       "date": "2025-04-18",
@@ -343,7 +417,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 3
     },
     {
       "date": "2025-04-18",
@@ -351,7 +427,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 4
     },
     {
       "date": "2025-04-19",
@@ -359,7 +437,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 1
     },
     {
       "date": "2025-04-19",
@@ -367,7 +447,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "富邦悍將",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 2
     },
     {
       "date": "2025-04-19",
@@ -375,7 +457,19 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 3
+    },
+    {
+      "date": "2025-04-20",
+      "time": "15:05",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "富邦悍將",
+      "venue": "大巨蛋",
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 1
     },
     {
       "date": "2025-04-20",
@@ -383,23 +477,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-29",
-      "time": "14:05",
-      "homeTeam": "樂天桃猿",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "樂天桃園",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-04-20",
-      "time": "15:05",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "富邦悍將",
-      "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "date": "2025-04-20",
@@ -407,7 +487,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 2
     },
     {
       "date": "2025-04-22",
@@ -415,7 +497,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 2
     },
     {
       "date": "2025-04-22",
@@ -423,7 +507,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 6
     },
     {
       "date": "2025-04-23",
@@ -431,7 +517,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 6
     },
     {
       "date": "2025-04-23",
@@ -439,7 +527,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 2
     },
     {
       "date": "2025-04-23",
@@ -447,7 +537,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 0
     },
     {
       "date": "2025-04-24",
@@ -455,7 +547,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "date": "2025-04-25",
@@ -463,15 +557,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "樂天桃猿",
       "venue": "新莊",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-25",
-      "time": "18:35",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "樂天桃猿",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-04-25",
@@ -479,7 +567,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 0
     },
     {
       "date": "2025-04-25",
@@ -487,7 +577,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
     },
     {
       "date": "2025-04-26",
@@ -495,7 +587,19 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 6
+    },
+    {
+      "date": "2025-04-26",
+      "time": "17:05",
+      "homeTeam": "味全龍",
+      "awayTeam": "中信兄弟",
+      "venue": "大巨蛋",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "date": "2025-04-26",
@@ -503,15 +607,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "樂天桃猿",
       "venue": "新莊",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-04-26",
-      "time": "17:05",
-      "homeTeam": "味全龍",
-      "awayTeam": "中信兄弟",
-      "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 7
     },
     {
       "date": "2025-04-27",
@@ -519,7 +617,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-04-27",
@@ -527,7 +627,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-04-27",
@@ -535,7 +637,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "樂天桃猿",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 3
     },
     {
       "date": "2025-04-29",
@@ -543,7 +647,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 4
     },
     {
       "date": "2025-04-29",
@@ -551,7 +657,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
     },
     {
       "date": "2025-04-30",
@@ -559,7 +667,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 7
     },
     {
       "date": "2025-04-30",
@@ -567,7 +677,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 5
     },
     {
       "date": "2025-04-30",
@@ -575,7 +687,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 1
     },
     {
       "date": "2025-05-01",
@@ -583,7 +697,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 8
     },
     {
       "date": "2025-05-02",
@@ -591,7 +707,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "嘉義市",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
     },
     {
       "date": "2025-05-02",
@@ -599,7 +717,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 4
     },
     {
       "date": "2025-05-02",
@@ -607,7 +727,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 5
     },
     {
       "date": "2025-05-03",
@@ -615,7 +737,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-05-03",
@@ -623,7 +747,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 7
     },
     {
       "date": "2025-05-03",
@@ -631,7 +757,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 2
     },
     {
       "date": "2025-05-04",
@@ -639,15 +767,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-05-04",
-      "time": "17:06",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 9
     },
     {
       "date": "2025-05-04",
@@ -655,7 +777,29 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 5
+    },
+    {
+      "date": "2025-05-04",
+      "time": "17:06",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 13
+    },
+    {
+      "date": "2025-05-06",
+      "time": "18:35",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "樂天桃猿",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 5
     },
     {
       "date": "2025-05-06",
@@ -663,15 +807,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-05-06",
-      "time": "18:35",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "樂天桃猿",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 2
     },
     {
       "date": "2025-05-07",
@@ -679,7 +817,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 4
     },
     {
       "date": "2025-05-07",
@@ -687,7 +827,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 9
     },
     {
       "date": "2025-05-07",
@@ -695,15 +837,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "樂天桃猿",
       "venue": "新莊",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-26",
-      "time": "18:35",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "樂天桃猿",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-05-09",
@@ -711,7 +847,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 6
     },
     {
       "date": "2025-05-09",
@@ -719,7 +857,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "花蓮",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
     },
     {
       "date": "2025-05-09",
@@ -727,7 +867,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
     },
     {
       "date": "2025-05-10",
@@ -735,7 +877,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "花蓮",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 15,
+      "awayScore": 2
     },
     {
       "date": "2025-05-10",
@@ -743,15 +887,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "洲際",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-28",
-      "time": "17:05",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-05-10",
@@ -759,7 +897,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "date": "2025-05-11",
@@ -767,23 +907,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "天母",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-05-29",
-      "time": "18:35",
-      "homeTeam": "味全龍",
-      "awayTeam": "樂天桃猿",
-      "venue": "天母",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-24",
-      "time": "18:35",
-      "homeTeam": "味全龍",
-      "awayTeam": "樂天桃猿",
-      "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-05-11",
@@ -791,15 +917,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "花蓮",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-28",
-      "time": "17:05",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "富邦悍將",
-      "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-05-11",
@@ -807,15 +927,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "洲際",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-29",
-      "time": "17:05",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-05-13",
@@ -823,7 +937,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 3
     },
     {
       "date": "2025-05-13",
@@ -831,7 +947,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "中信兄弟",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 9,
+      "awayScore": 3
     },
     {
       "date": "2025-05-14",
@@ -839,7 +957,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 6
     },
     {
       "date": "2025-05-14",
@@ -847,7 +967,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "中信兄弟",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 1
     },
     {
       "date": "2025-05-14",
@@ -855,7 +977,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 10,
+      "awayScore": 1
     },
     {
       "date": "2025-05-15",
@@ -863,7 +987,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
     },
     {
       "date": "2025-05-16",
@@ -871,7 +997,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 1
     },
     {
       "date": "2025-05-16",
@@ -879,7 +1007,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 6
     },
     {
       "date": "2025-05-16",
@@ -887,7 +1017,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 5
     },
     {
       "date": "2025-05-17",
@@ -895,7 +1027,19 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 8
+    },
+    {
+      "date": "2025-05-17",
+      "time": "17:05",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "樂天桃猿",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 12
     },
     {
       "date": "2025-05-17",
@@ -903,15 +1047,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-05-17",
-      "time": "17:05",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "樂天桃猿",
-      "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "date": "2025-05-18",
@@ -919,7 +1057,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 6
     },
     {
       "date": "2025-05-18",
@@ -927,15 +1067,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-29",
-      "time": "17:05",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "味全龍",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-05-18",
@@ -943,7 +1077,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 9,
+      "awayScore": 7
     },
     {
       "date": "2025-05-20",
@@ -951,7 +1087,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 3
     },
     {
       "date": "2025-05-20",
@@ -959,7 +1097,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "嘉義市",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 1
     },
     {
       "date": "2025-05-21",
@@ -967,7 +1107,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 1
     },
     {
       "date": "2025-05-21",
@@ -975,7 +1117,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 4
     },
     {
       "date": "2025-05-22",
@@ -983,7 +1127,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "富邦悍將",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 9,
+      "awayScore": 3
     },
     {
       "date": "2025-05-23",
@@ -991,7 +1137,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "date": "2025-05-23",
@@ -999,7 +1147,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 12,
+      "awayScore": 2
     },
     {
       "date": "2025-05-23",
@@ -1007,7 +1157,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 10,
+      "awayScore": 5
     },
     {
       "date": "2025-05-24",
@@ -1015,7 +1167,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 7
     },
     {
       "date": "2025-05-24",
@@ -1023,7 +1177,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 0
     },
     {
       "date": "2025-05-24",
@@ -1031,7 +1187,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "date": "2025-05-25",
@@ -1039,7 +1197,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 6
     },
     {
       "date": "2025-05-25",
@@ -1047,7 +1207,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 6
     },
     {
       "date": "2025-05-25",
@@ -1055,7 +1217,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 1
     },
     {
       "date": "2025-05-27",
@@ -1063,7 +1227,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
     },
     {
       "date": "2025-05-27",
@@ -1071,7 +1237,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 4
     },
     {
       "date": "2025-05-28",
@@ -1079,7 +1247,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 2
     },
     {
       "date": "2025-05-28",
@@ -1087,15 +1257,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-24",
-      "time": "18:35",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-05-28",
@@ -1103,7 +1267,19 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 5
+    },
+    {
+      "date": "2025-05-29",
+      "time": "18:35",
+      "homeTeam": "味全龍",
+      "awayTeam": "樂天桃猿",
+      "venue": "天母",
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-05-30",
@@ -1111,7 +1287,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 9
     },
     {
       "date": "2025-05-30",
@@ -1119,7 +1297,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 3
     },
     {
       "date": "2025-05-30",
@@ -1127,7 +1307,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 4
     },
     {
       "date": "2025-05-31",
@@ -1135,7 +1317,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 14,
+      "awayScore": 0
     },
     {
       "date": "2025-05-31",
@@ -1143,7 +1327,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 5
     },
     {
       "date": "2025-05-31",
@@ -1151,7 +1337,19 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 10,
+      "awayScore": 14
+    },
+    {
+      "date": "2025-06-01",
+      "time": "16:05",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "樂天桃猿",
+      "venue": "台南",
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 0
     },
     {
       "date": "2025-06-01",
@@ -1159,15 +1357,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "澄清湖",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-06-01",
-      "time": "16:05",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "樂天桃猿",
-      "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 4
     },
     {
       "date": "2025-06-01",
@@ -1175,7 +1367,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 12,
+      "awayScore": 4
     },
     {
       "date": "2025-06-03",
@@ -1183,7 +1377,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "花蓮",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 0
     },
     {
       "date": "2025-06-03",
@@ -1191,15 +1387,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "樂天桃園",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-27",
-      "time": "18:35",
-      "homeTeam": "樂天桃猿",
-      "awayTeam": "中信兄弟",
-      "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-06-04",
@@ -1207,15 +1397,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "花蓮",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-27",
-      "time": "18:35",
-      "homeTeam": "味全龍",
-      "awayTeam": "富邦悍將",
-      "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-06-04",
@@ -1223,7 +1407,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 2
     },
     {
       "date": "2025-06-04",
@@ -1231,15 +1417,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "嘉義市",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-27",
-      "time": "18:35",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "嘉義市",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-06-06",
@@ -1247,7 +1427,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 7
     },
     {
       "date": "2025-06-06",
@@ -1255,7 +1437,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 11
     },
     {
       "date": "2025-06-06",
@@ -1263,7 +1447,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "台鋼雄鷹",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 1
     },
     {
       "date": "2025-06-07",
@@ -1271,7 +1457,19 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 3
+    },
+    {
+      "date": "2025-06-07",
+      "time": "17:05",
+      "homeTeam": "樂天桃猿",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "樂天桃園",
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 6
     },
     {
       "date": "2025-06-07",
@@ -1279,15 +1477,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "新莊",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-06-07",
-      "time": "17:05",
-      "homeTeam": "樂天桃猿",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 12
     },
     {
       "date": "2025-06-08",
@@ -1295,7 +1487,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 6
     },
     {
       "date": "2025-06-08",
@@ -1303,7 +1497,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 8
     },
     {
       "date": "2025-06-08",
@@ -1311,7 +1507,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "台鋼雄鷹",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 7
     },
     {
       "date": "2025-06-10",
@@ -1319,15 +1517,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "洲際",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-06-10",
-      "time": "18:36",
-      "homeTeam": "樂天桃猿",
-      "awayTeam": "味全龍",
-      "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 10
     },
     {
       "date": "2025-06-10",
@@ -1335,7 +1527,19 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "嘉義市",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 5
+    },
+    {
+      "date": "2025-06-10",
+      "time": "18:36",
+      "homeTeam": "樂天桃猿",
+      "awayTeam": "味全龍",
+      "venue": "樂天桃園",
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 13
     },
     {
       "date": "2025-06-12",
@@ -1343,7 +1547,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
     },
     {
       "date": "2025-06-12",
@@ -1351,7 +1557,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-06-12",
@@ -1359,7 +1567,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 12,
+      "awayScore": 4
     },
     {
       "date": "2025-06-13",
@@ -1367,15 +1577,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "洲際",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-18",
-      "time": "18:35",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "樂天桃猿",
-      "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-06-13",
@@ -1383,7 +1587,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 3
     },
     {
       "date": "2025-06-13",
@@ -1391,15 +1597,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "台南",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-06-26",
-      "time": "19:45",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-06-14",
@@ -1407,7 +1607,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 8
     },
     {
       "date": "2025-06-14",
@@ -1415,7 +1617,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 1
     },
     {
       "date": "2025-06-14",
@@ -1423,7 +1627,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 7
     },
     {
       "date": "2025-06-15",
@@ -1431,7 +1637,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 6
     },
     {
       "date": "2025-06-15",
@@ -1439,7 +1647,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 3
     },
     {
       "date": "2025-06-15",
@@ -1447,7 +1657,29 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "台南",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 0
+    },
+    {
+      "date": "2025-06-17",
+      "time": "18:35",
+      "homeTeam": "味全龍",
+      "awayTeam": "樂天桃猿",
+      "venue": "天母",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 2
+    },
+    {
+      "date": "2025-06-17",
+      "time": "18:35",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
     },
     {
       "date": "2025-06-17",
@@ -1455,23 +1687,39 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 6
     },
     {
-      "date": "2025-06-17",
+      "date": "2025-06-18",
+      "time": "18:35",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "樂天桃猿",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 4
+    },
+    {
+      "date": "2025-06-19",
+      "time": "18:35",
+      "homeTeam": "樂天桃猿",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "樂天桃園",
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
+    },
+    {
+      "date": "2025-06-19",
       "time": "18:35",
       "homeTeam": "味全龍",
-      "awayTeam": "樂天桃猿",
+      "awayTeam": "中信兄弟",
       "venue": "天母",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-06-17",
-      "time": "18:35",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 5
     },
     {
       "date": "2025-06-19",
@@ -1479,23 +1727,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "澄清湖",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-06-19",
-      "time": "18:35",
-      "homeTeam": "樂天桃猿",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "樂天桃園",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-06-19",
-      "time": "18:35",
-      "homeTeam": "味全龍",
-      "awayTeam": "中信兄弟",
-      "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 2
     },
     {
       "date": "2025-06-20",
@@ -1503,7 +1737,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
     },
     {
       "date": "2025-06-20",
@@ -1511,7 +1747,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 12
     },
     {
       "date": "2025-06-20",
@@ -1519,15 +1757,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "中信兄弟",
       "venue": "天母",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-06-21",
-      "time": "17:05",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "富邦悍將",
-      "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
     },
     {
       "date": "2025-06-21",
@@ -1535,7 +1767,19 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "台鋼雄鷹",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 11,
+      "awayScore": 12
+    },
+    {
+      "date": "2025-06-21",
+      "time": "17:05",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "富邦悍將",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 4
     },
     {
       "date": "2025-06-21",
@@ -1543,7 +1787,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "date": "2025-06-22",
@@ -1551,7 +1797,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "富邦悍將",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 10,
+      "awayScore": 0
     },
     {
       "date": "2025-06-22",
@@ -1559,7 +1807,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "台鋼雄鷹",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-06-22",
@@ -1567,7 +1817,159 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
+    },
+    {
+      "date": "2025-06-24",
+      "time": "18:35",
+      "homeTeam": "味全龍",
+      "awayTeam": "樂天桃猿",
+      "venue": "天母",
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 11
+    },
+    {
+      "date": "2025-06-24",
+      "time": "18:35",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 0
+    },
+    {
+      "date": "2025-06-25",
+      "time": "18:35",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "樂天桃猿",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 0
+    },
+    {
+      "date": "2025-06-26",
+      "time": "18:35",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "樂天桃猿",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 4
+    },
+    {
+      "date": "2025-06-26",
+      "time": "19:45",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "台南",
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
+    },
+    {
+      "date": "2025-06-27",
+      "time": "18:35",
+      "homeTeam": "樂天桃猿",
+      "awayTeam": "中信兄弟",
+      "venue": "樂天桃園",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 2
+    },
+    {
+      "date": "2025-06-27",
+      "time": "18:35",
+      "homeTeam": "味全龍",
+      "awayTeam": "富邦悍將",
+      "venue": "天母",
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 5
+    },
+    {
+      "date": "2025-06-27",
+      "time": "18:35",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "嘉義市",
+      "status": "已結束",
+      "homeScore": 12,
+      "awayScore": 5
+    },
+    {
+      "date": "2025-06-28",
+      "time": "17:05",
+      "homeTeam": "樂天桃猿",
+      "awayTeam": "味全龍",
+      "venue": "樂天桃園",
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 7
+    },
+    {
+      "date": "2025-06-28",
+      "time": "17:05",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 8
+    },
+    {
+      "date": "2025-06-28",
+      "time": "17:05",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "富邦悍將",
+      "venue": "台南",
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 1
+    },
+    {
+      "date": "2025-06-29",
+      "time": "14:05",
+      "homeTeam": "樂天桃猿",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "樂天桃園",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
+    },
+    {
+      "date": "2025-06-29",
+      "time": "17:05",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 8
+    },
+    {
+      "date": "2025-06-29",
+      "time": "17:05",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "味全龍",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 1
+    },
+    {
+      "date": "2025-07-04",
+      "time": "18:35",
+      "homeTeam": "味全龍",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "天母",
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
     },
     {
       "date": "2025-07-04",
@@ -1575,7 +1977,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 4
     },
     {
       "date": "2025-07-04",
@@ -1583,15 +1987,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-07-04",
-      "time": "18:35",
-      "homeTeam": "味全龍",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "date": "2025-07-05",
@@ -1599,7 +1997,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 6
     },
     {
       "date": "2025-07-05",
@@ -1607,7 +2007,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 18
     },
     {
       "date": "2025-07-05",
@@ -1615,7 +2017,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 4
     },
     {
       "date": "2025-07-06",
@@ -1623,15 +2027,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-04",
-      "time": "17:06",
-      "homeTeam": "台鋼雄鷹",
-      "awayTeam": "中信兄弟",
-      "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-07-06",
@@ -1639,7 +2037,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 2
     },
     {
       "date": "2025-07-06",
@@ -1647,7 +2047,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 16,
+      "awayScore": 12
     },
     {
       "date": "2025-07-08",
@@ -1655,7 +2057,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 8
     },
     {
       "date": "2025-07-08",
@@ -1663,7 +2067,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "date": "2025-07-09",
@@ -1671,15 +2077,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "洲際",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-09-29",
-      "time": "17:05",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-07-09",
@@ -1687,15 +2087,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-09-29",
-      "time": "17:05",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "味全龍",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-07-09",
@@ -1703,15 +2097,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "嘉義市",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-02",
-      "time": "18:35",
-      "homeTeam": "台鋼雄鷹",
-      "awayTeam": "樂天桃猿",
-      "venue": "嘉義市",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-07-10",
@@ -1719,15 +2107,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "澄清湖",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-01",
-      "time": "18:35",
-      "homeTeam": "台鋼雄鷹",
-      "awayTeam": "樂天桃猿",
-      "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-07-11",
@@ -1735,15 +2117,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-02",
-      "time": "18:35",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "味全龍",
-      "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-07-11",
@@ -1751,15 +2127,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "台南",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-03",
-      "time": "18:36",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "樂天桃猿",
-      "venue": "嘉義市",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-07-11",
@@ -1767,7 +2137,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-07-12",
@@ -1775,7 +2147,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 11,
+      "awayScore": 4
     },
     {
       "date": "2025-07-12",
@@ -1783,7 +2157,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 3
     },
     {
       "date": "2025-07-12",
@@ -1791,7 +2167,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 1
     },
     {
       "date": "2025-07-13",
@@ -1799,7 +2177,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 4
     },
     {
       "date": "2025-07-13",
@@ -1807,7 +2187,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 8
     },
     {
       "date": "2025-07-13",
@@ -1815,7 +2197,19 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
+    },
+    {
+      "date": "2025-07-15",
+      "time": "18:35",
+      "homeTeam": "樂天桃猿",
+      "awayTeam": "中信兄弟",
+      "venue": "樂天桃園",
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 5
     },
     {
       "date": "2025-07-15",
@@ -1823,15 +2217,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "斗六",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-07-15",
-      "time": "18:35",
-      "homeTeam": "樂天桃猿",
-      "awayTeam": "中信兄弟",
-      "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 12,
+      "awayScore": 4
     },
     {
       "date": "2025-07-16",
@@ -1839,7 +2227,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "斗六",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 9
     },
     {
       "date": "2025-07-16",
@@ -1847,7 +2237,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 7
     },
     {
       "date": "2025-07-16",
@@ -1855,7 +2247,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 3
     },
     {
       "date": "2025-07-17",
@@ -1863,7 +2257,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "date": "2025-07-22",
@@ -1871,7 +2267,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
     },
     {
       "date": "2025-07-22",
@@ -1879,7 +2277,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 1
     },
     {
       "date": "2025-07-23",
@@ -1887,7 +2287,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "date": "2025-07-23",
@@ -1895,7 +2297,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 6
     },
     {
       "date": "2025-07-23",
@@ -1903,7 +2307,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "date": "2025-07-24",
@@ -1911,47 +2317,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "新莊",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-01",
-      "time": "18:35",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "中信兄弟",
-      "venue": "新莊",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-07-25",
-      "time": "18:35",
-      "homeTeam": "味全龍",
-      "awayTeam": "富邦悍將",
-      "venue": "天母",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-03",
-      "time": "18:35",
-      "homeTeam": "味全龍",
-      "awayTeam": "富邦悍將",
-      "venue": "天母",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-07-25",
-      "time": "18:35",
-      "homeTeam": "樂天桃猿",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "樂天桃園",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-09-29",
-      "time": "17:06",
-      "homeTeam": "樂天桃猿",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 5
     },
     {
       "date": "2025-07-25",
@@ -1959,7 +2327,29 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 5
+    },
+    {
+      "date": "2025-07-25",
+      "time": "18:35",
+      "homeTeam": "味全龍",
+      "awayTeam": "富邦悍將",
+      "venue": "天母",
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
+    },
+    {
+      "date": "2025-07-25",
+      "time": "18:35",
+      "homeTeam": "樂天桃猿",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "樂天桃園",
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-07-26",
@@ -1967,7 +2357,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 5
     },
     {
       "date": "2025-07-26",
@@ -1975,7 +2367,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 4
     },
     {
       "date": "2025-07-26",
@@ -1983,7 +2377,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "台鋼雄鷹",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 5
     },
     {
       "date": "2025-07-27",
@@ -1991,7 +2387,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 5
     },
     {
       "date": "2025-07-27",
@@ -1999,7 +2397,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 1
     },
     {
       "date": "2025-07-27",
@@ -2007,7 +2407,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "台鋼雄鷹",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 7
     },
     {
       "date": "2025-07-29",
@@ -2015,7 +2417,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 11,
+      "awayScore": 15
     },
     {
       "date": "2025-07-29",
@@ -2023,7 +2427,19 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 0
+    },
+    {
+      "date": "2025-07-30",
+      "time": "18:36",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "樂天桃猿",
+      "venue": "大巨蛋",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 9
     },
     {
       "date": "2025-07-30",
@@ -2031,15 +2447,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "洲際",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-07-30",
-      "time": "18:36",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "樂天桃猿",
-      "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 11,
+      "awayScore": 2
     },
     {
       "date": "2025-07-30",
@@ -2047,7 +2457,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 1
     },
     {
       "date": "2025-07-31",
@@ -2055,7 +2467,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-08-01",
@@ -2063,7 +2477,19 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 5
+    },
+    {
+      "date": "2025-08-01",
+      "time": "18:35",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-08-01",
@@ -2071,23 +2497,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-08-01",
-      "time": "18:35",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "新莊",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-09-17",
-      "time": "18:35",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-08-02",
@@ -2095,7 +2507,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 1
     },
     {
       "date": "2025-08-02",
@@ -2103,7 +2517,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
     },
     {
       "date": "2025-08-02",
@@ -2111,7 +2527,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 5
     },
     {
       "date": "2025-08-03",
@@ -2119,7 +2537,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 3
     },
     {
       "date": "2025-08-03",
@@ -2127,15 +2547,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-05",
-      "time": "17:05",
-      "homeTeam": "台鋼雄鷹",
-      "awayTeam": "味全龍",
-      "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-08-03",
@@ -2143,7 +2557,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-08-05",
@@ -2151,7 +2567,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 2
     },
     {
       "date": "2025-08-05",
@@ -2159,7 +2577,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
     },
     {
       "date": "2025-08-05",
@@ -2167,7 +2587,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "台東",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
     },
     {
       "date": "2025-08-06",
@@ -2175,7 +2597,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 2
     },
     {
       "date": "2025-08-06",
@@ -2183,7 +2607,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
     },
     {
       "date": "2025-08-06",
@@ -2191,7 +2617,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "台東",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 5
     },
     {
       "date": "2025-08-08",
@@ -2199,7 +2627,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
     },
     {
       "date": "2025-08-08",
@@ -2207,7 +2637,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
     },
     {
       "date": "2025-08-08",
@@ -2215,7 +2647,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "富邦悍將",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 2
     },
     {
       "date": "2025-08-09",
@@ -2223,7 +2657,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 8
     },
     {
       "date": "2025-08-09",
@@ -2231,7 +2667,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 5
     },
     {
       "date": "2025-08-09",
@@ -2239,15 +2677,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "富邦悍將",
       "venue": "洲際",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-08-10",
-      "time": "16:05",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 0
     },
     {
       "date": "2025-08-10",
@@ -2255,7 +2687,19 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 6
+    },
+    {
+      "date": "2025-08-10",
+      "time": "16:05",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "澄清湖",
+      "status": "已結束",
+      "homeScore": 10,
+      "awayScore": 7
     },
     {
       "date": "2025-08-10",
@@ -2263,7 +2707,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "富邦悍將",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 3
     },
     {
       "date": "2025-08-12",
@@ -2271,7 +2717,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 12
     },
     {
       "date": "2025-08-12",
@@ -2279,7 +2727,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "date": "2025-08-13",
@@ -2287,7 +2737,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 5
     },
     {
       "date": "2025-08-13",
@@ -2295,7 +2747,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 2
     },
     {
       "date": "2025-08-13",
@@ -2303,7 +2757,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "date": "2025-08-14",
@@ -2311,7 +2767,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "date": "2025-08-15",
@@ -2319,7 +2777,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 2
     },
     {
       "date": "2025-08-15",
@@ -2327,7 +2787,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 7
     },
     {
       "date": "2025-08-15",
@@ -2335,7 +2797,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 3
     },
     {
       "date": "2025-08-16",
@@ -2343,7 +2807,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 2
     },
     {
       "date": "2025-08-16",
@@ -2351,7 +2817,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 9
     },
     {
       "date": "2025-08-16",
@@ -2359,7 +2827,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 2
     },
     {
       "date": "2025-08-17",
@@ -2367,7 +2837,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 11,
+      "awayScore": 1
     },
     {
       "date": "2025-08-17",
@@ -2375,7 +2847,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "date": "2025-08-17",
@@ -2383,7 +2857,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 6
     },
     {
       "date": "2025-08-19",
@@ -2391,7 +2867,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-08-19",
@@ -2399,7 +2877,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 1
     },
     {
       "date": "2025-08-19",
@@ -2407,7 +2887,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "台東",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 2
     },
     {
       "date": "2025-08-20",
@@ -2415,7 +2897,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 9
     },
     {
       "date": "2025-08-20",
@@ -2423,7 +2907,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 8
     },
     {
       "date": "2025-08-20",
@@ -2431,7 +2917,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "味全龍",
       "venue": "台東",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 4
     },
     {
       "date": "2025-08-22",
@@ -2439,7 +2927,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 9,
+      "awayScore": 0
     },
     {
       "date": "2025-08-22",
@@ -2447,7 +2937,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 4
     },
     {
       "date": "2025-08-22",
@@ -2455,23 +2947,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-08-23",
-      "time": "17:06",
-      "homeTeam": "樂天桃猿",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "樂天桃園",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-08-23",
-      "time": "17:06",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "味全龍",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
     },
     {
       "date": "2025-08-23",
@@ -2479,7 +2957,29 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
+    },
+    {
+      "date": "2025-08-23",
+      "time": "17:06",
+      "homeTeam": "樂天桃猿",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "樂天桃園",
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 3
+    },
+    {
+      "date": "2025-08-23",
+      "time": "17:06",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "味全龍",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 3
     },
     {
       "date": "2025-08-24",
@@ -2487,7 +2987,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 8
     },
     {
       "date": "2025-08-24",
@@ -2495,7 +2997,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 8
     },
     {
       "date": "2025-08-24",
@@ -2503,7 +3007,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 2
     },
     {
       "date": "2025-08-26",
@@ -2511,7 +3017,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-08-26",
@@ -2519,7 +3027,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "date": "2025-08-27",
@@ -2527,7 +3037,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 5
     },
     {
       "date": "2025-08-27",
@@ -2535,7 +3047,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 2
     },
     {
       "date": "2025-08-27",
@@ -2543,7 +3057,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 1
     },
     {
       "date": "2025-08-28",
@@ -2551,7 +3067,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 6
     },
     {
       "date": "2025-08-29",
@@ -2559,7 +3077,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 9,
+      "awayScore": 3
     },
     {
       "date": "2025-08-29",
@@ -2567,7 +3087,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 2
     },
     {
       "date": "2025-08-29",
@@ -2575,7 +3097,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 10,
+      "awayScore": 5
     },
     {
       "date": "2025-08-30",
@@ -2583,7 +3107,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
     },
     {
       "date": "2025-08-30",
@@ -2591,7 +3117,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 4
     },
     {
       "date": "2025-08-30",
@@ -2599,7 +3127,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 5
     },
     {
       "date": "2025-08-31",
@@ -2607,7 +3137,19 @@
       "homeTeam": "味全龍",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 10
+    },
+    {
+      "date": "2025-08-31",
+      "time": "16:05",
+      "homeTeam": "台鋼雄鷹",
+      "awayTeam": "樂天桃猿",
+      "venue": "澄清湖",
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 7
     },
     {
       "date": "2025-08-31",
@@ -2615,15 +3157,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "新莊",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-08-31",
-      "time": "16:05",
-      "homeTeam": "台鋼雄鷹",
-      "awayTeam": "樂天桃猿",
-      "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 3
     },
     {
       "date": "2025-09-02",
@@ -2631,7 +3167,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "富邦悍將",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "date": "2025-09-02",
@@ -2639,7 +3177,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 5
     },
     {
       "date": "2025-09-03",
@@ -2647,7 +3187,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "富邦悍將",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 2
     },
     {
       "date": "2025-09-03",
@@ -2655,7 +3197,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-09-03",
@@ -2663,7 +3207,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 3
     },
     {
       "date": "2025-09-04",
@@ -2671,7 +3217,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 3
     },
     {
       "date": "2025-09-05",
@@ -2679,7 +3227,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "date": "2025-09-05",
@@ -2687,7 +3237,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "樂天桃猿",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 3
     },
     {
       "date": "2025-09-05",
@@ -2695,7 +3247,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 1
     },
     {
       "date": "2025-09-06",
@@ -2703,7 +3257,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 7
     },
     {
       "date": "2025-09-06",
@@ -2711,7 +3267,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "樂天桃猿",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 8
     },
     {
       "date": "2025-09-06",
@@ -2719,7 +3277,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 3
     },
     {
       "date": "2025-09-07",
@@ -2727,7 +3287,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 11,
+      "awayScore": 1
     },
     {
       "date": "2025-09-07",
@@ -2735,15 +3297,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "洲際",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-05",
-      "time": "17:05",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-09-07",
@@ -2751,15 +3307,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "樂天桃猿",
       "venue": "新莊",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-04",
-      "time": "17:05",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "樂天桃猿",
-      "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-09-09",
@@ -2767,7 +3317,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 2
     },
     {
       "date": "2025-09-09",
@@ -2775,7 +3327,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "嘉義市",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 4
     },
     {
       "date": "2025-09-10",
@@ -2783,7 +3337,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
     },
     {
       "date": "2025-09-10",
@@ -2791,7 +3347,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "嘉義市",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 0
     },
     {
       "date": "2025-09-10",
@@ -2799,7 +3357,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 5
     },
     {
       "date": "2025-09-11",
@@ -2807,7 +3367,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 9
     },
     {
       "date": "2025-09-12",
@@ -2815,7 +3377,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 4
     },
     {
       "date": "2025-09-12",
@@ -2823,7 +3387,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 4
     },
     {
       "date": "2025-09-12",
@@ -2831,7 +3397,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 5
     },
     {
       "date": "2025-09-13",
@@ -2839,7 +3407,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 8
     },
     {
       "date": "2025-09-13",
@@ -2847,7 +3417,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 1
     },
     {
       "date": "2025-09-13",
@@ -2855,7 +3427,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 0
     },
     {
       "date": "2025-09-14",
@@ -2863,7 +3437,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 2
     },
     {
       "date": "2025-09-14",
@@ -2871,7 +3447,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "富邦悍將",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "date": "2025-09-14",
@@ -2879,7 +3457,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 7
     },
     {
       "date": "2025-09-16",
@@ -2887,7 +3467,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "味全龍",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 4
     },
     {
       "date": "2025-09-16",
@@ -2895,7 +3477,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 2
     },
     {
       "date": "2025-09-16",
@@ -2903,7 +3487,19 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "中信兄弟",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 1
+    },
+    {
+      "date": "2025-09-17",
+      "time": "18:35",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 8
     },
     {
       "date": "2025-09-18",
@@ -2911,7 +3507,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 11
     },
     {
       "date": "2025-09-18",
@@ -2919,7 +3517,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 2
     },
     {
       "date": "2025-09-18",
@@ -2927,7 +3527,9 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 1
     },
     {
       "date": "2025-09-19",
@@ -2935,7 +3537,19 @@
       "homeTeam": "味全龍",
       "awayTeam": "台鋼雄鷹",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 3
+    },
+    {
+      "date": "2025-09-19",
+      "time": "18:35",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "大巨蛋",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "date": "2025-09-19",
@@ -2943,71 +3557,89 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "富邦悍將",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 2
     },
     {
-      "date": "2025-09-19",
+      "date": "2025-09-20",
+      "time": "16:05",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "樂天桃猿",
+      "venue": "澄清湖",
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1
+    },
+    {
+      "date": "2025-09-20",
+      "time": "17:05",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "大巨蛋",
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 1
+    },
+    {
+      "date": "2025-09-20",
+      "time": "17:05",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "味全龍",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 8
+    },
+    {
+      "date": "2025-09-21",
+      "time": "16:05",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "樂天桃猿",
+      "venue": "澄清湖",
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
+    },
+    {
+      "date": "2025-09-21",
+      "time": "16:05",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "大巨蛋",
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 4
+    },
+    {
+      "date": "2025-09-21",
+      "time": "17:05",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "味全龍",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 5
+    },
+    {
+      "date": "2025-09-23",
+      "time": "18:35",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "富邦悍將",
+      "venue": "澄清湖",
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
+    },
+    {
+      "date": "2025-09-23",
       "time": "18:35",
       "homeTeam": "中信兄弟",
-      "awayTeam": "統一7-ELEVEn獅",
-      "venue": "大巨蛋",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-09-20",
-      "time": "16:05",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "樂天桃猿",
-      "venue": "澄清湖",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-09-20",
-      "time": "17:05",
-      "homeTeam": "富邦悍將",
       "awayTeam": "台鋼雄鷹",
-      "venue": "大巨蛋",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-09-20",
-      "time": "17:05",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "味全龍",
       "venue": "洲際",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-09-21",
-      "time": "16:05",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "樂天桃猿",
-      "venue": "澄清湖",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-06",
-      "time": "17:05",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "樂天桃猿",
-      "venue": "澄清湖",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-09-21",
-      "time": "16:05",
-      "homeTeam": "富邦悍將",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "大巨蛋",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-09-21",
-      "time": "17:05",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "味全龍",
-      "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "date": "2025-09-23",
@@ -3015,39 +3647,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "樂天桃猿",
       "venue": "天母",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-09-23",
-      "time": "18:35",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "富邦悍將",
-      "venue": "澄清湖",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-02",
-      "time": "18:35",
-      "homeTeam": "統一7-ELEVEn獅",
-      "awayTeam": "富邦悍將",
-      "venue": "澄清湖",
-      "status": "已結束"
-    },
-    {
-      "date": "2025-09-23",
-      "time": "18:35",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "洲際",
-      "status": "未開始"
-    },
-    {
-      "date": "2025-10-03",
-      "time": "18:35",
-      "homeTeam": "中信兄弟",
-      "awayTeam": "台鋼雄鷹",
-      "venue": "洲際",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 8
     },
     {
       "date": "2025-09-25",
@@ -3055,7 +3657,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 7
     },
     {
       "date": "2025-09-25",
@@ -3063,7 +3667,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 2
     },
     {
       "date": "2025-09-25",
@@ -3071,7 +3677,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 2
     },
     {
       "date": "2025-09-26",
@@ -3079,7 +3687,9 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "中信兄弟",
       "venue": "新莊",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 9
     },
     {
       "date": "2025-09-26",
@@ -3087,7 +3697,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "澄清湖",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 2
     },
     {
       "date": "2025-09-26",
@@ -3095,7 +3707,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "樂天桃猿",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 4
     },
     {
       "date": "2025-09-27",
@@ -3103,7 +3717,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 1
     },
     {
       "date": "2025-09-27",
@@ -3111,7 +3727,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 7
     },
     {
       "date": "2025-09-27",
@@ -3119,7 +3737,9 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 9,
+      "awayScore": 0
     },
     {
       "date": "2025-09-28",
@@ -3127,7 +3747,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "大巨蛋",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 3
     },
     {
       "date": "2025-09-28",
@@ -3135,7 +3757,9 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "中信兄弟",
       "venue": "樂天桃園",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 4
     },
     {
       "date": "2025-09-28",
@@ -3143,8 +3767,170 @@
       "homeTeam": "味全龍",
       "awayTeam": "富邦悍將",
       "venue": "天母",
-      "status": "已結束"
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 3
+    },
+    {
+      "date": "2025-09-29",
+      "time": "17:05",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 6
+    },
+    {
+      "date": "2025-09-29",
+      "time": "17:05",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "味全龍",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 10,
+      "awayScore": 7
+    },
+    {
+      "date": "2025-09-29",
+      "time": "17:06",
+      "homeTeam": "樂天桃猿",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "樂天桃園",
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 7
+    },
+    {
+      "date": "2025-10-01",
+      "time": "18:35",
+      "homeTeam": "台鋼雄鷹",
+      "awayTeam": "樂天桃猿",
+      "venue": "澄清湖",
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 0
+    },
+    {
+      "date": "2025-10-01",
+      "time": "18:35",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "中信兄弟",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 5
+    },
+    {
+      "date": "2025-10-02",
+      "time": "18:35",
+      "homeTeam": "台鋼雄鷹",
+      "awayTeam": "樂天桃猿",
+      "venue": "嘉義市",
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 3
+    },
+    {
+      "date": "2025-10-02",
+      "time": "18:35",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "味全龍",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 2
+    },
+    {
+      "date": "2025-10-02",
+      "time": "18:35",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "富邦悍將",
+      "venue": "澄清湖",
+      "status": "已結束",
+      "homeScore": 0,
+      "awayScore": 2
+    },
+    {
+      "date": "2025-10-03",
+      "time": "18:35",
+      "homeTeam": "味全龍",
+      "awayTeam": "富邦悍將",
+      "venue": "天母",
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 6
+    },
+    {
+      "date": "2025-10-03",
+      "time": "18:35",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "台鋼雄鷹",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 0
+    },
+    {
+      "date": "2025-10-03",
+      "time": "18:36",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "樂天桃猿",
+      "venue": "嘉義市",
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 7
+    },
+    {
+      "date": "2025-10-04",
+      "time": "17:05",
+      "homeTeam": "富邦悍將",
+      "awayTeam": "樂天桃猿",
+      "venue": "新莊",
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 2
+    },
+    {
+      "date": "2025-10-04",
+      "time": "17:06",
+      "homeTeam": "台鋼雄鷹",
+      "awayTeam": "中信兄弟",
+      "venue": "澄清湖",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4
+    },
+    {
+      "date": "2025-10-05",
+      "time": "17:05",
+      "homeTeam": "台鋼雄鷹",
+      "awayTeam": "味全龍",
+      "venue": "澄清湖",
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3
+    },
+    {
+      "date": "2025-10-05",
+      "time": "17:05",
+      "homeTeam": "中信兄弟",
+      "awayTeam": "統一7-ELEVEn獅",
+      "venue": "洲際",
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 7
+    },
+    {
+      "date": "2025-10-06",
+      "time": "17:05",
+      "homeTeam": "統一7-ELEVEn獅",
+      "awayTeam": "樂天桃猿",
+      "venue": "澄清湖",
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 5
     }
   ],
-  "lastUpdated": "2025-10-17T23:46:24.517Z"
+  "lastUpdated": "2025-10-18T02:26:22.861Z"
 }

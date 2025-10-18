@@ -260,6 +260,7 @@ async function fetchCPBLSchedule(season = new Date().getFullYear().toString()) {
 
     function toLocalSchema(rows) {
         const pad2 = (n) => String(n).padStart(2, '0');
+        const parseScore = (s) => (s === undefined || s === null || s === '' || isNaN(Number(s))) ? null : Number(s);
         return rows.map(r => {
             const dateObj = new Date(r.GameDate);
             const start = r.GameDateTimeS ? new Date(r.GameDateTimeS) : (r.GameDate ? new Date(r.GameDate) : null);
@@ -287,8 +288,8 @@ async function fetchCPBLSchedule(season = new Date().getFullYear().toString()) {
                 awayTeam: r.VisitingTeamName || '',
                 venue: r.FieldAbbe || '',
                 status,
-                homeScore: typeof r.HomeScore === 'number' ? r.HomeScore : null,
-                awayScore: typeof r.VisitingScore === 'number' ? r.VisitingScore : null,
+                homeScore: parseScore(r.HomeScore),
+                awayScore: parseScore(r.VisitingScore),
             };
         });
     }
@@ -491,6 +492,7 @@ const server = http.createServer(async (req, res) => {
         try {
             const reqSeason = requestUrl.searchParams.get('season') || new Date().getFullYear().toString();
             const season = reqSeason;
+            const forceRefresh = requestUrl.searchParams.get('refresh') === '1';
             const dataFile = path.join(__dirname, 'data', `schedule-${season}.json`);
             let shouldRefresh = true;
             if (fs.existsSync(dataFile)) {
@@ -499,8 +501,8 @@ const server = http.createServer(async (req, res) => {
                     const localData = JSON.parse(fileContent);
                     if (localData.lastUpdated) {
                         const ageMs = Date.now() - new Date(localData.lastUpdated).getTime();
-                        // 一天內不刷新，直接回本地
-                        if (ageMs < 24 * 60 * 60 * 1000 && Array.isArray(localData.games) && localData.games.length > 0) {
+                        // 一天內不刷新，直接回本地（除非指定強制刷新）
+                        if (!forceRefresh && ageMs < 24 * 60 * 60 * 1000 && Array.isArray(localData.games) && localData.games.length > 0) {
                             shouldRefresh = false;
                             res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
                             res.end(JSON.stringify(localData));
