@@ -69,11 +69,11 @@ function showErrorState() {
 // 顯示賽程表格
 function displayScheduleTable(data) {
     const scheduleContent = document.getElementById('schedule-content');
-    
-    // 僅顯示統一獅相關比賽（主隊或客隊）
     const isLions = (name) => !!name && /統一.*獅/.test(name);
-    const games = Array.isArray(data.games) ? data.games.filter(g => isLions(g.homeTeam) || isLions(g.awayTeam)) : [];
-    
+    let games = Array.isArray(data.games) ? data.games.filter(g => isLions(g.homeTeam) || isLions(g.awayTeam)) : [];
+    // 新增：依日期時間排序（升序）
+    const toDT = (g) => new Date(`${g.date} ${g.time || '00:00'}`);
+    games = games.sort((a, b) => toDT(a) - toDT(b));
     if (!games || games.length === 0) {
         scheduleContent.innerHTML = `
             <div class="schedule-error">
@@ -84,7 +84,6 @@ function displayScheduleTable(data) {
         `;
         return;
     }
-    
     const tableHTML = `
         <div class="schedule-table-container">
             <table class="schedule-table">
@@ -94,6 +93,7 @@ function displayScheduleTable(data) {
                         <th>時間</th>
                         <th>主隊</th>
                         <th>客隊</th>
+                        <th>比分</th>
                         <th>球場</th>
                         <th>狀態</th>
                     </tr>
@@ -108,7 +108,6 @@ function displayScheduleTable(data) {
             <p>僅顯示統一獅相關比賽，共 ${games.length} 場</p>
         </div>
     `;
-    
     scheduleContent.innerHTML = tableHTML;
 }
 
@@ -116,16 +115,18 @@ function displayScheduleTable(data) {
 function createGameRow(game) {
     const homeTeamClass = game.homeTeam.includes('統一獅') ? 'team-name uni-lions' : 'team-name';
     const awayTeamClass = game.awayTeam.includes('統一獅') ? 'team-name uni-lions' : 'team-name';
-    
     const statusClass = getGameStatusClass(game.status);
     const statusText = getGameStatusText(game.status);
-    
+    const scoreText = (typeof game.homeScore === 'number' && typeof game.awayScore === 'number')
+        ? `${game.homeScore} - ${game.awayScore}`
+        : '-';
     return `
         <tr>
             <td>${formatDate(game.date)}</td>
             <td>${game.time}</td>
             <td class="${homeTeamClass}">${game.homeTeam}</td>
             <td class="${awayTeamClass}">${game.awayTeam}</td>
+            <td class="score-cell">${scoreText}</td>
             <td class="venue-info">${game.venue}</td>
             <td><span class="game-status ${statusClass}">${statusText}</span></td>
         </tr>

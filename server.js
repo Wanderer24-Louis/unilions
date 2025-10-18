@@ -262,8 +262,22 @@ async function fetchCPBLSchedule(season = new Date().getFullYear().toString()) {
         const pad2 = (n) => String(n).padStart(2, '0');
         return rows.map(r => {
             const dateObj = new Date(r.GameDate);
-            const start = r.GameDateTimeS ? new Date(r.GameDateTimeS) : null;
-            const status = r.GameDateTimeE ? '已結束' : (r.IsPlayBall === 'Y' ? '進行中' : '未開始');
+            const start = r.GameDateTimeS ? new Date(r.GameDateTimeS) : (r.GameDate ? new Date(r.GameDate) : null);
+            const now = new Date();
+            let status = '未開始';
+            if (r.IsCancel === 'Y') {
+                status = '延賽';
+            } else if (r.IsSuspend === 'Y') {
+                status = '中止';
+            } else if (r.ScoreIsComPa === 'Y' || r.GameDateTimeE) {
+                status = '已結束';
+            } else if (r.IsPlayBall === 'Y') {
+                status = '進行中';
+            } else if (start && now < start) {
+                status = '未開始';
+            } else if (start && now >= start) {
+                status = '已結束';
+            }
             const dateStr = `${dateObj.getFullYear()}-${pad2(dateObj.getMonth()+1)}-${pad2(dateObj.getDate())}`;
             const timeStr = start ? `${pad2(start.getHours())}:${pad2(start.getMinutes())}` : '';
             return {
@@ -272,7 +286,9 @@ async function fetchCPBLSchedule(season = new Date().getFullYear().toString()) {
                 homeTeam: r.HomeTeamName || '',
                 awayTeam: r.VisitingTeamName || '',
                 venue: r.FieldAbbe || '',
-                status
+                status,
+                homeScore: typeof r.HomeScore === 'number' ? r.HomeScore : null,
+                awayScore: typeof r.VisitingScore === 'number' ? r.VisitingScore : null,
             };
         });
     }
@@ -287,6 +303,11 @@ async function fetchCPBLSchedule(season = new Date().getFullYear().toString()) {
         };
         if (!schedule.games || schedule.games.length === 0) {
             schedule = getDefaultScheduleData(season);
+        }
+        // 新增：按照日期時間排序（升序）
+        if (Array.isArray(schedule.games)) {
+            const toDT = (g) => new Date(`${g.date} ${g.time || '00:00'}`);
+            schedule.games.sort((a, b) => toDT(a) - toDT(b));
         }
         // 自動更新本地檔
         try {
