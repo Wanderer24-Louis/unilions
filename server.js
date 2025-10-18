@@ -443,8 +443,9 @@ function getDefaultScheduleData(season) {
 }
 
 const server = http.createServer(async (req, res) => {
-    const parsedUrl = url.parse(req.url, true);
-    const pathname = parsedUrl.pathname;
+    // 改用 WHATWG URL API 解析請求 URL
+    const requestUrl = new URL(req.url, `http://${req.headers.host}`);
+    const pathname = requestUrl.pathname;
     
     // API端點：獲取統一獅新聞
     if (pathname === '/api/news' && req.method === 'GET') {
@@ -467,7 +468,7 @@ const server = http.createServer(async (req, res) => {
     // 變更：預設當年度，優先回應本地檔，過期時自動刷新
     if (pathname === '/api/schedule' && req.method === 'GET') {
         try {
-            const reqSeason = parsedUrl.query.season || new Date().getFullYear().toString();
+            const reqSeason = requestUrl.searchParams.get('season') || new Date().getFullYear().toString();
             const season = reqSeason;
             const dataFile = path.join(__dirname, 'data', `schedule-${season}.json`);
             let shouldRefresh = true;
