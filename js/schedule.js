@@ -70,12 +70,16 @@ function showErrorState() {
 function displayScheduleTable(data) {
     const scheduleContent = document.getElementById('schedule-content');
     
-    if (!data.games || data.games.length === 0) {
+    // 僅顯示統一獅相關比賽（主隊或客隊）
+    const isLions = (name) => !!name && /統一.*獅/.test(name);
+    const games = Array.isArray(data.games) ? data.games.filter(g => isLions(g.homeTeam) || isLions(g.awayTeam)) : [];
+    
+    if (!games || games.length === 0) {
         scheduleContent.innerHTML = `
             <div class="schedule-error">
                 <div class="error-icon">📅</div>
                 <h3>暫無賽程</h3>
-                <p>${data.season} 年賽季暫無賽程資料。</p>
+                <p>${data.season} 年僅顯示統一獅相關比賽，目前沒有資料。</p>
             </div>
         `;
         return;
@@ -95,13 +99,13 @@ function displayScheduleTable(data) {
                     </tr>
                 </thead>
                 <tbody>
-                    ${data.games.map(game => createGameRow(game)).join('')}
+                    ${games.map(game => createGameRow(game)).join('')}
                 </tbody>
             </table>
         </div>
         <div class="schedule-info">
             <p>最後更新時間: ${formatDateTime(data.lastUpdated)}</p>
-            <p>共 ${data.games.length} 場比賽</p>
+            <p>僅顯示統一獅相關比賽，共 ${games.length} 場</p>
         </div>
     `;
     
