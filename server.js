@@ -301,8 +301,8 @@ async function fetchCPBLSchedule(season = new Date().getFullYear().toString()) {
         return getDefaultScheduleData(season);
     }
 }
-g
-// 解析 CPBL 賽程 HTMLg
+
+// 解析 CPBL 賽程 HTML
 function parseCPBLSchedule(html, season) {
     const scheduleData = {
         season: season,
@@ -345,7 +345,7 @@ function parseCPBLSchedule(html, season) {
                         status: cells[5] || '未開始'
                     };
                     
-                    // 過濾掉標題行
+                    // 過濾標題行
                     if (game.date !== '日期' && game.time !== '時間') {
                         scheduleData.games.push(game);
                     }
