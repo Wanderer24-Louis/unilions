@@ -20,7 +20,7 @@ function parseRSSXML(xmlData) {
     const items = [];
     
     // 使用正則表達式解析RSS項目
-    const itemRegex = /<item[^>]*>([\s\S]*?)<\/item>/gi;
+    const itemRegex = /<item[^>]*>([\s\s]*?)<\/item>/gi;
     const titleRegex = /<title[^>]*><!\[CDATA\[(.*?)\]\]><\/title>|<title[^>]*>(.*?)<\/title>/i;
     const linkRegex = /<link[^>]*>(.*?)<\/link>/i;
     const descRegex = /<description[^>]*><!\[CDATA\[(.*?)\]\]><\/description>|<description[^>]*>(.*?)<\/description>/i;
@@ -189,7 +189,7 @@ async function fetchUnilionsNews() {
 }
 
 // 獲取 CPBL 賽程資料
-async function fetchCPBLSchedule(season = new Date().getFullYear().toString()) {
+async function fetchCPBLSchedule(season = new Date().getFullYear().toString(), kindCode = 'A') {
     // 以官方 AJAX 端點抓取資料，並轉為本地結構
     async function getVerificationToken() {
         return new Promise((resolve, reject) => {
@@ -486,14 +486,15 @@ const server = http.createServer(async (req, res) => {
         }
     }
     
-    // API端點：獲取賽程資料（僅提供 2024 年，優先回應本地檔）
-    // 變更：預設當年度，優先回應本地檔，過期時自動刷新
+    // API端點：獲取賽程資料（支援例行賽和季後賽）
+    // 變更：預設當年度，優先回應本地檔，過期時自動刷新，支援 kindCode 參數
     if (pathname === '/api/schedule' && req.method === 'GET') {
         try {
             const reqSeason = requestUrl.searchParams.get('season') || new Date().getFullYear().toString();
             const season = reqSeason;
+            const kindCode = requestUrl.searchParams.get('kindCode') || 'A'; // A=例行賽, E=季後賽
             const forceRefresh = requestUrl.searchParams.get('refresh') === '1';
-            const dataFile = path.join(__dirname, 'data', `schedule-${season}.json`);
+            const dataFile = path.join(__dirname, 'data', `schedule-${season}-${kindCode}.json`);
             let shouldRefresh = true;
             if (fs.existsSync(dataFile)) {
                 try {
@@ -512,7 +513,7 @@ const server = http.createServer(async (req, res) => {
                 } catch {}
             }
             // 刷新或不存在：抓取官方，並寫入本地
-            const schedule = await fetchCPBLSchedule(season);
+            const schedule = await fetchCPBLSchedule(season, kindCode);
             try {
                 fs.writeFileSync(dataFile, JSON.stringify(schedule, null, 2), 'utf8');
             } catch (e) { console.error('更新本地檔失敗:', e); }

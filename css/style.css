@@ -1315,3 +1315,1136 @@ footer {
         font-size: 0.8rem;
     }
 }
+
+/* 控制按鈕樣式 */
+.game-type-controls,
+.filter-controls {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.game-type-controls button,
+.filter-controls button {
+    background: #f8f9fa;
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.game-type-controls button:hover,
+.filter-controls button:hover {
+    background: #d4af37;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.game-type-controls button.active,
+.filter-controls button.active {
+    background: #d4af37;
+    color: white;
+    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+}
+
+/* 賽程表格樣式增強 */
+#schedule-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#schedule-table thead {
+    background: linear-gradient(135deg, #d4af37, #b8941f);
+    color: white;
+}
+
+#schedule-table th, 
+#schedule-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+#schedule-table th {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#schedule-table tbody tr:hover {
+    background: #f8f9fa;
+    transform: scale(1.01);
+    transition: all 0.2s ease;
+}
+
+#schedule-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* 統一獅隊名高亮 */
+#schedule-table td:contains("統一獅") {
+    font-weight: bold;
+    color: #d4af37;
+}
+
+/* 比分樣式 */
+#schedule-table td:last-child {
+    font-weight: bold;
+    color: #333;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .game-type-controls button,
+    .filter-controls button {
+        padding: 8px 15px;
+        margin: 2px;
+        font-size: 0.9em;
+    }
+    
+    #schedule-table table {
+        font-size: 0.9em;
+    }
+    
+    #schedule-table th, 
+    #schedule-table td {
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-type-controls button,
+    .filter-controls button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+    
+    #schedule-table table {
+        font-size: 0.8em;
+    }
+    
+    #schedule-table th, 
+    #schedule-table td {
+        padding: 6px 8px;
+    }
+}
+
+.toggle-content-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    margin-right: 10px;
+}
+
+.toggle-content-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.news-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* 球員頁面樣式 */
+.player-filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    margin: 0 10px 10px;
+    background-color: var(--light-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.players-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.player-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: white;
+}
+
+.player-card:hover {
+    transform: translateY(-10px);
+}
+
+.player-image {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.player-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.player-number {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.player-info {
+    padding: 20px;
+}
+
+.player-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.player-name h3 {
+    font-size: 1.5rem;
+}
+
+.player-position {
+    background-color: var(--secondary-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.player-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--gray-color);
+}
+
+/* 啦啦隊頁面樣式 */
+.cheerleaders-intro {
+    padding: 40px 0;
+}
+
+.intro-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+}
+
+.intro-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.intro-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.intro-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.intro-content p {
+    margin-bottom: 15px;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-link {
+    display: inline-block;
+    margin-right: 15px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.social-link i {
+    margin-right: 5px;
+}
+
+.cheerleaders-section {
+    padding: 40px 0;
+    background-color: var(--light-color);
+}
+
+.cheerleaders-section h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+.cheerleaders-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.cheerleader-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cheerleader-image {
+    height: 350px;
+    overflow: hidden;
+}
+
+.cheerleader-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.cheerleader-card:hover .cheerleader-image img {
+    transform: scale(1.1);
+}
+
+.cheerleader-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.cheerleader-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.cheerleader-year {
+    color: var(--gray-color);
+    margin-bottom: 10px;
+}
+
+.cheerleader-quote {
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.cheerleader-social a {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.events-section {
+    padding: 60px 0;
+}
+
+.events-section h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+.events-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.event-card {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.event-date {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+}
+
+.event-date .month {
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.event-date .day {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.event-info {
+    padding: 20px;
+    flex: 1;
+}
+
+.event-info h3 {
+    margin-bottom: 10px;
+}
+
+.event-location,
+.event-time {
+    color: var(--gray-color);
+    margin-bottom: 5px;
+}
+
+/* 售票頁面樣式 */
+.ticket-info {
+    padding: 40px 0;
+}
+
+.ticket-channels {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.ticket-channel {
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.ticket-channel i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.ticket-channel h3 {
+    margin-bottom: 15px;
+}
+
+.ticket-channel p {
+    margin-bottom: 20px;
+    color: var(--gray-color);
+}
+
+.ticket-prices {
+    padding: 40px 0;
+    background-color: var(--light-color);
+}
+
+.price-table-container {
+    overflow-x: auto;
+    margin-bottom: 30px;
+}
+
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.price-table th,
+.price-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.price-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.price-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.price-notes {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.price-notes h3 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.price-notes ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.price-notes li {
+    margin-bottom: 10px;
+}
+
+.stadium-info {
+    padding: 60px 0;
+}
+
+.stadium-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.stadium-map {
+    flex: 1;
+    min-width: 300px;
+}
+
+.stadium-details {
+    flex: 1;
+    min-width: 300px;
+}
+
+.stadium-details h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.stadium-details p {
+    margin-bottom: 15px;
+}
+
+.stadium-details h4 {
+    margin: 20px 0 10px;
+    font-size: 1.3rem;
+}
+
+.transportation {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.transport-item {
+    background-color: var(--light-color);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.transport-item i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.transport-item h5 {
+    margin-bottom: 10px;
+}
+
+.season-tickets {
+    padding: 60px 0;
+    background-color: var(--light-color);
+}
+
+.season-ticket-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.season-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.season-card:hover {
+    transform: translateY(-10px);
+}
+
+.season-card.featured {
+    border: 2px solid var(--primary-color);
+    transform: scale(1.05);
+}
+
+.season-card.featured:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.season-card-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.season-card-header h3 {
+    margin-bottom: 10px;
+}
+
+.season-card-header .price {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.season-card-body {
+    padding: 20px;
+}
+
+.season-card-body ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.season-card-body li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.season-card-body li:before {
+    content: '✓';
+    color: var(--success-color);
+    margin-right: 10px;
+}
+
+.faq-section {
+    padding: 60px 0;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+    background-color: white;
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question h3 {
+    margin: 0;
+}
+
+.faq-answer {
+    background-color: var(--light-color);
+    padding: 20px;
+    display: none;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+/* 頁尾樣式 */
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 60px 0 0;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-logo img {
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.footer-links h4,
+.footer-social h4,
+.footer-contact h4 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #ddd;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.footer-contact p {
+    margin-bottom: 10px;
+    color: #ddd;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    nav {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        display: none;
+    }
+
+    nav.active {
+        display: block;
+    }
+
+    .main-menu {
+        flex-direction: column;
+        padding: 20px 0;
+    }
+
+    .main-menu li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .intro-container,
+    .stadium-container {
+        flex-direction: column;
+    }
+}
+
+/* 新聞載入狀態樣式 */
+.loading-news,
+.news-error {
+    text-align: center;
+    padding: 40px 20px;
+    grid-column: 1 / -1;
+}
+
+.loading-news i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.loading-news p {
+    color: var(--gray-color);
+    font-size: 1.1rem;
+}
+
+.news-error {
+    background-color: var(--light-color);
+    border-radius: 10px;
+    border: 2px dashed var(--gray-color);
+}
+
+.news-error i {
+    font-size: 2rem;
+    color: var(--danger-color);
+    margin-bottom: 15px;
+}
+
+.news-error p {
+    color: var(--gray-color);
+    margin-bottom: 20px;
+}
+
+.retry-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.retry-btn:hover {
+    background-color: #c50010;
+}
+
+/* 新聞元數據樣式 */
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.news-date {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+}
+
+.read-more {
+    color: var(--primary-color);
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: #c50010;
+}
+
+/* 賽程頁面樣式 */
+.schedule-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.schedule-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.schedule-title {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.schedule-subtitle {
+    color: var(--gray-color);
+    font-size: 1.1rem;
+}
+
+/* 賽季選擇標籤 */
+.season-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+}
+
+.season-tab {
+    padding: 12px 24px;
+    margin: 0 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--gray-color);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.season-tab:hover {
+    color: var(--primary-color);
+}
+
+.season-tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* 賽程表格樣式 */
+.schedule-table-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.schedule-table th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 10px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid #c50010;
+}
+
+.schedule-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.schedule-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.schedule-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* 球隊名稱樣式 */
+.team-name {
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.team-name.uni-lions {
+    color: var(--primary-color);
+}
+
+/* 比賽狀態樣式 */
+.game-status {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.game-status.upcoming {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.game-status.live {
+    background-color: #ffebee;
+    color: var(--primary-color);
+    animation: pulse 2s infinite;
+}
+
+.game-status.finished {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* 場地資訊樣式 */
+.venue-info {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+}
+
+/* 載入和錯誤狀態 */
+.schedule-loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--gray-color);
+}
+
+.schedule-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+.schedule-error {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--danger-color);
+}
+
+.schedule-error .error-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.schedule-retry-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.schedule-retry-btn:hover {
+    background-color: #c50010;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .schedule-title {
+        font-size: 2rem;
+    }
+    
+    .season-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .season-tab {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .schedule-table {
+        font-size: 0.85rem;
+    }
+    
+    .schedule-table th,
+    .schedule-table td {
+        padding: 8px 6px;
+    }
+    
+    .schedule-table th {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .schedule-container {
+        padding: 15px;
+    }
+    
+    .schedule-title {
+        font-size: 1.8rem;
+    }
+    
+    .schedule-table {
+        font-size: 0.8rem;
+    }
+    
+    .schedule-table th,
+    .schedule-table td {
+        padding: 6px 4px;
+    }
+    
+    .team-name {
+        font-size: 0.85rem;
+    }
+    
+    .venue-info {
+        font-size: 0.8rem;
+    }
+}
