@@ -20,7 +20,7 @@ function parseRSSXML(xmlData) {
     const items = [];
     
     // 使用正則表達式解析RSS項目
-    const itemRegex = /<item[^>]*>([\s\S]*?)<\/item>/gi;
+    const itemRegex = /<item[^>]*>([\s\s]*?)<\/item>/gi;
     const titleRegex = /<title[^>]*><!\[CDATA\[(.*?)\]\]><\/title>|<title[^>]*>(.*?)<\/title>/i;
     const linkRegex = /<link[^>]*>(.*?)<\/link>/i;
     const descRegex = /<description[^>]*><!\[CDATA\[(.*?)\]\]><\/description>|<description[^>]*>(.*?)<\/description>/i;
@@ -486,8 +486,8 @@ const server = http.createServer(async (req, res) => {
         }
     }
     
-    // API端點：獲取賽程資料（僅提供 2024 年，優先回應本地檔）
-    // 變更：預設當年度，優先回應本地檔，過期時自動刷新
+    // API端點：獲取賽程資料（支援例行賽和季後賽）
+    // 變更：預設當年度，優先回應本地檔，過期時自動刷新，支援 kindCode 參數
     if (pathname === '/api/schedule' && req.method === 'GET') {
         try {
             const reqSeason = requestUrl.searchParams.get('season') || new Date().getFullYear().toString();
