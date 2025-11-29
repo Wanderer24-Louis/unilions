@@ -4,12 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const saveEventBtn = document.getElementById('save-event-btn');
     const cancelEventBtn = document.getElementById('cancel-event-btn');
     const newsContainer = document.querySelector('.news-container');
-    const eventsContainer = document.querySelector('.events-container');
-    const addCheerEventBtn = document.getElementById('add-cheer-event-btn');
-    const addCheerEventForm = document.getElementById('add-cheer-event-form');
-    const saveCheerEventBtn = document.getElementById('save-cheer-event-btn');
-    const cancelCheerEventBtn = document.getElementById('cancel-cheer-event-btn');
-    const cheerEventError = document.getElementById('cheer-event-error');
     const loginModal = document.getElementById('login-modal');
     const loginCloseBtn = document.getElementById('login-close-btn');
     const loginCancelBtn = document.getElementById('login-cancel-btn');
@@ -30,16 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    if (addCheerEventBtn) {
-        addCheerEventBtn.addEventListener('click', () => {
-            if (!isAuthenticated()) {
-                pendingAction = 'addCheerEvent';
-                openLoginModal();
-                return;
-            }
-            addCheerEventForm.style.display = 'block';
-        });
-    }
 
     if (cancelEventBtn) {
         cancelEventBtn.addEventListener('click', () => {
@@ -47,11 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    if (cancelCheerEventBtn) {
-        cancelCheerEventBtn.addEventListener('click', () => {
-            addCheerEventForm.style.display = 'none';
-        });
-    }
 
     if (saveEventBtn) {
         saveEventBtn.addEventListener('click', () => {
@@ -93,54 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    if (saveCheerEventBtn) {
-        saveCheerEventBtn.addEventListener('click', () => {
-            if (!isAuthenticated()) {
-                pendingAction = 'saveCheerEvent';
-                openLoginModal();
-                return;
-            }
-            const month = document.getElementById('cheer-event-month').value;
-            const day = document.getElementById('cheer-event-day').value;
-            const title = document.getElementById('cheer-event-title').value;
-            const location = document.getElementById('cheer-event-location').value;
-            const showup = document.getElementById('cheer-event-showup').value;
-            const time = document.getElementById('cheer-event-time').value;
-            const link = document.getElementById('cheer-event-link').value;
-
-            if (!month || !day || !title) {
-                if (cheerEventError) cheerEventError.style.display = 'block';
-                return;
-            }
-            if (cheerEventError) cheerEventError.style.display = 'none';
-
-            const card = document.createElement('div');
-            card.className = 'event-card';
-            card.innerHTML = `
-                <div class="event-date">
-                    <span class="month">${month}</span>
-                    <span class="day">${day}</span>
-                </div>
-                <div class="event-info">
-                    <h3>${title}</h3>
-                    ${location ? `<p class="event-location">${location}</p>` : ''}
-                    ${showup ? `<p class="showup">出席女孩：${showup}</p>` : ''}
-                    ${time ? `<p class="event-time">${time}</p>` : ''}
-                    ${link ? `<a href="${link}" class="btn btn-secondary" target="_blank">活動詳情</a>` : ''}
-                </div>
-            `;
-            if (eventsContainer) eventsContainer.prepend(card);
-
-            document.getElementById('cheer-event-month').value = '';
-            document.getElementById('cheer-event-day').value = '';
-            document.getElementById('cheer-event-title').value = '';
-            document.getElementById('cheer-event-location').value = '';
-            document.getElementById('cheer-event-showup').value = '';
-            document.getElementById('cheer-event-time').value = '';
-            document.getElementById('cheer-event-link').value = '';
-            addCheerEventForm.style.display = 'none';
-        });
-    }
 
     function openLoginModal() {
         if (loginModal) {
@@ -190,12 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             if (pendingAction === 'saveEvent') {
                 saveEventBtn.click();
-            }
-            if (pendingAction === 'addCheerEvent') {
-                addCheerEventForm.style.display = 'block';
-            }
-            if (pendingAction === 'saveCheerEvent') {
-                saveCheerEventBtn.click();
             }
             pendingAction = null;
         });
