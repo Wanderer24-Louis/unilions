@@ -189,7 +189,7 @@ async function fetchUnilionsNews() {
 }
 
 // 獲取 CPBL 賽程資料
-async function fetchCPBLSchedule(season = new Date().getFullYear().toString()) {
+async function fetchCPBLSchedule(season = new Date().getFullYear().toString(), kindCode = 'A') {
     // 以官方 AJAX 端點抓取資料，並轉為本地結構
     async function getVerificationToken() {
         return new Promise((resolve, reject) => {
@@ -492,8 +492,9 @@ const server = http.createServer(async (req, res) => {
         try {
             const reqSeason = requestUrl.searchParams.get('season') || new Date().getFullYear().toString();
             const season = reqSeason;
+            const kindCode = requestUrl.searchParams.get('kindCode') || 'A'; // A=例行賽, E=季後賽
             const forceRefresh = requestUrl.searchParams.get('refresh') === '1';
-            const dataFile = path.join(__dirname, 'data', `schedule-${season}.json`);
+            const dataFile = path.join(__dirname, 'data', `schedule-${season}-${kindCode}.json`);
             let shouldRefresh = true;
             if (fs.existsSync(dataFile)) {
                 try {
@@ -512,7 +513,7 @@ const server = http.createServer(async (req, res) => {
                 } catch {}
             }
             // 刷新或不存在：抓取官方，並寫入本地
-            const schedule = await fetchCPBLSchedule(season);
+            const schedule = await fetchCPBLSchedule(season, kindCode);
             try {
                 fs.writeFileSync(dataFile, JSON.stringify(schedule, null, 2), 'utf8');
             } catch (e) { console.error('更新本地檔失敗:', e); }

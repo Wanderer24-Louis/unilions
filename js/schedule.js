@@ -1,259 +1,175 @@
 // 賽程頁面 JavaScript 功能
 
-let scheduleData = null;
-let filterMode = 'month'; // 週: 'week'、月: 'month'、全部: 'all'
-
-// 頁面載入完成後初始化
-document.addEventListener('DOMContentLoaded', function() {
-    initializeSchedulePage();
-});
-
-// 初始化賽程頁面
-function initializeSchedulePage() {
-    const currentYear = new Date().getFullYear().toString();
-    updateScheduleHeader(currentYear);
-    loadScheduleData(currentYear); // 改為當年度
-}
-
-// 新增：動態更新標題年份
-function updateScheduleHeader(year) {
-    const header = document.querySelector('.schedule-header h1');
-    if (header) {
-        header.textContent = `統一獅 ${year} 年賽程表`;
-    }
-}
+let scheduleData = [];
+let filterMode = 'month'; // 'week', 'month', 'all'
+let gameType = 'A'; // 'A'=例行賽, 'E'=季後賽
 
 // 載入賽程資料
-async function loadScheduleData(season = new Date().getFullYear().toString(), refresh = false) {
-    const scheduleContent = document.getElementById('schedule-content');
-    // 顯示載入狀態
-    showLoadingState();
+async function loadScheduleData(refresh = false, kindCode = 'A') {
     try {
-        const url = refresh ? `/api/schedule?season=${season}&refresh=1` : `/api/schedule?season=${season}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        const currentYear = new Date().getFullYear();
+        let url = `/api/schedule?season=${currentYear}`;
+        if (kindCode) {
+            url += `&kindCode=${kindCode}`;
         }
-        scheduleData = await response.json();
-        displayScheduleTable(scheduleData);
+        if (refresh) {
+            url += '&refresh=1';
+        }
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.games && Array.isArray(data.games)) {
+            scheduleData = data.games;
+            displayScheduleTable();
+        } else {
+            console.error('賽程資料格式錯誤:', data);
+            document.getElementById('schedule-table').innerHTML = '<p>無法載入賽程資料</p>';
+        }
     } catch (error) {
-        console.error('載入賽程資料失敗:', error);
-        showErrorState();
+        console.error('載入賽程資料時發生錯誤:', error);
+        document.getElementById('schedule-table').innerHTML = '<p>載入賽程資料時發生錯誤</p>';
     }
 }
 
-// 顯示載入狀態
-function showLoadingState() {
-    const scheduleContent = document.getElementById('schedule-content');
-    scheduleContent.innerHTML = `
-        <div class="schedule-loading">
-            <div class="spinner"></div>
-            <p>載入賽程資料中...</p>
-        </div>
-    `;
+// 重新載入賽程
+function reloadSchedule() {
+    loadScheduleData(true, gameType);
 }
 
-// 顯示錯誤狀態
-function showErrorState() {
-    const scheduleContent = document.getElementById('schedule-content');
-    scheduleContent.innerHTML = `
-        <div class="schedule-error">
-            <div class="error-icon">⚠️</div>
-            <h3>載入失敗</h3>
-            <p>無法載入賽程資料，請檢查網路連線或稍後再試。</p>
-            <button class="schedule-retry-btn" onclick="reloadSchedule()">
-                重新載入
-            </button>
+// 切換賽事類型
+function switchGameType(newGameType) {
+    gameType = newGameType;
+    loadScheduleData(false, gameType);
+}
+
+// 切換篩選模式
+function switchFilter(newMode) {
+    filterMode = newMode;
+    displayScheduleTable();
+}
+
+// 檢查日期是否在一週內
+function withinOneWeek(gameDate) {
+    const today = new Date();
+    const game = new Date(gameDate);
+    const diffTime = game - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays >= 0 && diffDays <= 7;
+}
+
+// 檢查日期是否在一個月內
+function withinOneMonth(gameDate) {
+    const today = new Date();
+    const game = new Date(gameDate);
+    const diffTime = game - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays >= 0 && diffDays <= 31;
+}
+
+// 渲染控制按鈕
+function renderControls() {
+    const gameTypeButtons = `
+        <div class="game-type-controls" style="margin-bottom: 15px;">
+            <button onclick="switchGameType('A')" class="${gameType === 'A' ? 'active' : ''}">例行賽</button>
+            <button onclick="switchGameType('E')" class="${gameType === 'E' ? 'active' : ''}">季後挑戰賽</button>
         </div>
     `;
+    
+    const filterButtons = `
+        <div class="filter-controls" style="margin-bottom: 15px;">
+            <button onclick="switchFilter('week')" class="${filterMode === 'week' ? 'active' : ''}">近一周內</button>
+            <button onclick="switchFilter('month')" class="${filterMode === 'month' ? 'active' : ''}">一個月內</button>
+            <button onclick="switchFilter('all')" class="${filterMode === 'all' ? 'active' : ''}">完整賽程</button>
+            <button onclick="reloadSchedule()" style="margin-left: 20px;">重新載入</button>
+        </div>
+    `;
+    
+    return gameTypeButtons + filterButtons;
 }
 
 // 顯示賽程表格
-function displayScheduleTable(data) {
-    const scheduleContent = document.getElementById('schedule-content');
-    const isLions = (name) => !!name && /統一.*獅/.test(name);
-    const toDT = (g) => new Date(`${g.date} ${g.time || '00:00'}`);
-    const now = new Date();
-    const oneMonthLater = new Date(now.getTime());
-    oneMonthLater.setDate(oneMonthLater.getDate() + 31);
-    const oneWeekLater = new Date(now.getTime());
-    oneWeekLater.setDate(oneWeekLater.getDate() + 7);
-
-    // 僅顯示統一獅相關比賽（主隊或客隊）的基礎集合
-    const gamesAll = Array.isArray(data.games) ? data.games.filter(g => isLions(g.homeTeam) || isLions(g.awayTeam)) : [];
-
-    // 一個月內（未來31天）的過濾條件
-    const withinOneMonth = (g) => {
-        const dt = toDT(g);
-        return dt >= now && dt <= oneMonthLater;
-    };
-    // 一周內（未來7天）的過濾條件
-    const withinOneWeek = (g) => {
-        const dt = toDT(g);
-        return dt >= now && dt <= oneWeekLater;
-    };
-
-    // 根據模式選擇集合
-    let games;
-    switch (filterMode) {
-        case 'all':
-            games = gamesAll.slice();
-            break;
-        case 'week':
-            games = gamesAll.filter(withinOneWeek);
-            break;
-        case 'month':
-        default:
-            games = gamesAll.filter(withinOneMonth);
-            break;
-    }
-
-    if (!games || games.length === 0) {
-        scheduleContent.innerHTML = `
-            <div class="schedule-error">
-                <div class="error-icon">📅</div>
-                <h3>暫無賽程</h3>
-                <p>${data.season} 年僅顯示統一獅相關比賽，${filterMode === 'all' ? '目前沒有資料。' : (filterMode === 'week' ? '近一周內目前沒有資料。' : '一個月內目前沒有資料。')}</p>
-                <div class="schedule-controls">
-                    ${renderControls()}
-                </div>
-            </div>
-        `;
+function displayScheduleTable() {
+    const tableContainer = document.getElementById('schedule-table');
+    
+    if (!scheduleData || scheduleData.length === 0) {
+        tableContainer.innerHTML = renderControls() + '<p>目前沒有賽程資料</p>';
         return;
     }
 
-    // 依日期時間排序（降序，最晚的在最上）
-    games = games.sort((a, b) => toDT(b) - toDT(a));
+    // 篩選統一獅的比賽
+    let lionsGames = scheduleData.filter(game => 
+        game.homeTeam === '統一獅' || game.awayTeam === '統一獅'
+    );
 
-    const tableHTML = `
-        <div class="schedule-controls">
-            ${renderControls()}
-        </div>
-        <div class="schedule-table-container">
-            <table class="schedule-table">
-                <thead>
-                    <tr>
-                        <th>日期</th>
-                        <th>時間</th>
-                        <th>主隊</th>
-                        <th>客隊</th>
-                        <th>比分</th>
-                        <th>球場</th>
-                        <th>狀態</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${games.map(game => createGameRow(game)).join('')}
-                </tbody>
-            </table>
-        </div>
-        <div class="schedule-info">
-            <p>最後更新時間: ${formatDateTime(data.lastUpdated)}</p>
-            <p>僅顯示統一獅相關比賽，${filterMode === 'all' ? '完整賽程' : (filterMode === 'week' ? '近一周內' : '一個月內')} 共 ${games.length} 場</p>
-        </div>
+    // 根據篩選模式進行篩選
+    if (filterMode === 'week') {
+        lionsGames = lionsGames.filter(game => withinOneWeek(game.date));
+    } else if (filterMode === 'month') {
+        lionsGames = lionsGames.filter(game => withinOneMonth(game.date));
+    }
+    // 'all' 模式不進行額外篩選
+
+    // 按日期和時間排序（降序）
+    lionsGames.sort((a, b) => {
+        const dateA = new Date(`${a.date} ${a.time}`);
+        const dateB = new Date(`${b.date} ${b.time}`);
+        return dateB - dateA; // 降序排列
+    });
+
+    if (lionsGames.length === 0) {
+        const modeText = filterMode === 'week' ? '近一周內' : filterMode === 'month' ? '一個月內' : '完整賽程';
+        const gameTypeText = gameType === 'A' ? '例行賽' : '季後挑戰賽';
+        tableContainer.innerHTML = renderControls() + `<p>目前沒有${modeText}的統一獅${gameTypeText}賽程</p>`;
+        return;
+    }
+
+    let tableHTML = renderControls() + `
+        <table>
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>時間</th>
+                    <th>主隊</th>
+                    <th>客隊</th>
+                    <th>球場</th>
+                    <th>狀態</th>
+                    <th>比分</th>
+                </tr>
+            </thead>
+            <tbody>
     `;
-    scheduleContent.innerHTML = tableHTML;
-}
 
-function renderControls() {
-    const weekActive = filterMode === 'week' ? 'active' : '';
-    const monthActive = filterMode === 'month' ? 'active' : '';
-    const allActive = filterMode === 'all' ? 'active' : '';
-    return `
-        <button class="schedule-toggle-btn ${weekActive}" onclick="switchFilter('week')">近一周內</button>
-        <button class="schedule-toggle-btn ${monthActive}" onclick="switchFilter('month')">一個月內</button>
-        <button class="schedule-toggle-btn ${allActive}" onclick="switchFilter('all')">完整賽程</button>
+    lionsGames.forEach(game => {
+        // 處理比分顯示
+        let scoreDisplay = '-';
+        if (game.homeScore !== null && game.homeScore !== undefined && 
+            game.awayScore !== null && game.awayScore !== undefined) {
+            scoreDisplay = `${game.homeScore} : ${game.awayScore}`;
+        }
+
+        tableHTML += `
+            <tr>
+                <td>${game.date}</td>
+                <td>${game.time}</td>
+                <td>${game.homeTeam}</td>
+                <td>${game.awayTeam}</td>
+                <td>${game.venue}</td>
+                <td>${game.status}</td>
+                <td>${scoreDisplay}</td>
+            </tr>
+        `;
+    });
+
+    tableHTML += `
+            </tbody>
+        </table>
     `;
+
+    tableContainer.innerHTML = tableHTML;
 }
 
-function switchFilter(mode) {
-    filterMode = mode;
-    if (scheduleData) {
-        displayScheduleTable(scheduleData);
-    }
-}
-
-function createGameRow(game) {
-    const homeTeamClass = game.homeTeam.includes('統一獅') ? 'team-name uni-lions' : 'team-name';
-    const awayTeamClass = game.awayTeam.includes('統一獅') ? 'team-name uni-lions' : 'team-name';
-    const statusClass = getGameStatusClass(game.status);
-    const statusText = getGameStatusText(game.status);
-    const scoreText = (typeof game.homeScore === 'number' && typeof game.awayScore === 'number')
-        ? `${game.homeScore} - ${game.awayScore}`
-        : '-';
-    return `
-        <tr>
-            <td>${formatDate(game.date)}</td>
-            <td>${game.time}</td>
-            <td class="${homeTeamClass}">${game.homeTeam}</td>
-            <td class="${awayTeamClass}">${game.awayTeam}</td>
-            <td class="score-cell">${scoreText}</td>
-            <td class="venue-info">${game.venue}</td>
-            <td><span class="game-status ${statusClass}">${statusText}</span></td>
-        </tr>
-    `;
-}
-
-// 獲取比賽狀態樣式類別
-function getGameStatusClass(status) {
-    switch (status) {
-        case '進行中':
-        case 'LIVE':
-            return 'live';
-        case '已結束':
-        case '結束':
-            return 'finished';
-        default:
-            return 'upcoming';
-    }
-}
-
-// 獲取比賽狀態文字
-function getGameStatusText(status) {
-    switch (status) {
-        case '進行中':
-        case 'LIVE':
-            return '🔴 進行中';
-        case '已結束':
-        case '結束':
-            return '✅ 已結束';
-        case '未開始':
-        default:
-            return '⏰ 未開始';
-    }
-}
-
-// 格式化日期
-function formatDate(dateStr) {
-    try {
-        const d = new Date(dateStr);
-        return d.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    } catch (e) { return dateStr; }
-}
-
-// 格式化日期時間
-function formatDateTime(dateTimeString) {
-    try {
-        const date = new Date(dateTimeString);
-        return date.toLocaleString('zh-TW', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    } catch (error) {
-        return dateTimeString;
-    }
-}
-
-// 重新載入賽程資料
-function reloadSchedule() {
-    const currentYear = new Date().getFullYear().toString();
-    loadScheduleData(currentYear, true);
-}
-
-// 導出函數供全域使用
-window.loadScheduleData = loadScheduleData;
-window.reloadSchedule = reloadSchedule;
-window.switchFilter = switchFilter;
+// 頁面載入時初始化
+document.addEventListener('DOMContentLoaded', function() {
+    loadScheduleData();
+});
