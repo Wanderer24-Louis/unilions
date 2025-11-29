@@ -172,10 +172,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
             if (!username || !password) {
+                loginError.textContent = '請輸入帳號與密碼';
+                loginError.style.display = 'block';
+                return;
+            }
+            const isValid = username === 'admin' && password === 'unilions123';
+            if (!isValid) {
+                loginError.textContent = '帳號或密碼錯誤';
                 loginError.style.display = 'block';
                 return;
             }
             localStorage.setItem('authToken', 'local-demo-token');
+            localStorage.setItem('authUser', username);
             closeLoginModal();
             if (pendingAction === 'addEvent') {
                 addEventForm.style.display = 'block';
