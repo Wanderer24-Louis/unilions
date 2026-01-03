@@ -61,7 +61,7 @@ async function loadUnilionsNews() {
     const newsContainer = document.querySelector('.news-container');
     
     if (!newsContainer) {
-        return; // 如果不在首頁，就不執行
+        return; // 如果不在相關頁面，就不執行
     }
 
     try {
@@ -81,8 +81,10 @@ async function loadUnilionsNews() {
             // 清空容器並顯示新聞
             newsContainer.innerHTML = '';
             
-            // 只顯示前3則新聞
-            const displayNews = news.slice(0, 3);
+            // 判斷是否需要限制顯示數量
+            // 檢查容器是否有 data-limit="all" 屬性
+            const limit = newsContainer.getAttribute('data-limit');
+            const displayNews = (limit === 'all') ? news : news.slice(0, 3);
             
             displayNews.forEach((article, index) => {
                 const newsCard = document.createElement('div');

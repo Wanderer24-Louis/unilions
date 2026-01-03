@@ -20,7 +20,7 @@ app.get('/api/news', async (req, res) => {
         // Use Google News RSS for Unified Lions
         const feed = await parser.parseURL('https://news.google.com/rss/search?q=%E7%B5%B1%E4%B8%80%E7%8D%85&hl=zh-TW&gl=TW&ceid=TW:zh-Hant');
         
-        const newsItems = feed.items.slice(0, 5).map(item => {
+        const newsItems = feed.items.slice(0, 20).map(item => {
             // Extract image from content if possible, otherwise use default
             // Google News RSS doesn't always provide image in a clean way, so we might need a default
             let image = 'images/logo.png'; // Default

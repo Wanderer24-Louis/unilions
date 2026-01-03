@@ -3,11 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>賽程表 - 統一7-ELEVEn獅</title>
+    <title>最新消息 - 統一7-ELEVEn獅</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="images/icon.png">
     <link rel="apple-touch-icon" href="images/icon.png">
+    <style>
+        .news-page-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .page-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -22,8 +35,8 @@
                 <li><a href="players.html">球員</a></li>
                 <li><a href="cheerleaders.html">啦啦隊員</a></li>
                 <li><a href="tickets.html">售票資訊</a></li>
-                <li><a href="news.html">新聞</a></li>
-                <li><a href="schedule.html" class="active">賽程</a></li>
+                <li><a href="news.html" class="active">新聞</a></li>
+                <li><a href="schedule.html">賽程</a></li>
                 <li><a href="https://lioncrew.uni-lions.com.tw/" target="_blank">萊恩酷商城</a></li>
             </ul>
         </nav>
@@ -33,14 +46,20 @@
     </header>
 
     <main>
-        <div class="schedule-container">
-            <div class="schedule-header">
-                <h1>統一獅 2025 年例行賽程表</h1>
+        <section class="page-banner">
+            <div class="banner-content">
+                <h1>最新消息</h1>
+                <p>掌握統一獅第一手資訊</p>
             </div>
+        </section>
 
-            <!-- 賽程內容區域 -->
-            <div id="schedule-content">
-                <!-- 賽程表格將由 JavaScript 動態載入 -->
+        <div class="news-page-container">
+            <!-- 
+                使用 data-limit="all" 告訴 JS 這裡要顯示所有新聞
+                雖然 JS 邏輯可能預設就是顯示所有，但保留彈性
+            -->
+            <div class="news-container" data-limit="all">
+                <!-- 新聞內容將由 JavaScript 動態載入 -->
             </div>
         </div>
     </main>
@@ -58,8 +77,8 @@
                     <li><a href="players.html">球員</a></li>
                     <li><a href="cheerleaders.html">啦啦隊員</a></li>
                     <li><a href="tickets.html">售票資訊</a></li>
-                    <li><a href="#">新聞</a></li>
-                    <li><a href="#">賽程</a></li>
+                    <li><a href="news.html">新聞</a></li>
+                    <li><a href="schedule.html">賽程</a></li>
                 </ul>
             </div>
             <div class="footer-social">
@@ -84,7 +103,6 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/schedule.js"></script>
     <script src="js/visitor-counter.js"></script>
 </body>
 </html>
