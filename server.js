@@ -48,6 +48,36 @@ app.get('/api/news', async (req, res) => {
     }
 });
 
+// API Endpoint for fetching UniGirls-specific news
+app.get('/api/unigirls-news', async (req, res) => {
+    try {
+        const query = encodeURIComponent('統一獅 啦啦隊 OR UniGirls OR Uni Girls OR Uni-Girls');
+        const url = `https://news.google.com/rss/search?q=${query}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant`;
+        const feed = await parser.parseURL(url);
+        
+        const newsItems = feed.items.slice(0, 20).map(item => {
+            let image = 'images/logo.png';
+            const imgMatch = item.content && item.content.match(/src="([^"]+)"/);
+            if (imgMatch) {
+                image = imgMatch[1];
+            }
+            return {
+                title: item.title,
+                summary: item.contentSnippet || item.content || '',
+                content: item.content || item.contentSnippet || '',
+                date: new Date(item.pubDate).toLocaleDateString('zh-TW'),
+                link: item.link,
+                image: image
+            };
+        });
+
+        res.json(newsItems);
+    } catch (error) {
+        console.error('Error fetching UniGirls RSS:', error);
+        res.status(500).json({ error: 'Failed to fetch UniGirls news' });
+    }
+});
+
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {

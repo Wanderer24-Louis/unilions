@@ -72,6 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    if (newsContainer && newsContainer.getAttribute('data-source') === 'unigirls') {
+        loadUniGirlsNews(newsContainer);
+    }
 
     function openLoginModal() {
         if (loginModal) {
@@ -126,3 +129,58 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+async function loadUniGirlsNews(container) {
+    try {
+        container.innerHTML = `
+            <div class="loading-news">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>正在載入最新消息...</p>
+            </div>
+        `;
+        const response = await fetch('/api/unigirls-news');
+        const news = await response.json();
+        if (response.ok && Array.isArray(news) && news.length > 0) {
+            container.innerHTML = '';
+            const displayNews = news.slice(0, 3);
+            displayNews.forEach((article, index) => {
+                const cardId = `unigirls-${index}`;
+                const el = document.createElement('div');
+                el.className = 'news-card';
+                el.innerHTML = `
+                    <div class="news-image-container">
+                        <img src="${article.image}" alt="${article.title}" onerror="this.src='images/logo.png'">
+                    </div>
+                    <div class="news-content">
+                        <h3>${article.title}</h3>
+                        <div class="news-summary">
+                            <p>${article.summary}</p>
+                        </div>
+                        <div class="news-full-content" id="content-${cardId}" style="display: none;">
+                            <p>${article.content || article.summary}</p>
+                        </div>
+                        <div class="news-meta">
+                            <span class="news-date">${article.date}</span>
+                            <button class="toggle-content-btn" onclick="toggleNewsContent('${cardId}')">
+                                <span class="expand-text">展開全文</span>
+                                <span class="collapse-text" style="display: none;">收起</span>
+                            </button>
+                            <a href="${article.link}" class="read-more" target="_blank">原文連結</a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+        } else {
+            throw new Error('無資料');
+        }
+    } catch (e) {
+        container.innerHTML = `
+            <div class="news-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>暫時無法載入最新消息，請稍後再試</p>
+                <button onclick="loadUniGirlsNews(document.querySelector('.news-container[data-source=\\'unigirls\\']'))" class="retry-btn">重新載入</button>
+            </div>
+        `;
+    }
+}

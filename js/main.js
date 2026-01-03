@@ -52,8 +52,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 動態載入統一獅新聞
-    loadUnilionsNews();
+    const nc = document.querySelector('.news-container');
+    if (!(nc && nc.getAttribute('data-source') === 'unigirls')) {
+        loadUnilionsNews();
+    }
 });
 
 // 載入統一獅新聞的函數
