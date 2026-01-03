@@ -464,43 +464,13 @@
 
     <section class="container news-section">
         <h2>最新消息</h2>
-        <button id="add-event-btn" class="btn">新增活動</button>
-        <div id="add-event-form" style="display: none;">
-            <h3>新增活動</h3>
-            <input type="text" id="event-title" placeholder="活動標題">
-            <textarea id="event-content" placeholder="活動內容"></textarea>
-            <input type="text" id="event-image" placeholder="圖片URL">
-            <button id="save-event-btn" class="btn">儲存</button>
-            <button id="cancel-event-btn" class="btn">取消</button>
-        </div>
+        
         <div class="news-container" data-source="unigirls">
             <!-- 新聞內容將由 JavaScript 動態載入 -->
         </div>
     </section>
 
-    <div id="login-modal" class="modal-overlay" style="display: none;">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>會員登入</h3>
-                <button id="login-close-btn" class="modal-close">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <label for="login-username">帳號</label>
-                    <input type="text" id="login-username" placeholder="電子郵件或使用者名稱">
-                </div>
-                <div class="input-group">
-                    <label for="login-password">密碼</label>
-                    <input type="password" id="login-password" placeholder="密碼">
-                </div>
-                <div class="modal-actions">
-                    <button id="login-submit-btn" class="btn btn-primary">登入</button>
-                    <button id="login-cancel-btn" class="btn btn-secondary">取消</button>
-                </div>
-                <div id="login-error" class="modal-error" style="display: none;">請輸入帳號與密碼</div>
-            </div>
-        </div>
-    </div>
+    
 
     <footer>
         <div class="footer-container">
