@@ -3681,3 +3681,20 @@ footer {
         font-size: 0.8rem;
     }
 }
+
+
+/* Visitor Counter */
+.visitor-counter {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: #eee;
+}
+
+.visitor-counter .counter-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
