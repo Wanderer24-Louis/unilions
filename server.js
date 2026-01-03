@@ -4,12 +4,49 @@ const { Server } = require("socket.io");
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const Parser = require('rss-parser');
 
 const app = express();
+const parser = new Parser();
+
 app.use(cors());
 
 // Serve static files from the current directory
 app.use(express.static(__dirname));
+
+// API Endpoint for fetching news
+app.get('/api/news', async (req, res) => {
+    try {
+        // Use Google News RSS for Unified Lions
+        const feed = await parser.parseURL('https://news.google.com/rss/search?q=%E7%B5%B1%E4%B8%80%E7%8D%85&hl=zh-TW&gl=TW&ceid=TW:zh-Hant');
+        
+        const newsItems = feed.items.slice(0, 5).map(item => {
+            // Extract image from content if possible, otherwise use default
+            // Google News RSS doesn't always provide image in a clean way, so we might need a default
+            let image = 'images/logo.png'; // Default
+            
+            // Try to find an image in contentSnippet or content (simple regex)
+            const imgMatch = item.content && item.content.match(/src="([^"]+)"/);
+            if (imgMatch) {
+                image = imgMatch[1];
+            }
+
+            return {
+                title: item.title,
+                summary: item.contentSnippet || item.content || '',
+                content: item.content || item.contentSnippet || '',
+                date: new Date(item.pubDate).toLocaleDateString('zh-TW'),
+                link: item.link,
+                image: image
+            };
+        });
+
+        res.json(newsItems);
+    } catch (error) {
+        console.error('Error fetching RSS:', error);
+        res.status(500).json({ error: 'Failed to fetch news' });
+    }
+});
 
 const server = http.createServer(app);
 const io = new Server(server, {
