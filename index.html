@@ -79,13 +79,13 @@
             <h1>球隊焦點</h1>
             <div class="highlights-container">
                 <div class="highlight-card">
-                    <img src="images/group.jpg" alt="球員焦點">
+                    <img src="images/group1.jpeg" alt="球員焦點"  height="300">
                     <h3>球員陣容</h3>
                     <p>了解統一獅最新球員陣容與選手資料</p>
                     <a href="players.html" class="btn btn-secondary">查看球員</a>
                 </div>
                 <div class="highlight-card">
-                    <img src="images/cheerleaders-group.jpg" alt="啦啦隊焦點">
+                    <img src="images/cheerleaderss.avif" alt="啦啦隊焦點">
                     <h3>Uni Girls</h3>
                     <p>認識統一獅專屬啦啦隊 Uni Girls 成員</p>
                     <a href="cheerleaders.html" class="btn btn-secondary">查看啦啦隊</a>
@@ -115,8 +115,8 @@
                     <li><a href="players.html">球員</a></li>
                     <li><a href="cheerleaders.html">啦啦隊員</a></li>
                     <li><a href="tickets.html">售票資訊</a></li>
-                    <li><a href="#">新聞</a></li>
-                    <li><a href="#">賽程</a></li>
+                    <li><a href="news.html">新聞</a></li>
+                    <li><a href="schedule.html">賽程</a></li>
                 </ul>
             </div>
             <div class="footer-social">
@@ -137,10 +137,20 @@
         </div>
         <div class="footer-bottom">
             <p>本網站僅供學習使用，非官方網站，所有權屬於統一獅隊。</p>
+            <p id="display-time"></p>
+
+<script>
+  async function loadTime() {
+    const response = await fetch('./data/data.json');
+    const data = await response.json();
+    document.getElementById('display-time').innerText = "最後更新於：" + data.lastUpdated;
+  }
+  loadTime();
+</script>
         </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script src="js/visitor-counter.js"></script>
-</body>
+</body> 
 </html>
