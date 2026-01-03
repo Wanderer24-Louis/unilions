@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function startSimulation() {
         let totalVisits = localStorage.getItem('totalVisits');
         if (!totalVisits) {
-            totalVisits = 12345;
+            totalVisits = 10;
         } else {
             // Only increment if we haven't just switched from real mode
             // For simplicity, just read it.
