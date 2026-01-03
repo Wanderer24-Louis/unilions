@@ -1,30 +1,14 @@
 {
-  "name": "uni-lions-website",
+  "name": "unilions-fan-site",
   "version": "1.0.0",
-  "description": "統一獅官方網站 - 包含球員資訊、啦啦隊介紹、票務資訊和即時新聞",
+  "description": "Unified Lions Fan Site with Real-time Visitor Counter",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "keywords": [
-    "uni-lions",
-    "baseball",
-    "cpbl",
-    "taiwan",
-    "sports",
-    "news"
-  ],
-  "author": "Uni-Lions Team",
-  "license": "MIT",
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "dependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Wanderer24-Louis/unilions.git"
-  },
-  "homepage": "https://unilions.onrender.com/"
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "cors": "^2.8.5"
+  }
 }

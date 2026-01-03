@@ -1,42 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Initialize Total Visits
-    let totalVisits = localStorage.getItem('totalVisits');
-    if (!totalVisits) {
-        // Initial seed number (e.g., start from 12,345 to look realistic)
-        totalVisits = 12345;
-    } else {
-        // Increment on new session or page load
-        // To prevent incrementing on every refresh in the same session, we could use sessionStorage
-        // But for "Total Page Views", incrementing every time is correct.
-        totalVisits = parseInt(totalVisits) + 1;
-    }
-    localStorage.setItem('totalVisits', totalVisits);
+    // Inject CSS for the counter
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .visitor-counter {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #eee;
+        }
+        .visitor-counter .counter-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    `;
+    document.head.appendChild(style);
 
-    // 2. Simulate Current Online Users
-    // Random number between 50 and 150
-    let currentOnline = Math.floor(Math.random() * (150 - 50 + 1)) + 50;
-
-    // 3. Create the HTML for the counter
+    // Create the HTML structure
     const counterDiv = document.createElement('div');
     counterDiv.className = 'visitor-counter';
     counterDiv.innerHTML = `
         <div class="counter-item">
             <i class="fas fa-eye"></i>
-            <span>總瀏覽人數: ${totalVisits.toLocaleString()}</span>
+            <span>總瀏覽人數: <span id="total-visits">Loading...</span></span>
         </div>
         <div class="counter-item">
             <i class="fas fa-users"></i>
-            <span>即時在線人數: <span id="online-count">${currentOnline}</span></span>
+            <span>即時在線人數: <span id="online-count">Loading...</span></span>
         </div>
     `;
 
-    // 4. Inject into the footer
-    // Try to find .footer-bottom first, otherwise append to footer, otherwise body
+    // Inject into footer
     const footerBottom = document.querySelector('.footer-bottom');
     const footer = document.querySelector('footer');
-    
     if (footerBottom) {
-        // Insert before the copyright text
         footerBottom.insertBefore(counterDiv, footerBottom.firstChild);
     } else if (footer) {
         footer.appendChild(counterDiv);
@@ -44,25 +43,89 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(counterDiv);
     }
 
-    // 5. Simulate real-time fluctuation for online users
-    setInterval(() => {
-        // Fluctuate by -3 to +3
-        const change = Math.floor(Math.random() * 7) - 3; 
-        currentOnline += change;
-        
-        // Safety bounds
-        if (currentOnline < 20) currentOnline = 20 + Math.floor(Math.random() * 10);
-        if (currentOnline > 500) currentOnline = 500 - Math.floor(Math.random() * 10);
-        
-        const onlineCountEl = document.getElementById('online-count');
-        if (onlineCountEl) {
-            onlineCountEl.textContent = currentOnline;
-            
-            // Optional: visual effect for update
-            onlineCountEl.style.color = '#ff9900';
-            setTimeout(() => {
-                onlineCountEl.style.color = '';
-            }, 500);
+    // --- Mode Switching Logic ---
+
+    // Function to load Socket.io client dynamically
+    function loadSocketIO(callback) {
+        if (window.io) {
+            callback();
+            return;
         }
-    }, 5000); // Update every 5 seconds
+        const script = document.createElement('script');
+        script.src = 'https://cdn.socket.io/4.7.2/socket.io.min.js';
+        script.onload = callback;
+        script.onerror = () => {
+            console.warn('Failed to load Socket.io, falling back to simulation.');
+            startSimulation();
+        };
+        document.body.appendChild(script);
+    }
+
+    // REAL MODE: Connect to backend
+    function startRealTime() {
+        // Determine server URL: 
+        // If we are on localhost, assume localhost:3000
+        // If we are on Render (deployed), use the relative path or specific URL
+        const serverUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+            ? 'http://localhost:3000' 
+            : window.location.origin; // Assume backend serves frontend on same domain
+
+        const socket = io(serverUrl, {
+            reconnectionAttempts: 3, // Try 3 times then give up (and maybe simulate)
+            timeout: 2000
+        });
+
+        const totalEl = document.getElementById('total-visits');
+        const onlineEl = document.getElementById('online-count');
+
+        socket.on('connect', () => {
+            console.log('Connected to real-time server');
+        });
+
+        socket.on('updateCounts', (data) => {
+            if (totalEl) totalEl.textContent = data.total.toLocaleString();
+            if (onlineEl) onlineEl.textContent = data.online;
+        });
+
+        socket.on('connect_error', (err) => {
+            console.log('Connection failed, falling back to simulation', err);
+            socket.disconnect();
+            startSimulation(); // Fallback if server is not running
+        });
+    }
+
+    // SIMULATION MODE: Fake numbers (Original Logic)
+    function startSimulation() {
+        let totalVisits = localStorage.getItem('totalVisits');
+        if (!totalVisits) {
+            totalVisits = 12345;
+        } else {
+            // Only increment if we haven't just switched from real mode
+            // For simplicity, just read it.
+            totalVisits = parseInt(totalVisits) + 1;
+        }
+        localStorage.setItem('totalVisits', totalVisits);
+
+        let currentOnline = Math.floor(Math.random() * (150 - 50 + 1)) + 50;
+
+        const totalEl = document.getElementById('total-visits');
+        const onlineEl = document.getElementById('online-count');
+
+        if (totalEl) totalEl.textContent = totalVisits.toLocaleString();
+        if (onlineEl) onlineEl.textContent = currentOnline;
+
+        // Fluctuation
+        setInterval(() => {
+            const change = Math.floor(Math.random() * 7) - 3; 
+            currentOnline += change;
+            if (currentOnline < 20) currentOnline = 20 + Math.floor(Math.random() * 10);
+            if (currentOnline > 500) currentOnline = 500 - Math.floor(Math.random() * 10);
+            
+            if (onlineEl) onlineEl.textContent = currentOnline;
+        }, 5000);
+    }
+
+    // ENTRY POINT
+    // Try to load Socket.io and connect. If it fails, use simulation.
+    loadSocketIO(startRealTime);
 });
