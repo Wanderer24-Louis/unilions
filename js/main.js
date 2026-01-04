@@ -56,6 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!(nc && nc.getAttribute('data-source') === 'unigirls')) {
         loadUnilionsNews();
     }
+
+    const weatherContainer = document.getElementById('weather-container');
+    if (weatherContainer) {
+        loadWeatherForecast(weatherContainer);
+    }
 });
 
 // 載入統一獅新聞的函數
@@ -152,6 +157,53 @@ function toggleNewsContent(cardId) {
         fullContentElement.style.display = 'none';
         expandText.style.display = 'inline';
         collapseText.style.display = 'none';
+    }
+}
+
+async function loadWeatherForecast(container) {
+    try {
+        container.innerHTML = `
+            <div class="loading-news">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>正在載入天氣預報...</p>
+            </div>
+        `;
+        const response = await fetch('/api/weather');
+        const data = await response.json();
+        if (response.ok && data.items && Array.isArray(data.items) && data.items.length > 0) {
+            container.innerHTML = '';
+            data.items.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <div class="news-content">
+                        <h3>${item.title}</h3>
+                        <div class="news-summary">
+                            <p>${item.description}</p>
+                        </div>
+                        <div class="news-meta">
+                            <span class="news-date">${item.date}</span>
+                            <a href="${item.link}" class="read-more" target="_blank">詳細</a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        } else {
+            throw new Error('無資料');
+        }
+    } catch (e) {
+        container.innerHTML = `
+            <div class="news-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>暫時無法載入天氣預報，請稍後再試</p>
+                <button class="retry-btn">重新載入</button>
+            </div>
+        `;
+        const btn = container.querySelector('.retry-btn');
+        if (btn) {
+            btn.addEventListener('click', () => loadWeatherForecast(container));
+        }
     }
 }
 //篩選球員

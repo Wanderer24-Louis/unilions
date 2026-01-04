@@ -78,6 +78,41 @@ app.get('/api/unigirls-news', async (req, res) => {
     }
 });
 
+// Simple in-memory cache for weather
+let weatherCache = {
+    data: null,
+    timestamp: 0
+};
+const WEATHER_CACHE_TTL = 5 * 60 * 1000;
+
+// API Endpoint for fetching Tainan weather forecast from CWA RSS
+app.get('/api/weather', async (req, res) => {
+    try {
+        const now = Date.now();
+        if (weatherCache.data && (now - weatherCache.timestamp) < WEATHER_CACHE_TTL) {
+            return res.json(weatherCache.data);
+        }
+        const rssUrl = 'https://www.cwa.gov.tw/rss/forecast/36_13.xml';
+        const feed = await parser.parseURL(rssUrl);
+        const items = (feed.items || []).slice(0, 3).map(item => ({
+            title: item.title,
+            description: item.content || item.contentSnippet || '',
+            date: new Date(item.pubDate).toLocaleString('zh-TW'),
+            link: item.link
+        }));
+        const payload = {
+            source: '中央氣象署RSS',
+            updatedAt: new Date(feed.lastBuildDate || Date.now()).toLocaleString('zh-TW'),
+            items
+        };
+        weatherCache = { data: payload, timestamp: now };
+        res.json(payload);
+    } catch (error) {
+        console.error('Error fetching weather RSS:', error);
+        res.status(500).json({ error: 'Failed to fetch weather' });
+    }
+});
+
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
