@@ -162,32 +162,38 @@ function toggleNewsContent(cardId) {
 
 async function loadWeatherForecast(container) {
     try {
-        container.innerHTML = `
-            <div class="loading-news">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>正在載入天氣預報...</p>
-            </div>
-        `;
+        container.innerHTML = `<div class="loading-news"><i class="fas fa-spinner fa-spin"></i><p>正在載入天氣預報...</p></div>`;
         const response = await fetch('/api/weather');
         const data = await response.json();
         if (response.ok && data.items && Array.isArray(data.items) && data.items.length > 0) {
-            container.innerHTML = '';
+            container.innerHTML = '<div class="weather-grid"></div>';
+            const grid = container.querySelector('.weather-grid');
             data.items.forEach((item) => {
+                const text = `${item.title} ${item.description}`;
+                const tempMatch = text.match(/溫度[:：]\s*(\d+)\s*~\s*(\d+)/);
+                const rainMatch = text.match(/降雨機率[:：]\s*([0-9]+%)/);
+                const cond = /雷|暴|雨/.test(text) ? 'rain' : (/陰/.test(text) ? 'cloud' : (/多雲/.test(text) ? 'cloud-sun' : (/晴/.test(text) ? 'sun' : 'cloud')));
+                const iconClass = cond === 'rain' ? 'fa-cloud-rain' : (cond === 'cloud' ? 'fa-cloud' : (cond === 'cloud-sun' ? 'fa-cloud-sun' : 'fa-sun'));
+                const tMin = tempMatch ? tempMatch[1] : '';
+                const tMax = tempMatch ? tempMatch[2] : '';
+                const rain = rainMatch ? rainMatch[1] : '';
                 const card = document.createElement('div');
-                card.className = 'news-card';
+                card.className = 'weather-card';
                 card.innerHTML = `
-                    <div class="news-content">
+                    <div class="weather-icon"><i class="fas ${iconClass}"></i></div>
+                    <div class="weather-content">
                         <h3>${item.title}</h3>
-                        <div class="news-summary">
-                            <p>${item.description}</p>
+                        <div class="weather-sub">
+                            <span class="weather-temp">${tMin && tMax ? `${tMin} ~ ${tMax}°C` : ''}</span>
+                            <span class="precip-badge">${rain ? `降雨 ${rain}` : ''}</span>
                         </div>
-                        <div class="news-meta">
-                            <span class="news-date">${item.date}</span>
+                        <div class="weather-meta">
+                            <span class="weather-date">${item.date}</span>
                             <a href="${item.link}" class="read-more" target="_blank">詳細</a>
                         </div>
                     </div>
                 `;
-                container.appendChild(card);
+                grid.appendChild(card);
             });
         } else {
             throw new Error('無資料');
