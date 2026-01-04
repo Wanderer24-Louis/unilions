@@ -173,14 +173,13 @@ async function loadWeatherForecast(container) {
                 const tempMatch = text.match(/溫度[:：]\s*(\d+)\s*~\s*(\d+)/);
                 const rainMatch = text.match(/降雨機率[:：]\s*([0-9]+%)/);
                 const cond = /雷|暴|雨/.test(text) ? 'rain' : (/陰/.test(text) ? 'cloud' : (/多雲/.test(text) ? 'cloud-sun' : (/晴/.test(text) ? 'sun' : 'cloud')));
-                const iconClass = cond === 'rain' ? 'fa-cloud-rain' : (cond === 'cloud' ? 'fa-cloud' : (cond === 'cloud-sun' ? 'fa-cloud-sun' : 'fa-sun'));
                 const tMin = tempMatch ? tempMatch[1] : '';
                 const tMax = tempMatch ? tempMatch[2] : '';
                 const rain = rainMatch ? rainMatch[1] : '';
                 const card = document.createElement('div');
                 card.className = 'weather-card';
                 card.innerHTML = `
-                    <div class="weather-icon"><i class="fas ${iconClass}"></i></div>
+                    <div class="weather-icon">${getWeatherSVG(cond)}</div>
                     <div class="weather-content">
                         <h3>${item.title}</h3>
                         <div class="weather-sub">
@@ -211,6 +210,19 @@ async function loadWeatherForecast(container) {
             btn.addEventListener('click', () => loadWeatherForecast(container));
         }
     }
+}
+
+function getWeatherSVG(cond) {
+    if (cond === 'sun') {
+        return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="14" fill="#FFC107"/><g stroke="#FFA000" stroke-width="4" stroke-linecap="round"><line x1="32" y1="6" x2="32" y2="16"/><line x1="32" y1="48" x2="32" y2="58"/><line x1="6" y1="32" x2="16" y2="32"/><line x1="48" y1="32" x2="58" y2="32"/><line x1="12" y1="12" x2="20" y2="20"/><line x1="44" y1="44" x2="52" y2="52"/><line x1="12" y1="52" x2="20" y2="44"/><line x1="44" y1="20" x2="52" y2="12"/></g></svg>';
+    }
+    if (cond === 'cloud-sun') {
+        return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="24" r="10" fill="#FFC107"/><g stroke="#FFA000" stroke-width="3" stroke-linecap="round"><line x1="20" y1="9" x2="20" y2="14"/><line x1="20" y1="34" x2="20" y2="39"/><line x1="5" y1="24" x2="10" y2="24"/><line x1="30" y1="24" x2="35" y2="24"/></g><g fill="#B0BEC5"><circle cx="36" cy="34" r="12"/><circle cx="26" cy="38" r="10"/><rect x="20" y="34" width="28" height="12" rx="6"/></g></svg>';
+    }
+    if (cond === 'rain') {
+        return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g fill="#B0BEC5"><circle cx="36" cy="28" r="12"/><circle cx="26" cy="32" r="10"/><rect x="20" y="30" width="28" height="12" rx="6"/></g><g fill="#4FC3F7"><path d="M24 48c0 3-3 6-3 6s-3-3-3-6a3 3 0 0 1 6 0z"/><path d="M34 48c0 3-3 6-3 6s-3-3-3-6a3 3 0 0 1 6 0z"/><path d="M44 48c0 3-3 6-3 6s-3-3-3-6a3 3 0 0 1 6 0z"/></g></svg>';
+    }
+    return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g fill="#B0BEC5"><circle cx="36" cy="34" r="12"/><circle cx="26" cy="38" r="10"/><rect x="20" y="34" width="28" height="12" rx="6"/></g></svg>';
 }
 //篩選球員
 document.addEventListener("DOMContentLoaded", function () {

@@ -1170,16 +1170,18 @@ footer {
     transform: translateY(-6px);
 }
 .weather-icon {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: var(--light-color);
-    color: var(--primary-color);
+    background: linear-gradient(135deg, #f7f7f7, #ececec);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
     flex-shrink: 0;
+}
+.weather-icon svg {
+    width: 38px;
+    height: 38px;
 }
 .weather-content h3 {
     margin-bottom: 6px;
