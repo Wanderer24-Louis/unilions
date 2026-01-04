@@ -1224,6 +1224,30 @@ footer {
     font-size: 1.05rem;
 }
 
+.stadium-tabs {
+    display: flex;
+    gap: 12px;
+    margin: 12px 0 20px;
+    flex-wrap: wrap;
+}
+.stadium-tab {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+.stadium-tab:hover {
+    background: var(--light-color);
+}
+.stadium-tab.active {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
 /* 賽程頁面樣式 */
 .schedule-container {
     max-width: 1200px;

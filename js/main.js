@@ -63,13 +63,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const stadiumSelect = document.getElementById('stadium-select');
-    if (stadiumSelect) {
-        const entries = document.querySelectorAll('.stadium-entry');
-        const showStadium = (val) => {
-            entries.forEach(el => {
-                el.style.display = (el.getAttribute('data-stadium') === val) ? 'block' : 'none';
-            });
-        };
+    const stadiumTabs = document.querySelectorAll('.stadium-tab');
+    const entries = document.querySelectorAll('.stadium-entry');
+    const showStadium = (val) => {
+        entries.forEach(el => {
+            el.style.display = (el.getAttribute('data-stadium') === val) ? 'block' : 'none';
+        });
+        stadiumTabs.forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-stadium') === val);
+        });
+    };
+    if (stadiumTabs.length > 0) {
+        showStadium(document.querySelector('.stadium-tab.active').getAttribute('data-stadium'));
+        stadiumTabs.forEach(btn => {
+            btn.addEventListener('click', () => showStadium(btn.getAttribute('data-stadium')));
+        });
+    } else if (stadiumSelect) {
         showStadium(stadiumSelect.value);
         stadiumSelect.addEventListener('change', () => showStadium(stadiumSelect.value));
     }

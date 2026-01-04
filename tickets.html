@@ -129,12 +129,9 @@
         <section class="stadium-info">
            <div class="container">
              <h2>球場資訊</h2>
-             <div class="stadium-switcher" style="margin: 10px 0 20px;">
-                <label for="stadium-select" style="margin-right: 10px; font-weight: bold;">選擇球場：</label>
-                <select id="stadium-select" class="stadium-select" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd;">
-                    <option value="tainan" selected>台南棒球場</option>
-                    <option value="apac">亞太棒球場</option>
-                </select>
+             <div class="stadium-tabs">
+                <button class="stadium-tab active" data-stadium="tainan">台南棒球場</button>
+                <button class="stadium-tab" data-stadium="apac">亞太棒球場</button>
              </div>
              <div class="stadium-entry" data-stadium="tainan" style="display: block;">
                 <div class="stadium-container">
