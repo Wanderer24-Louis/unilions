@@ -171,11 +171,24 @@ async function loadWeatherForecast(container) {
             data.items.forEach((item) => {
                 const text = `${item.title} ${item.description}`;
                 const tempMatch = text.match(/溫度[:：]\s*(\d+)\s*~\s*(\d+)/);
-                const rainMatch = text.match(/降雨機率[:：]\s*([0-9]+%)/);
-                const cond = /雷|暴|雨/.test(text) ? 'rain' : (/陰/.test(text) ? 'cloud' : (/多雲/.test(text) ? 'cloud-sun' : (/晴/.test(text) ? 'sun' : 'cloud')));
+                const rainMatch = text.match(/降雨(?:機率)?[:：]\s*(\d+)\s*%/);
+                const rainPct = rainMatch ? parseInt(rainMatch[1], 10) : 0;
+                let cond = 'cloud-sun';
+                if (/晴時多雲|多雲時晴/.test(text)) {
+                    cond = 'cloud-sun';
+                } else if (/多雲/.test(text)) {
+                    cond = 'cloud-sun';
+                } else if (/陰/.test(text)) {
+                    cond = 'cloud';
+                } else if (/晴/.test(text)) {
+                    cond = 'sun';
+                }
+                if ((/雷陣雨|豪雨|大雨|陣雨/.test(text) && rainPct >= 20) || rainPct >= 50) {
+                    cond = 'rain';
+                }
                 const tMin = tempMatch ? tempMatch[1] : '';
                 const tMax = tempMatch ? tempMatch[2] : '';
-                const rain = rainMatch ? rainMatch[1] : '';
+                const rain = `${rainPct}%`;
                 const card = document.createElement('div');
                 card.className = 'weather-card';
                 card.innerHTML = `
@@ -184,7 +197,7 @@ async function loadWeatherForecast(container) {
                         <h3>${item.title}</h3>
                         <div class="weather-sub">
                             <span class="weather-temp">${tMin && tMax ? `${tMin} ~ ${tMax}°C` : ''}</span>
-                            <span class="precip-badge">${rain ? `降雨 ${rain}` : ''}</span>
+                            <span class="precip-badge">降雨 ${rain}</span>
                         </div>
                         <div class="weather-meta">
                             <span class="weather-date">${item.date}</span>
