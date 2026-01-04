@@ -53,13 +53,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const nc = document.querySelector('.news-container');
-    if (!(nc && nc.getAttribute('data-source') === 'unigirls')) {
+    if (nc && nc.id !== 'weather-container' && nc.getAttribute('data-source') !== 'unigirls') {
         loadUnilionsNews();
     }
 
     const weatherContainer = document.getElementById('weather-container');
     if (weatherContainer) {
         loadWeatherForecast(weatherContainer);
+    }
+
+    const stadiumSelect = document.getElementById('stadium-select');
+    if (stadiumSelect) {
+        const entries = document.querySelectorAll('.stadium-entry');
+        const showStadium = (val) => {
+            entries.forEach(el => {
+                el.style.display = (el.getAttribute('data-stadium') === val) ? 'block' : 'none';
+            });
+        };
+        showStadium(stadiumSelect.value);
+        stadiumSelect.addEventListener('change', () => showStadium(stadiumSelect.value));
     }
 });
 

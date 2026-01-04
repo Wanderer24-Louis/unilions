@@ -129,6 +129,14 @@
         <section class="stadium-info">
            <div class="container">
              <h2>球場資訊</h2>
+             <div class="stadium-switcher" style="margin: 10px 0 20px;">
+                <label for="stadium-select" style="margin-right: 10px; font-weight: bold;">選擇球場：</label>
+                <select id="stadium-select" class="stadium-select" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd;">
+                    <option value="tainan" selected>台南棒球場</option>
+                    <option value="apac">亞太棒球場</option>
+                </select>
+             </div>
+             <div class="stadium-entry" data-stadium="tainan" style="display: block;">
                 <div class="stadium-container">
                     <div class="stadium-map">
                         <img src="images/stadium-map.jpeg" alt="台南棒球場座位圖">
@@ -154,13 +162,56 @@
                         <p>球場周邊設有收費停車場，建議提早到場停車或使用大眾運輸工具</p>
                     </div>
                 </div>
+             </div>
+             <div class="stadium-entry" data-stadium="apac" style="display: none;">
+                <div class="stadium-container">
+                    <div class="stadium-map">
+                        <iframe title="亞太棒球場地圖" src="https://www.google.com/maps?q=%E4%BA%9E%E5%A4%AA%E6%A3%92%E7%90%83%E5%A0%B4&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="stadium-details">
+                        <h3>亞太棒球場</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> 地址：709臺南市安南區環館路505號</p>
+                        <p><i class="fas fa-phone"></i> 電話：06-215-7691</p>
+                        <h4>交通方式</h4>
+                        <div class="transportation">
+                            <div class="transport-item">
+                                <i class="fas fa-car"></i>
+                                <h5>自行開車</h5>
+                                <p>依導航前往，依現場指示停車</p>
+                            </div>
+                            <div class="transport-item">
+                                <i class="fas fa-bus"></i>
+                                <h5>大眾運輸</h5>
+                                <p>🚃搭乘火車再轉搭公車
+                                    ★永康火車站 → 20路、直達接駁車 → 環館三路站
+                                    ★臺南火車站(南站) → 18路 → 環館三路站
+                                    🚌搭乘客運再轉搭公車
+                                    ★臺南轉運站 → 18路 → 環館三路站
+                                    ❣外縣市遊客可在高鐵台南站搭台鐵沙崙線至永康火車站轉乘接駁車！</p>
+                            </div>
+                        </div>
+                        <h4>停車資訊</h4>
+                        <p>🅿停車場共1,326格汽車位🚗、1495格機車位🛵
+                            ▶成棒副球場收費停車場(295格汽車、115格機車)
+                            ▶成棒球場收費停車場(301格汽車、335格機車)
+                            ▶長和路停車場(691格汽車、353格機車)
+                            ▶館安路停車場(274格汽車、377格機車)
+                            ▶竑穗和館收費停車場(297格汽車)
+                            ▶臺灣歷史博物館收費停車場(225格汽車、118格機車)
+                            ▶和順轉運站停車場(38格汽車、78格機車)
+                            🅿#臨時機車停車格🛵
+                            ▶環館路(環館二路-慶和路)西向人行道路段(約308格機車)
+                            ⚠其他環館路、長和路人行道禁止停放機車⚠</p>
+                    </div>
+                </div>
+             </div>
             </div>
         </section>
 
         <section class="weather-section">
             <div class="container">
                 <h2>臺南天氣預報</h2>
-                <div id="weather-container" class="news-container">
+                <div id="weather-container">
                     <div class="loading-news">
                         <i class="fas fa-spinner fa-spin"></i>
                         <p>正在載入天氣預報...</p>
