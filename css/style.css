@@ -1192,6 +1192,7 @@ footer {
     margin-bottom: 10px;
     font-size: 1.35rem;
     line-height: 1.4;
+    word-break: break-word;
 }
 .weather-sub {
     display: flex;
@@ -1222,6 +1223,30 @@ footer {
 .weather-date {
     color: var(--gray-color);
     font-size: 1.05rem;
+}
+
+@media (max-width: 520px) {
+    .weather-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .weather-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 18px;
+    }
+    .weather-icon {
+        width: 72px;
+        height: 72px;
+    }
+    .weather-icon svg {
+        width: 46px;
+        height: 46px;
+    }
+    .weather-meta {
+        width: 100%;
+    }
 }
 
 .stadium-tabs {

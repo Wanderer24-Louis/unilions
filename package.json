@@ -1,7 +1,7 @@
 {
   "name": "unilions-fan-site",
   "version": "1.0.0",
-  "description": "Unified Lions Fan Site with Real-time Visitor Counter",
+  "description": "UniLions Fan Site with Real-time Visitor Counter",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
