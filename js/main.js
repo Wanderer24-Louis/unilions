@@ -302,33 +302,3 @@ backToTopButton.onclick = function() {
         behavior: "smooth"
     });
 };
- 
- const feedbackForm = document.getElementById('feedback-form');
- if (feedbackForm) {
-   const statusEl = document.getElementById('feedback-status');
-   feedbackForm.addEventListener('submit', async (e) => {
-     e.preventDefault();
-     const payload = {
-       name: document.getElementById('fb-name')?.value || '',
-       email: document.getElementById('fb-email')?.value || '',
-       subject: document.getElementById('fb-subject')?.value || '',
-       message: document.getElementById('fb-message')?.value || ''
-     };
-     try {
-       const resp = await fetch('/api/feedback', {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify(payload)
-       });
-       const data = await resp.json();
-       if (data && data.ok) {
-         statusEl && (statusEl.textContent = '已送出，謝謝您的回饋！');
-         feedbackForm.reset();
-       } else {
-         statusEl && (statusEl.textContent = '送出失敗，請稍後再試');
-       }
-     } catch (err) {
-       statusEl && (statusEl.textContent = '連線錯誤，請稍後再試');
-     }
-   });
- }
