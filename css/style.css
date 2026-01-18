@@ -328,6 +328,47 @@ nav {
     gap: 10px;
 }
 
+/* 意見反映 */
+.feedback-section {
+    margin: 40px 0;
+}
+.feedback-form {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.form-field label {
+    font-weight: bold;
+    color: var(--dark-color);
+    margin-bottom: 6px;
+    display: block;
+}
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 1rem;
+}
+.feedback-status {
+    margin-top: 8px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+@media (max-width: 520px) {
+    .feedback-form {
+        padding: 18px;
+        border-radius: 10px;
+    }
+}
+
 /* 回到頁首按鈕 */
 .back-to-top {
     position: fixed;

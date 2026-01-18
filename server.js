@@ -10,9 +10,17 @@ const app = express();
 const parser = new Parser();
 
 app.use(cors());
+app.use(express.json());
 
 // Serve static files from the current directory
 app.use(express.static(__dirname));
+
+const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
+try {
+    if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+} catch (err) {}
 
 // API Endpoint for fetching news
 app.get('/api/news', async (req, res) => {
@@ -121,14 +129,14 @@ const io = new Server(server, {
     }
 });
 
-// Path to data file
-const DATA_FILE = path.join(__dirname, 'data', 'visits.json');
+const VISITS_FILE = path.join(DATA_DIR, 'visits.json');
+const FEEDBACK_FILE = path.join(DATA_DIR, 'feedbacks.json');
 
 // Helper to read total visits
 function getVisits() {
     try {
-        if (fs.existsSync(DATA_FILE)) {
-            const data = fs.readFileSync(DATA_FILE, 'utf8');
+        if (fs.existsSync(VISITS_FILE)) {
+            const data = fs.readFileSync(VISITS_FILE, 'utf8');
             return JSON.parse(data).total || 0;
         }
     } catch (err) {
@@ -140,16 +148,43 @@ function getVisits() {
 // Helper to write total visits
 function saveVisits(count) {
     try {
-        // Ensure directory exists
-        const dir = path.dirname(DATA_FILE);
-        if (!fs.existsSync(dir)){
-            fs.mkdirSync(dir, { recursive: true });
-        }
-        fs.writeFileSync(DATA_FILE, JSON.stringify({ total: count }), 'utf8');
+        fs.writeFileSync(VISITS_FILE, JSON.stringify({ total: count }), 'utf8');
     } catch (err) {
         console.error("Error writing data file:", err);
     }
 }
+
+app.post('/api/feedback', (req, res) => {
+    try {
+        const { name = '', email = '', subject = '', message = '' } = req.body || {};
+        const trimmed = {
+            name: String(name).trim().slice(0, 100),
+            email: String(email).trim().slice(0, 200),
+            subject: String(subject).trim().slice(0, 200),
+            message: String(message).trim().slice(0, 2000)
+        };
+        if (!trimmed.message) {
+            return res.status(400).json({ error: 'message_required' });
+        }
+        const entry = {
+            id: Date.now().toString(36),
+            ...trimmed,
+            createdAt: new Date().toISOString()
+        };
+        let list = [];
+        if (fs.existsSync(FEEDBACK_FILE)) {
+            try {
+                const data = fs.readFileSync(FEEDBACK_FILE, 'utf8');
+                list = JSON.parse(data) || [];
+            } catch {}
+        }
+        list.push(entry);
+        fs.writeFileSync(FEEDBACK_FILE, JSON.stringify(list), 'utf8');
+        res.json({ ok: true });
+    } catch (err) {
+        res.status(500).json({ error: 'save_failed' });
+    }
+});
 
 // Initialize counts
 let onlineUsers = 0;
