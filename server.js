@@ -121,6 +121,35 @@ app.get('/api/weather', async (req, res) => {
     }
 });
 
+// API Endpoint for fetching schedule
+app.get('/api/schedule', (req, res) => {
+    try {
+        const season = req.query.season || new Date().getFullYear();
+        const kindCode = req.query.kindCode;
+        
+        let targetFile = `schedule-${season}.json`;
+        
+        if (kindCode) {
+             const specificFile = `schedule-${season}-${kindCode}.json`;
+             if (fs.existsSync(path.join(DATA_DIR, specificFile))) {
+                 targetFile = specificFile;
+             }
+        }
+        
+        const filePath = path.join(DATA_DIR, targetFile);
+        
+        if (fs.existsSync(filePath)) {
+            const data = fs.readFileSync(filePath, 'utf8');
+            res.json(JSON.parse(data));
+        } else {
+            res.status(404).json({ error: 'Schedule not found', season, kindCode });
+        }
+    } catch (error) {
+        console.error('Error fetching schedule:', error);
+        res.status(500).json({ error: 'Failed to fetch schedule' });
+    }
+});
+
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {

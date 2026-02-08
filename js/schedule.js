@@ -99,7 +99,7 @@ function displayScheduleTable() {
 
     // 篩選統一獅的比賽
     let lionsGames = scheduleData.filter(game => 
-        game.homeTeam === '統一獅' || game.awayTeam === '統一獅'
+        game.homeTeam.includes('統一') || game.awayTeam.includes('統一')
     );
 
     // 根據篩選模式進行篩選
