@@ -24,11 +24,11 @@ async function loadScheduleData(refresh = false, kindCode = 'A') {
             displayScheduleTable();
         } else {
             console.error('賽程資料格式錯誤:', data);
-            document.getElementById('schedule-table').innerHTML = '<p>無法載入賽程資料</p>';
+            document.getElementById('schedule-content').innerHTML = renderControls() + '<p>無法載入賽程資料</p>';
         }
     } catch (error) {
         console.error('載入賽程資料時發生錯誤:', error);
-        document.getElementById('schedule-table').innerHTML = '<p>載入賽程資料時發生錯誤</p>';
+        document.getElementById('schedule-content').innerHTML = renderControls() + '<p>載入賽程資料時發生錯誤</p>';
     }
 }
 
@@ -90,7 +90,7 @@ function renderControls() {
 
 // 顯示賽程表格
 function displayScheduleTable() {
-    const tableContainer = document.getElementById('schedule-table');
+    const tableContainer = document.getElementById('schedule-content');
     
     if (!scheduleData || scheduleData.length === 0) {
         tableContainer.innerHTML = renderControls() + '<p>目前沒有賽程資料</p>';
@@ -125,19 +125,20 @@ function displayScheduleTable() {
     }
 
     let tableHTML = renderControls() + `
-        <table>
-            <thead>
-                <tr>
-                    <th>日期</th>
-                    <th>時間</th>
-                    <th>主隊</th>
-                    <th>客隊</th>
-                    <th>球場</th>
-                    <th>狀態</th>
-                    <th>比分</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="schedule-table-container">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>時間</th>
+                        <th>主隊</th>
+                        <th>客隊</th>
+                        <th>球場</th>
+                        <th>狀態</th>
+                        <th>比分</th>
+                    </tr>
+                </thead>
+                <tbody>
     `;
 
     lionsGames.forEach(game => {
@@ -162,8 +163,9 @@ function displayScheduleTable() {
     });
 
     tableHTML += `
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     `;
 
     tableContainer.innerHTML = tableHTML;
