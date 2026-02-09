@@ -15,12 +15,21 @@ app.use(express.json());
 // Serve static files from the current directory
 app.use(express.static(__dirname));
 
-const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
+// Ensure DATA_DIR is correct absolute path
+const DATA_DIR = path.join(__dirname, 'data');
+console.log(`[INIT] Server starting...`);
+console.log(`[INIT] __dirname: ${__dirname}`);
+console.log(`[INIT] Forced DATA_DIR: ${DATA_DIR}`);
+console.log(`[INIT] process.env.DATA_DIR was: ${process.env.DATA_DIR}`);
+
 try {
     if (!fs.existsSync(DATA_DIR)) {
+        console.log(`[INIT] Creating DATA_DIR: ${DATA_DIR}`);
         fs.mkdirSync(DATA_DIR, { recursive: true });
     }
-} catch (err) {}
+} catch (err) {
+    console.error(`[INIT] Error creating DATA_DIR:`, err);
+}
 
 // API Endpoint for fetching news
 app.get('/api/news', async (req, res) => {
