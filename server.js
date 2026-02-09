@@ -138,11 +138,16 @@ app.get('/api/schedule', (req, res) => {
         
         const filePath = path.join(DATA_DIR, targetFile);
         
+        console.log(`[DEBUG] Request for season=${season}, kindCode=${kindCode}`);
+        console.log(`[DEBUG] Looking for file at: ${filePath}`);
+        console.log(`[DEBUG] DATA_DIR is: ${DATA_DIR}`);
+
         if (fs.existsSync(filePath)) {
             const data = fs.readFileSync(filePath, 'utf8');
             res.json(JSON.parse(data));
         } else {
-            res.status(404).json({ error: 'Schedule not found', season, kindCode });
+            console.log(`[DEBUG] File NOT found: ${filePath}`);
+            res.status(404).json({ error: 'Schedule not found', season, kindCode, filePath });
         }
     } catch (error) {
         console.error('Error fetching schedule:', error);

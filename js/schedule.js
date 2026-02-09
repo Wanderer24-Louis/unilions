@@ -24,12 +24,23 @@ async function loadScheduleData(refresh = false, kindCode = 'A') {
             displayScheduleTable();
         } else {
             console.error('賽程資料格式錯誤:', data);
-            const errorMsg = data.error || JSON.stringify(data);
-            document.getElementById('schedule-content').innerHTML = renderControls() + `<p>無法載入賽程資料: ${errorMsg}</p>`;
+            const errorDetails = JSON.stringify(data, null, 2);
+            document.getElementById('schedule-content').innerHTML = renderControls() + 
+                `<div style="color: red; padding: 20px;">
+                    <h3>無法載入賽程資料</h3>
+                    <p>請求網址: ${url}</p>
+                    <p>伺服器回應:</p>
+                    <pre style="background: #f5f5f5; padding: 10px; overflow: auto;">${errorDetails}</pre>
+                </div>`;
         }
     } catch (error) {
         console.error('載入賽程資料時發生錯誤:', error);
-        document.getElementById('schedule-content').innerHTML = renderControls() + `<p>載入賽程資料時發生錯誤: ${error.message}</p>`;
+        document.getElementById('schedule-content').innerHTML = renderControls() + 
+            `<div style="color: red; padding: 20px;">
+                <h3>載入賽程資料時發生錯誤</h3>
+                <p>錯誤訊息: ${error.message}</p>
+                <p>請求網址: ${url}</p>
+            </div>`;
     }
 }
 
