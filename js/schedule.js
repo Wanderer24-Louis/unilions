@@ -19,16 +19,17 @@ async function loadScheduleData(refresh = false, kindCode = 'A') {
         const response = await fetch(url);
         const data = await response.json();
         
-        if (data.games && Array.isArray(data.games)) {
+        if (response.ok && data.games && Array.isArray(data.games)) {
             scheduleData = data.games;
             displayScheduleTable();
         } else {
             console.error('賽程資料格式錯誤:', data);
-            document.getElementById('schedule-content').innerHTML = renderControls() + '<p>無法載入賽程資料</p>';
+            const errorMsg = data.error || JSON.stringify(data);
+            document.getElementById('schedule-content').innerHTML = renderControls() + `<p>無法載入賽程資料: ${errorMsg}</p>`;
         }
     } catch (error) {
         console.error('載入賽程資料時發生錯誤:', error);
-        document.getElementById('schedule-content').innerHTML = renderControls() + '<p>載入賽程資料時發生錯誤</p>';
+        document.getElementById('schedule-content').innerHTML = renderControls() + `<p>載入賽程資料時發生錯誤: ${error.message}</p>`;
     }
 }
 
