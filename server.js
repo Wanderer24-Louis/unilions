@@ -1,5 +1,6 @@
 const express = require('express');
 const http = require('http');
+const https = require('https');
 const { Server } = require("socket.io");
 const fs = require('fs');
 const path = require('path');
@@ -31,32 +32,108 @@ try {
     console.error(`[INIT] Error creating DATA_DIR:`, err);
 }
 
-// API Endpoint for fetching news
-app.get('/api/news', async (req, res) => {
-    try {
-        // Use Google News RSS for Unified Lions
-        const feed = await parser.parseURL('https://news.google.com/rss/search?q=%E7%B5%B1%E4%B8%80%E7%8D%85&hl=zh-TW&gl=TW&ceid=TW:zh-Hant');
-        
-        const newsItems = feed.items.slice(0, 20).map(item => {
-            // Extract image from content if possible, otherwise use default
-            // Google News RSS doesn't always provide image in a clean way, so we might need a default
-            let image = 'images/logo.png'; // Default
-            
-            // Try to find an image in contentSnippet or content (simple regex)
-            const imgMatch = item.content && item.content.match(/src="([^"]+)"/);
+function getImageFromRssItem(item) {
+    let image = 'images/logo.png';
+    if (item.enclosure && item.enclosure.url) {
+        image = item.enclosure.url;
+    } else if (item['media:content'] && item['media:content']['$'] && item['media:content']['$'].url) {
+        image = item['media:content']['$'].url;
+    } else if (item['media:thumbnail'] && item['media:thumbnail']['$'] && item['media:thumbnail']['$'].url) {
+        image = item['media:thumbnail']['$'].url;
+    } else {
+        const html = item['content:encoded'] || item.content || '';
+        if (html) {
+            const imgMatch = html.match(/<img[^>]+src="([^">]+)"/i);
             if (imgMatch) {
                 image = imgMatch[1];
             }
+        }
+    }
+    return image;
+}
 
-            return {
-                title: item.title,
-                summary: item.contentSnippet || item.content || '',
-                content: item.content || item.contentSnippet || '',
-                date: new Date(item.pubDate).toLocaleDateString('zh-TW'),
-                link: item.link,
-                image: image
-            };
-        });
+function fetchOgImage(url) {
+    return new Promise(resolve => {
+        try {
+            if (!url) {
+                return resolve(null);
+            }
+            const client = url.startsWith('https') ? https : http;
+            const req = client.get(url, res => {
+                if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                    return resolve(fetchOgImage(res.headers.location));
+                }
+                let data = '';
+                res.on('data', chunk => {
+                    if (data.length < 200000) {
+                        data += chunk.toString('utf8');
+                    }
+                });
+                res.on('end', () => {
+                    try {
+                        const ogMatch = data.match(/<meta[^>]+property=["']og:image["'][^>]*content=["']([^"']+)["']/i);
+                        const nameMatch = data.match(/<meta[^>]+name=["']og:image["'][^>]*content=["']([^"']+)["']/i);
+                        const twMatch = data.match(/<meta[^>]+name=["']twitter:image["'][^>]*content=["']([^"']+)["']/i);
+                        let raw = null;
+                        if (ogMatch) {
+                            raw = ogMatch[1];
+                        } else if (nameMatch) {
+                            raw = nameMatch[1];
+                        } else if (twMatch) {
+                            raw = twMatch[1];
+                        }
+                        if (!raw) {
+                            return resolve(null);
+                        }
+                        try {
+                            const u = new URL(raw, url);
+                            return resolve(u.toString());
+                        } catch {
+                            return resolve(raw);
+                        }
+                    } catch {
+                        return resolve(null);
+                    }
+                });
+            });
+            req.on('error', () => resolve(null));
+            req.setTimeout(5000, () => {
+                req.destroy();
+                resolve(null);
+            });
+        } catch {
+            resolve(null);
+        }
+    });
+}
+
+async function buildNewsItems(feedItems) {
+    const items = (feedItems || []).slice(0, 20);
+    const mapped = await Promise.all(items.map(async item => {
+        let image = getImageFromRssItem(item);
+        if (!image || image === 'images/logo.png') {
+            const og = await fetchOgImage(item.link);
+            if (og) {
+                image = og;
+            }
+        }
+        return {
+            title: item.title,
+            summary: item.contentSnippet || item.content || '',
+            content: item.content || item.contentSnippet || '',
+            date: new Date(item.pubDate).toLocaleDateString('zh-TW'),
+            link: item.link,
+            image
+        };
+    }));
+    return mapped;
+}
+
+// API Endpoint for fetching news
+app.get('/api/news', async (req, res) => {
+    try {
+        const feed = await parser.parseURL('https://news.google.com/rss/search?q=%E7%B5%B1%E4%B8%80%E7%8D%85&hl=zh-TW&gl=TW&ceid=TW:zh-Hant');
+        const newsItems = await buildNewsItems(feed.items);
 
         res.json(newsItems);
     } catch (error) {
@@ -71,22 +148,7 @@ app.get('/api/unigirls-news', async (req, res) => {
         const query = encodeURIComponent('統一獅 啦啦隊 OR UniGirls OR Uni Girls OR Uni-Girls');
         const url = `https://news.google.com/rss/search?q=${query}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant`;
         const feed = await parser.parseURL(url);
-        
-        const newsItems = feed.items.slice(0, 20).map(item => {
-            let image = 'images/logo.png';
-            const imgMatch = item.content && item.content.match(/src="([^"]+)"/);
-            if (imgMatch) {
-                image = imgMatch[1];
-            }
-            return {
-                title: item.title,
-                summary: item.contentSnippet || item.content || '',
-                content: item.content || item.contentSnippet || '',
-                date: new Date(item.pubDate).toLocaleDateString('zh-TW'),
-                link: item.link,
-                image: image
-            };
-        });
+        const newsItems = await buildNewsItems(feed.items);
 
         res.json(newsItems);
     } catch (error) {
