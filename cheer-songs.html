@@ -3,24 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>最新消息 - 統一7-ELEVEn獅</title>
+    <title>應援曲 - 統一7-ELEVEn獅</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="images/icon.png">
     <link rel="apple-touch-icon" href="images/icon.png">
-    <style>
-        .news-page-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .page-title {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 40px;
-            font-size: 2.5rem;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -34,9 +21,9 @@
                 <li><a href="index.html">首頁</a></li>
                 <li><a href="players.html">球員</a></li>
                 <li><a href="cheerleaders.html">啦啦隊員</a></li>
-                <li><a href="cheer-songs.html">應援曲</a></li>
+                <li><a href="cheer-songs.html" class="active">應援曲</a></li>
                 <li><a href="tickets.html">售票資訊</a></li>
-                <li><a href="news.html" class="active">新聞</a></li>
+                <li><a href="news.html">新聞</a></li>
                 <li><a href="schedule.html">賽程</a></li>
                 <li><a href="https://lioncrew.uni-lions.com.tw/" target="_blank">萊恩酷商城</a></li>
             </ul>
@@ -49,20 +36,30 @@
     <main>
         <section class="page-banner">
             <div class="banner-content">
-                <h1>最新消息</h1>
-                <p>掌握統一獅第一手資訊</p>
+                <h1>應援曲</h1>
+                <p>選擇喜愛的應援曲，跟著一起應援統一獅</p>
             </div>
         </section>
 
-        <div class="news-page-container">
-            <!-- 
-                使用 data-limit="all" 告訴 JS 這裡要顯示所有新聞
-                雖然 JS 邏輯可能預設就是顯示所有，但保留彈性
-            -->
-            <div class="news-container" data-limit="all">
-                <!-- 新聞內容將由 JavaScript 動態載入 -->
+        <section class="cheer-song-section">
+            <div class="player-filters cheer-song-filters">
+                <button class="filter-btn active" data-video-id="4hni1-4uve0">獅王點將錄</button>
+                <button class="filter-btn" data-video-id="80d-nnbICDc">火力全開</button>
+                <button class="filter-btn" data-video-id="04-XL7RqRj8">登峰造極</button>
             </div>
-        </div>
+
+            <div class="cheer-song-video">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/4hni1-4uve0?rel=0"
+                        title="統一獅應援曲"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -77,6 +74,7 @@
                     <li><a href="index.html">首頁</a></li>
                     <li><a href="players.html">球員</a></li>
                     <li><a href="cheerleaders.html">啦啦隊員</a></li>
+                    <li><a href="cheer-songs.html">應援曲</a></li>
                     <li><a href="tickets.html">售票資訊</a></li>
                     <li><a href="news.html">新聞</a></li>
                     <li><a href="schedule.html">賽程</a></li>
@@ -99,13 +97,14 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>本網站僅供學習使用，非官方網站，所有權屬於統一獅隊。</p>
+            <p>本網站僅供學習使用，非官方網站</p>
         </div>
     </footer>
 
     <button id="back-to-top" class="back-to-top" title="回到頁首">&uarr;</button>
 
     <script src="js/main.js"></script>
+    <script src="js/cheer-songs.js"></script>
     <script src="js/visitor-counter.js"></script>
 </body>
 </html>
