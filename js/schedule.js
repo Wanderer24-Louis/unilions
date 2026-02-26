@@ -161,9 +161,15 @@ function displayScheduleTable() {
             scoreDisplay = `${game.homeScore} : ${game.awayScore}`;
         }
 
+        // 取得星期幾
+        const weekDays = ['(日)', '(一)', '(二)', '(三)', '(四)', '(五)', '(六)'];
+        const gameDate = new Date(game.date);
+        const weekDay = weekDays[gameDate.getDay()];
+        const displayDate = `${game.date}${weekDay}`;
+
         tableHTML += `
             <tr>
-                <td>${game.date}</td>
+                <td>${displayDate}</td>
                 <td>${game.time}</td>
                 <td>${game.homeTeam}</td>
                 <td>${game.awayTeam}</td>
