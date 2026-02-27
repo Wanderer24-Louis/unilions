@@ -32,7 +32,17 @@
             <i class="fas fa-bars"></i>
         </div>
     </header>
+<script>
+window.onload = function() {
+    const result = confirm("即將前往CPBL官方網站，是否繼續？");
 
+    if (result) {
+        window.location.href = "https://cpbl.com.tw/team?ClubNo=ADD";
+    } else {
+        window.history.back(); // 回上一頁
+    }
+};
+</script>
     <main>
         <section class="page-banner">
             <div class="banner-content">
@@ -132,7 +142,7 @@
                         <img src="images/players/58.jpg" alt="胡智為">
                     </div>
                     <div class="player-info">
-                        <div class="player-number">12</div>
+                        <div class="player-number">58</div>
                         <h3>胡智為</h3>
                         <p class="player-position">投手</p>
                         <div class="player-stats">
