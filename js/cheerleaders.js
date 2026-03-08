@@ -128,6 +128,41 @@ document.addEventListener('DOMContentLoaded', function() {
             pendingAction = null;
         });
     }
+
+    // Lightbox 功能
+    const cheerleaderImages = document.querySelectorAll('.cheerleader-image img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    if (cheerleaderImages.length > 0 && lightbox && lightboxImg) {
+        cheerleaderImages.forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // 防止背景捲動
+            });
+        });
+
+        // 點擊關閉按鈕關閉
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeLightbox();
+            });
+        }
+
+        // 點擊黑色背景關閉
+        lightbox.addEventListener('click', () => {
+            closeLightbox();
+        });
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            lightboxImg.src = '';
+            document.body.style.overflow = 'auto';
+        }
+    }
 });
 
 async function loadUniGirlsNews(container) {
