@@ -70,6 +70,17 @@ img {
     background-color: #e6c200;
 }
 
+/* 狀態圖示 */
+.status-win {
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.status-lose {
+    color: var(--danger-color);
+    font-weight: bold;
+}
+
 /* 頁首樣式 */
 header {
     background-color: white;

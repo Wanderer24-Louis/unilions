@@ -92,6 +92,7 @@ function renderControls() {
         <div class="filter-controls" style="margin-bottom: 15px;">
             <button onclick="switchFilter('week')" class="${filterMode === 'week' ? 'active' : ''}">近一周內</button>
             <button onclick="switchFilter('month')" class="${filterMode === 'month' ? 'active' : ''}">一個月內</button>
+            <button onclick="switchFilter('venue-apac')" class="${filterMode === 'venue-apac' ? 'active' : ''}">主場 (亞太棒球場)</button>
             <button onclick="switchFilter('all')" class="${filterMode === 'all' ? 'active' : ''}">完整賽程</button>
             <button onclick="reloadSchedule()" style="margin-left: 20px;">重新載入</button>
         </div>
@@ -119,6 +120,8 @@ function displayScheduleTable() {
         lionsGames = lionsGames.filter(game => withinOneWeek(game.date));
     } else if (filterMode === 'month') {
         lionsGames = lionsGames.filter(game => withinOneMonth(game.date));
+    } else if (filterMode === 'venue-apac') {
+        lionsGames = lionsGames.filter(game => game.venue === '亞太棒球場');
     }
     // 'all' 模式不進行額外篩選
 
@@ -130,7 +133,12 @@ function displayScheduleTable() {
     });
 
     if (lionsGames.length === 0) {
-        const modeText = filterMode === 'week' ? '近一周內' : filterMode === 'month' ? '一個月內' : '完整賽程';
+        let modeText = '目前';
+        if (filterMode === 'week') modeText = '近一周內';
+        else if (filterMode === 'month') modeText = '一個月內';
+        else if (filterMode === 'venue-apac') modeText = '亞太棒球場';
+        else modeText = '完整';
+        
         const gameTypeText = gameType === 'A' ? '例行賽' : '季後挑戰賽';
         tableContainer.innerHTML = renderControls() + `<p>目前沒有${modeText}的統一獅${gameTypeText}賽程</p>`;
         return;
@@ -167,6 +175,28 @@ function displayScheduleTable() {
         const weekDay = weekDays[gameDate.getDay()];
         const displayDate = `${game.date}${weekDay}`;
 
+        // 處理狀態顯示 (Win/Lose 圖示)
+        let statusDisplay = game.status;
+        if (game.status === '已結束') {
+            const isHome = game.homeTeam.includes('統一');
+            const homeScore = parseInt(game.homeScore);
+            const awayScore = parseInt(game.awayScore);
+            
+            if (isHome) {
+                if (homeScore > awayScore) {
+                    statusDisplay = '<span class="status-win"><i class="fas fa-trophy"></i> Win</span>';
+                } else if (homeScore < awayScore) {
+                    statusDisplay = '<span class="status-lose"><i class="fas fa-times-circle"></i> Lose</span>';
+                }
+            } else {
+                if (awayScore > homeScore) {
+                    statusDisplay = '<span class="status-win"><i class="fas fa-trophy"></i> Win</span>';
+                } else if (awayScore < homeScore) {
+                    statusDisplay = '<span class="status-lose"><i class="fas fa-times-circle"></i> Lose</span>';
+                }
+            }
+        }
+
         tableHTML += `
             <tr>
                 <td>${displayDate}</td>
@@ -174,7 +204,7 @@ function displayScheduleTable() {
                 <td>${game.homeTeam}</td>
                 <td>${game.awayTeam}</td>
                 <td>${game.venue}</td>
-                <td>${game.status}</td>
+                <td>${statusDisplay}</td>
                 <td>${scoreDisplay}</td>
             </tr>
         `;
