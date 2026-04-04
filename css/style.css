@@ -81,6 +81,14 @@ img {
     font-weight: bold;
 }
 
+/* 國旗圖示樣式 */
+.fi {
+    width: 1.2em;
+    line-height: 1em;
+    border-radius: 2px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.2);
+}
+
 /* 頁首樣式 */
 header {
     background-color: white;
@@ -715,6 +723,10 @@ nav {
 .cheerleader-info h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .cheerleader-year {
@@ -2052,6 +2064,10 @@ footer {
 .cheerleader-info h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .cheerleader-year {
@@ -3185,6 +3201,10 @@ footer {
 .cheerleader-info h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .cheerleader-year {
