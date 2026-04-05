@@ -221,5 +221,6 @@ function displayScheduleTable() {
 
 // 頁面載入時初始化
 document.addEventListener('DOMContentLoaded', function() {
-    loadScheduleData();
+    // 首次載入時嘗試更新比數
+    loadScheduleData(true);
 });

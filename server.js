@@ -6,6 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const Parser = require('rss-parser');
+const axios = require('axios');
+const cheerio = require('cheerio');
 
 const app = express();
 const parser = new Parser();
@@ -193,10 +195,109 @@ app.get('/api/weather', async (req, res) => {
 });
 
 // API Endpoint for fetching schedule
-app.get('/api/schedule', (req, res) => {
+// Helper to refresh schedule data from CPBL
+async function refreshScheduleData(season, kindCode = 'A') {
     try {
-        const season = req.query.season || new Date().getFullYear();
+        console.log(`[REFRESH] Refreshing schedule for season ${season}, kindCode ${kindCode}...`);
+        
+        // Only implement for 2026 for now as requested
+        if (season !== '2026') return null;
+
+        const targetFile = `schedule-${season}.json`;
+        const filePath = path.join(DATA_DIR, targetFile);
+        
+        if (!fs.existsSync(filePath)) return null;
+        
+        let localData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        let updated = false;
+
+        // Fetch CPBL schedule (current month and previous month to be safe)
+        const now = new Date();
+        const months = [now.getMonth() + 1];
+        if (now.getDate() < 5) months.push(now.getMonth()); // Fetch previous month if early in current month
+
+        for (const month of months) {
+            if (month < 3 || month > 11) continue; // CPBL season is usually March to November
+            
+            const url = `https://www.cpbl.com.tw/schedule?year=${season}&month=${month.toString().padStart(2, '0')}`;
+            console.log(`[REFRESH] Fetching from ${url}...`);
+            
+            const response = await axios.get(url, {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                },
+                timeout: 10000
+            });
+
+            const $ = cheerio.load(response.data);
+            
+            // Find games in the schedule table
+            $('.schedule-table tbody tr').each((i, el) => {
+                const dateText = $(el).find('.date').text().trim(); // Format: 4/1(三)
+                if (!dateText) return;
+
+                const monthDayMatch = dateText.match(/(\d+)\/(\d+)/);
+                if (!monthDayMatch) return;
+                
+                const gameMonth = monthDayMatch[1].padStart(2, '0');
+                const gameDay = monthDayMatch[2].padStart(2, '0');
+                const fullDate = `${season}-${gameMonth}-${gameDay}`;
+
+                // Find game info
+                const gameInfo = $(el).find('.game-info');
+                if (gameInfo.length === 0) return;
+
+                const homeTeam = gameInfo.find('.home-team').text().trim();
+                const awayTeam = gameInfo.find('.away-team').text().trim();
+                const scoreText = gameInfo.find('.score').text().trim(); // Format: 8 : 2
+                const statusText = $(el).find('.status').text().trim(); // 已結束, 延賽, or time
+
+                const scores = scoreText.split(':').map(s => s.trim());
+                
+                // Update local data
+                localData.games.forEach(game => {
+                    if (game.date === fullDate && 
+                        (game.homeTeam.includes(homeTeam) || homeTeam.includes(game.homeTeam)) &&
+                        (game.awayTeam.includes(awayTeam) || awayTeam.includes(game.awayTeam))) {
+                        
+                        if (scores.length === 2 && scores[0] !== '-' && scores[1] !== '-') {
+                            const newHomeScore = parseInt(scores[0]);
+                            const newAwayScore = parseInt(scores[1]);
+                            
+                            if (game.homeScore !== newHomeScore || game.awayScore !== newAwayScore || game.status !== statusText) {
+                                console.log(`[REFRESH] Updating game on ${fullDate}: ${game.homeTeam} ${newHomeScore} : ${newAwayScore} ${game.awayTeam}`);
+                                game.homeScore = newHomeScore;
+                                game.awayScore = newAwayScore;
+                                game.status = statusText;
+                                updated = true;
+                            }
+                        } else if (statusText === '延賽' && game.status !== '延賽') {
+                            console.log(`[REFRESH] Updating game on ${fullDate}: Postponed`);
+                            game.status = '延賽';
+                            updated = true;
+                        }
+                    }
+                });
+            });
+        }
+
+        if (updated) {
+            fs.writeFileSync(filePath, JSON.stringify(localData, null, 2), 'utf8');
+            console.log(`[REFRESH] Saved updated schedule to ${targetFile}`);
+        }
+
+        return localData;
+    } catch (error) {
+        console.error('[REFRESH] Error refreshing schedule:', error.message);
+        return null;
+    }
+}
+
+app.get('/api/schedule', async (req, res) => {
+    try {
+        const season = req.query.season || new Date().getFullYear().toString();
         const kindCode = req.query.kindCode;
+        const refresh = req.query.refresh === '1';
         
         let targetFile = `schedule-${season}.json`;
         
@@ -209,16 +310,18 @@ app.get('/api/schedule', (req, res) => {
         
         const filePath = path.join(DATA_DIR, targetFile);
         
-        console.log(`[DEBUG] Request for season=${season}, kindCode=${kindCode}`);
-        console.log(`[DEBUG] Looking for file at: ${filePath}`);
-        console.log(`[DEBUG] DATA_DIR is: ${DATA_DIR}`);
+        if (refresh) {
+            const refreshedData = await refreshScheduleData(season, kindCode);
+            if (refreshedData) {
+                return res.json(refreshedData);
+            }
+        }
 
         if (fs.existsSync(filePath)) {
             const data = fs.readFileSync(filePath, 'utf8');
             res.json(JSON.parse(data));
         } else {
-            console.log(`[DEBUG] File NOT found: ${filePath}`);
-            res.status(404).json({ error: 'Schedule not found', season, kindCode, filePath });
+            res.status(404).json({ error: 'Schedule not found', season, kindCode });
         }
     } catch (error) {
         console.error('Error fetching schedule:', error);
