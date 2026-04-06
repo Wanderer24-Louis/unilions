@@ -15,6 +15,8 @@ async function loadScheduleData(refresh = false, kindCode = 'A') {
         if (refresh) {
             url += '&refresh=1';
         }
+        // 加入時間戳避免瀏覽器快取
+        url += `&t=${Date.now()}`;
         
         const response = await fetch(url);
         const data = await response.json();
@@ -61,22 +63,24 @@ function switchFilter(newMode) {
     displayScheduleTable();
 }
 
-// 檢查日期是否在一週內
+// 檢查日期是否在一週內 (含過去一週與未來一週)
 function withinOneWeek(gameDate) {
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
     const game = new Date(gameDate);
     const diffTime = game - today;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays >= 0 && diffDays <= 7;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays >= -7 && diffDays <= 7;
 }
 
-// 檢查日期是否在一個月內
+// 檢查日期是否在一個月內 (含過去兩週與未來三週)
 function withinOneMonth(gameDate) {
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
     const game = new Date(gameDate);
     const diffTime = game - today;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays >= 0 && diffDays <= 31;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays >= -14 && diffDays <= 30;
 }
 
 // 渲染控制按鈕

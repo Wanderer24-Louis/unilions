@@ -8,6 +8,7 @@ const cors = require('cors');
 const Parser = require('rss-parser');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const qs = require('qs');
 
 const app = express();
 const parser = new Parser();
@@ -200,7 +201,6 @@ async function refreshScheduleData(season, kindCode = 'A') {
     try {
         console.log(`[REFRESH] Refreshing schedule for season ${season}, kindCode ${kindCode}...`);
         
-        // Only implement for 2026 for now as requested
         if (season !== '2026') return null;
 
         const targetFile = `schedule-${season}.json`;
@@ -211,74 +211,127 @@ async function refreshScheduleData(season, kindCode = 'A') {
         let localData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
         let updated = false;
 
-        // Fetch CPBL schedule (current month and previous month to be safe)
         const now = new Date();
-        const months = [now.getMonth() + 1];
-        if (now.getDate() < 5) months.push(now.getMonth()); // Fetch previous month if early in current month
+        const currentMonth = now.getMonth() + 1;
+        const months = [currentMonth];
+        if (currentMonth > 3) months.push(currentMonth - 1);
 
         for (const month of months) {
-            if (month < 3 || month > 11) continue; // CPBL season is usually March to November
+            if (month < 3 || month > 11) continue; 
             
-            const url = `https://www.cpbl.com.tw/schedule?year=${season}&month=${month.toString().padStart(2, '0')}`;
-            console.log(`[REFRESH] Fetching from ${url}...`);
+            // Step 1: Get Token and Cookie
+            const baseUrl = `https://www.cpbl.com.tw/schedule?year=${season}&month=${month.toString().padStart(2, '0')}&_=${Date.now()}`;
+            console.log(`[REFRESH] Fetching token and cookies from ${baseUrl}...`);
             
-            const response = await axios.get(url, {
+            const sessionResponse = await axios.get(baseUrl, {
                 headers: {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
                 },
                 timeout: 10000
             });
 
-            const $ = cheerio.load(response.data);
+            const cookies = sessionResponse.headers['set-cookie'];
+            if (!cookies) {
+                console.log(`[REFRESH] No cookies found for month ${month}, skipping...`);
+                continue;
+            }
+
+            const $ = cheerio.load(sessionResponse.data);
             
-            // Find games in the schedule table
-            $('.schedule-table tbody tr').each((i, el) => {
-                const dateText = $(el).find('.date').text().trim(); // Format: 4/1(三)
-                if (!dateText) return;
+            // Try to find the specific token used in AJAX calls (often longer than the hidden input)
+            let token = '';
+            const scriptContent = $('script').text();
+            const ajaxTokenMatch = scriptContent.match(/RequestVerificationToken:\s*'([^']+)'/);
+            
+            if (ajaxTokenMatch) {
+                token = ajaxTokenMatch[1];
+                console.log(`[REFRESH] Found AJAX token for month ${month}`);
+            } else {
+                token = $('input[name="__RequestVerificationToken"]').val();
+                console.log(`[REFRESH] Using hidden field token for month ${month}`);
+            }
 
-                const monthDayMatch = dateText.match(/(\d+)\/(\d+)/);
-                if (!monthDayMatch) return;
+            if (!token) {
+                console.log(`[REFRESH] No token found for month ${month}, skipping...`);
+                continue;
+            }
+
+            // Step 2: Post to get JSON data
+            const apiUrl = 'https://www.cpbl.com.tw/schedule/getgamedatas';
+            const postData = qs.stringify({
+                calendar: `${season}/01/01`,
+                kindCode: kindCode,
+                location: ''
+            });
+
+            console.log(`[REFRESH] Posting to ${apiUrl} for month ${month}...`);
+            const apiResponse = await axios.post(apiUrl, postData, {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    'RequestVerificationToken': token,
+                    'Cookie': cookies.join('; '),
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Referer': `https://www.cpbl.com.tw/schedule?year=${season}&month=${month.toString().padStart(2, '0')}`,
+                    'Origin': 'https://www.cpbl.com.tw'
+                },
+                timeout: 10000
+            });
+
+            if (apiResponse.data && apiResponse.data.GameDatas) {
+                const games = JSON.parse(apiResponse.data.GameDatas);
+                console.log(`[REFRESH] Found ${games.length} games in month ${month}`);
                 
-                const gameMonth = monthDayMatch[1].padStart(2, '0');
-                const gameDay = monthDayMatch[2].padStart(2, '0');
-                const fullDate = `${season}-${gameMonth}-${gameDay}`;
+                if (games.length > 0) {
+                    console.log(`[REFRESH] Game object keys: ${Object.keys(games[0]).join(', ')}`);
+                }
 
-                // Find game info
-                const gameInfo = $(el).find('.game-info');
-                if (gameInfo.length === 0) return;
-
-                const homeTeam = gameInfo.find('.home-team').text().trim();
-                const awayTeam = gameInfo.find('.away-team').text().trim();
-                const scoreText = gameInfo.find('.score').text().trim(); // Format: 8 : 2
-                const statusText = $(el).find('.status').text().trim(); // 已結束, 延賽, or time
-
-                const scores = scoreText.split(':').map(s => s.trim());
-                
-                // Update local data
-                localData.games.forEach(game => {
-                    if (game.date === fullDate && 
-                        (game.homeTeam.includes(homeTeam) || homeTeam.includes(game.homeTeam)) &&
-                        (game.awayTeam.includes(awayTeam) || awayTeam.includes(game.awayTeam))) {
-                        
-                        if (scores.length === 2 && scores[0] !== '-' && scores[1] !== '-') {
-                            const newHomeScore = parseInt(scores[0]);
-                            const newAwayScore = parseInt(scores[1]);
+                games.forEach(cpblGame => {
+                    // GameDate: "2026/04/01 18:35:00"
+                    const gameDate = cpblGame.GameDate.substring(0, 10).replace(/\//g, '-');
+                    const homeTeamName = cpblGame.HomeTeamName;
+                    const visitingTeamName = cpblGame.VisitingTeamName;
+                    
+                    // GameStatus mapping
+                    let statusText = '未開賽';
+                    const presentStatus = parseInt(cpblGame.PresentStatus || 0);
+                    const isGameStop = parseInt(cpblGame.IsGameStop || 0);
+                    const isPlayBall = cpblGame.IsPlayBall === 'Y';
+                    
+                    if (cpblGame.GameDateTimeE) {
+                        statusText = '已結束';
+                    } else if (presentStatus === 2 || isPlayBall) {
+                        statusText = '進行中';
+                    } else if (isGameStop === 1 || cpblGame.GameStatus == 6 || cpblGame.GameResult == 1) {
+                        statusText = '延賽';
+                    }
+                    
+                    localData.games.forEach(game => {
+                        if (game.date === gameDate && 
+                            (game.homeTeam.includes(homeTeamName) || homeTeamName.includes(game.homeTeam)) &&
+                            (game.awayTeam.includes(visitingTeamName) || visitingTeamName.includes(game.awayTeam))) {
                             
+                            const newHomeScore = parseInt(cpblGame.HomeScore || 0);
+                            const newAwayScore = parseInt(cpblGame.VisitingScore || 0);
+                            
+                            // Log for debugging
+                            if (game.date === '2026-03-29' || game.date === '2026-04-04' || game.date === '2026-04-06') {
+                                console.log(`[REFRESH] Debug ${gameDate}: Status=${presentStatus}, Stop=${isGameStop}, Play=${cpblGame.IsPlayBall}, EndTime=${cpblGame.GameDateTimeE}, Result=${cpblGame.GameResult}`);
+                            }
+
                             if (game.homeScore !== newHomeScore || game.awayScore !== newAwayScore || game.status !== statusText) {
-                                console.log(`[REFRESH] Updating game on ${fullDate}: ${game.homeTeam} ${newHomeScore} : ${newAwayScore} ${game.awayTeam}`);
+                                console.log(`[REFRESH] Updating game on ${gameDate}: ${game.homeTeam} ${newHomeScore} : ${newAwayScore} ${game.awayTeam} (${statusText})`);
                                 game.homeScore = newHomeScore;
                                 game.awayScore = newAwayScore;
                                 game.status = statusText;
                                 updated = true;
                             }
-                        } else if (statusText === '延賽' && game.status !== '延賽') {
-                            console.log(`[REFRESH] Updating game on ${fullDate}: Postponed`);
-                            game.status = '延賽';
-                            updated = true;
                         }
-                    }
+                    });
                 });
-            });
+            } else {
+                console.log(`[REFRESH] No GameDatas returned for month ${month}`);
+            }
         }
 
         if (updated) {
