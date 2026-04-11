@@ -81,6 +81,32 @@ img {
     font-weight: bold;
 }
 
+.status-draw {
+    color: #6c757d;
+    font-weight: bold;
+}
+
+.status-postponed {
+    color: #fd7e14;
+    font-weight: bold;
+}
+
+.status-live {
+    color: #e44d26;
+    font-weight: bold;
+    animation: blink 1.5s infinite;
+}
+
+.status-upcoming {
+    color: #17a2b8;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
 /* 國旗圖示樣式 */
 .fi {
     width: 1.2em;

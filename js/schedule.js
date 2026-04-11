@@ -179,26 +179,36 @@ function displayScheduleTable() {
         const weekDay = weekDays[gameDate.getDay()];
         const displayDate = `${game.date}${weekDay}`;
 
-        // 處理狀態顯示 (Win/Lose 圖示)
+        // 處理狀態顯示 (Win/Lose/Draw 圖示)
         let statusDisplay = game.status;
         if (game.status === '已結束') {
-            const isHome = game.homeTeam.includes('統一');
             const homeScore = parseInt(game.homeScore);
             const awayScore = parseInt(game.awayScore);
             
-            if (isHome) {
-                if (homeScore > awayScore) {
-                    statusDisplay = '<span class="status-win"><i class="fas fa-trophy"></i> Win</span>';
-                } else if (homeScore < awayScore) {
-                    statusDisplay = '<span class="status-lose"><i class="fas fa-times-circle"></i> Lose</span>';
-                }
+            if (homeScore === awayScore) {
+                statusDisplay = '<span class="status-draw"><i class="fas fa-handshake"></i> 和</span>';
             } else {
-                if (awayScore > homeScore) {
-                    statusDisplay = '<span class="status-win"><i class="fas fa-trophy"></i> Win</span>';
-                } else if (awayScore < homeScore) {
-                    statusDisplay = '<span class="status-lose"><i class="fas fa-times-circle"></i> Lose</span>';
+                const isHome = game.homeTeam.includes('統一');
+                if (isHome) {
+                    if (homeScore > awayScore) {
+                        statusDisplay = '<span class="status-win"><i class="fas fa-trophy"></i> Win</span>';
+                    } else {
+                        statusDisplay = '<span class="status-lose"><i class="fas fa-times-circle"></i> Lose</span>';
+                    }
+                } else {
+                    if (awayScore > homeScore) {
+                        statusDisplay = '<span class="status-win"><i class="fas fa-trophy"></i> Win</span>';
+                    } else {
+                        statusDisplay = '<span class="status-lose"><i class="fas fa-times-circle"></i> Lose</span>';
+                    }
                 }
             }
+        } else if (game.status === '進行中') {
+            statusDisplay = '<span class="status-live"><i class="fas fa-baseball-ball fa-spin"></i> 進行中</span>';
+        } else if (game.status === '未開賽') {
+            statusDisplay = '<span class="status-upcoming"><i class="far fa-clock"></i> 未開賽</span>';
+        } else if (game.status === '延賽') {
+            statusDisplay = '<span class="status-postponed"><i class="fas fa-cloud-showers-heavy"></i> 延賽</span>';
         }
 
         tableHTML += `

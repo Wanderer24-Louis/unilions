@@ -67,9 +67,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖棒球場",
-      "status": "進行中",
-      "homeScore": 6,
-      "awayScore": 0
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 4
     },
     {
       "date": "2026-04-07",
@@ -77,9 +77,9 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 1
     },
     {
       "date": "2026-04-10",
@@ -87,9 +87,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "亞太棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 4
     },
     {
       "date": "2026-04-11",
@@ -97,9 +97,9 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "亞太棒球場",
-      "status": "未開賽",
+      "status": "進行中",
       "homeScore": 0,
-      "awayScore": 0
+      "awayScore": 3
     },
     {
       "date": "2026-04-12",
