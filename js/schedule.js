@@ -204,7 +204,8 @@ function displayScheduleTable() {
                 }
             }
         } else if (game.status === '進行中') {
-            statusDisplay = '<span class="status-live"><i class="fas fa-baseball-ball fa-spin"></i> 進行中</span>';
+            const liveInningText = game.liveInning ? ` ${game.liveInning}` : '';
+            statusDisplay = `<span class="status-live"><i class="fas fa-baseball-ball fa-spin"></i> 進行中${liveInningText}</span>`;
         } else if (game.status === '未開賽') {
             statusDisplay = '<span class="status-upcoming"><i class="far fa-clock"></i> 未開賽</span>';
         } else if (game.status === '延賽') {

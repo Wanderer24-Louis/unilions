@@ -26,6 +26,35 @@ console.log(`[INIT] __dirname: ${__dirname}`);
 console.log(`[INIT] Forced DATA_DIR: ${DATA_DIR}`);
 console.log(`[INIT] process.env.DATA_DIR was: ${process.env.DATA_DIR}`);
 
+const UNI_LIONS_TEAM_CODE = 'ADD011';
+const TEAM_NAME_MAP = {
+    ACN011: '中信兄弟',
+    ADD011: '統一7-ELEVEn獅',
+    AJL011: '樂天桃猿',
+    AEO011: '富邦悍將',
+    AAA011: '味全龍',
+    AKP011: '台鋼雄鷹'
+};
+const VENUE_NAME_MAP = {
+    '亞太主': '亞太棒球場',
+    '台南': '台南棒球場',
+    '大巨蛋': '臺北大巨蛋',
+    '洲際': '洲際棒球場',
+    '桃園': '樂天桃園棒球場',
+    '新莊': '新莊棒球場',
+    '澄清湖': '澄清湖棒球場',
+    '天母': '天母棒球場',
+    '嘉義市': '嘉義市棒球場',
+    '嘉義縣': '嘉義縣棒球場',
+    '斗六': '斗六棒球場',
+    '花蓮': '花蓮棒球場',
+    '屏東': '屏東棒球場',
+    '台東': '台東棒球場',
+    '新竹': '新竹棒球場',
+    '羅東': '羅東棒球場',
+    '斗六主': '斗六棒球場'
+};
+
 try {
     if (!fs.existsSync(DATA_DIR)) {
         console.log(`[INIT] Creating DATA_DIR: ${DATA_DIR}`);
@@ -53,6 +82,90 @@ function getImageFromRssItem(item) {
         }
     }
     return image;
+}
+
+function normalizeTeamName(teamCode, fallbackName = '') {
+    return TEAM_NAME_MAP[teamCode] || fallbackName || '';
+}
+
+function normalizeVenueName(fieldAbbe = '') {
+    return VENUE_NAME_MAP[fieldAbbe] || fieldAbbe || '';
+}
+
+function getGameDate(cpblGame) {
+    const source = cpblGame.GameDateTimeS || cpblGame.GameDate || '';
+    return source ? source.substring(0, 10) : '';
+}
+
+function getGameTime(cpblGame) {
+    const source = cpblGame.GameDateTimeS || cpblGame.GameDate || '';
+    return source.length >= 16 ? source.substring(11, 16) : '';
+}
+
+function getGameStatus(cpblGame) {
+    const presentStatus = parseInt(cpblGame.PresentStatus || 0, 10);
+    const isGameStop = parseInt(cpblGame.IsGameStop || 0, 10);
+    const isPlayBall = cpblGame.IsPlayBall === 'Y';
+
+    if (cpblGame.GameDateTimeE) {
+        return '已結束';
+    }
+    if (presentStatus === 2 || isPlayBall) {
+        return '進行中';
+    }
+    if (isGameStop === 1 || cpblGame.GameStatus == 6 || cpblGame.GameResult == 1) {
+        return '延賽';
+    }
+    return '未開賽';
+}
+
+function findMatchingGame(localGames, cpblGame, homeTeamName, awayTeamName, gameDate, gameTime) {
+    return localGames.find(game =>
+        String(game.gameSno || '') === String(cpblGame.GameSno || '') ||
+        (
+            game.date === gameDate &&
+            game.time === gameTime &&
+            game.homeTeam === homeTeamName &&
+            game.awayTeam === awayTeamName
+        ) ||
+        (
+            game.date === gameDate &&
+            game.homeTeam === homeTeamName &&
+            game.awayTeam === awayTeamName
+        )
+    );
+}
+
+async function fetchLiveInning(season, kindCode, gameSno) {
+    if (!gameSno) {
+        return '';
+    }
+
+    try {
+        const liveUrl = `https://cpbl.com.tw/box/live?gameSno=${gameSno}&kindCode=${kindCode || 'A'}&year=${season}`;
+        const response = await axios.get(liveUrl, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            },
+            responseType: 'arraybuffer',
+            timeout: 10000
+        });
+
+        const pageText = cheerio
+            .load(new TextDecoder('utf-8').decode(response.data))
+            .text()
+            .replace(/\s+/g, ' ');
+        const inningMatches = [...pageText.matchAll(/(\d+)\s*局\s*([上下])/g)];
+
+        if (inningMatches.length > 0) {
+            const latest = inningMatches[inningMatches.length - 1];
+            return `${latest[1]}局${latest[2]}`;
+        }
+    } catch (error) {
+        console.error(`[REFRESH] Failed to fetch live inning for game ${gameSno}:`, error.message);
+    }
+
+    return '';
 }
 
 function fetchOgImage(url) {
@@ -286,53 +399,95 @@ async function refreshScheduleData(season, kindCode = 'A') {
                     console.log(`[REFRESH] Game object keys: ${Object.keys(games[0]).join(', ')}`);
                 }
 
-                games.forEach(cpblGame => {
-                    // GameDate: "2026/04/01 18:35:00"
-                    const gameDate = cpblGame.GameDate.substring(0, 10).replace(/\//g, '-');
-                    const homeTeamName = cpblGame.HomeTeamName;
-                    const visitingTeamName = cpblGame.VisitingTeamName;
-                    
-                    // GameStatus mapping
-                    let statusText = '未開賽';
-                    const presentStatus = parseInt(cpblGame.PresentStatus || 0);
-                    const isGameStop = parseInt(cpblGame.IsGameStop || 0);
-                    const isPlayBall = cpblGame.IsPlayBall === 'Y';
-                    
-                    if (cpblGame.GameDateTimeE) {
-                        statusText = '已結束';
-                    } else if (presentStatus === 2 || isPlayBall) {
-                        statusText = '進行中';
-                    } else if (isGameStop === 1 || cpblGame.GameStatus == 6 || cpblGame.GameResult == 1) {
-                        statusText = '延賽';
-                    }
-                    
-                    localData.games.forEach(game => {
-                        if (game.date === gameDate && 
-                            (game.homeTeam.includes(homeTeamName) || homeTeamName.includes(game.homeTeam)) &&
-                            (game.awayTeam.includes(visitingTeamName) || visitingTeamName.includes(game.awayTeam))) {
-                            
-                            const newHomeScore = parseInt(cpblGame.HomeScore || 0);
-                            const newAwayScore = parseInt(cpblGame.VisitingScore || 0);
-                            
-                            // Log for debugging
-                            if (game.date === '2026-03-29' || game.date === '2026-04-04' || game.date === '2026-04-06') {
-                                console.log(`[REFRESH] Debug ${gameDate}: Status=${presentStatus}, Stop=${isGameStop}, Play=${cpblGame.IsPlayBall}, EndTime=${cpblGame.GameDateTimeE}, Result=${cpblGame.GameResult}`);
-                            }
+                for (const cpblGame of games) {
+                    const involvesUniLions =
+                        cpblGame.HomeTeamCode === UNI_LIONS_TEAM_CODE ||
+                        cpblGame.VisitingTeamCode === UNI_LIONS_TEAM_CODE;
 
-                            if (game.homeScore !== newHomeScore || game.awayScore !== newAwayScore || game.status !== statusText) {
-                                console.log(`[REFRESH] Updating game on ${gameDate}: ${game.homeTeam} ${newHomeScore} : ${newAwayScore} ${game.awayTeam} (${statusText})`);
-                                game.homeScore = newHomeScore;
-                                game.awayScore = newAwayScore;
-                                game.status = statusText;
-                                updated = true;
+                    if (!involvesUniLions) {
+                        continue;
+                    }
+
+                    const gameDate = getGameDate(cpblGame);
+                    const gameTime = getGameTime(cpblGame);
+                    const homeTeamName = normalizeTeamName(cpblGame.HomeTeamCode, cpblGame.HomeTeamName);
+                    const awayTeamName = normalizeTeamName(cpblGame.VisitingTeamCode, cpblGame.VisitingTeamName);
+                    const venueName = normalizeVenueName(cpblGame.FieldAbbe);
+                    const statusText = getGameStatus(cpblGame);
+                    const newHomeScore = parseInt(cpblGame.HomeScore || 0, 10);
+                    const newAwayScore = parseInt(cpblGame.VisitingScore || 0, 10);
+                    const liveInning = statusText === '進行中'
+                        ? await fetchLiveInning(season, cpblGame.KindCode || kindCode, cpblGame.GameSno)
+                        : '';
+
+                    const game = findMatchingGame(
+                        localData.games,
+                        cpblGame,
+                        homeTeamName,
+                        awayTeamName,
+                        gameDate,
+                        gameTime
+                    );
+
+                    if (game) {
+                        const venueChanged = venueName && game.venue !== venueName;
+                        const inningChanged = (game.liveInning || '') !== liveInning;
+
+                        if (
+                            game.homeScore !== newHomeScore ||
+                            game.awayScore !== newAwayScore ||
+                            game.status !== statusText ||
+                            venueChanged ||
+                            game.time !== gameTime ||
+                            inningChanged ||
+                            String(game.gameSno || '') !== String(cpblGame.GameSno || '')
+                        ) {
+                            console.log(`[REFRESH] Updating game on ${gameDate}: ${homeTeamName} ${newHomeScore} : ${newAwayScore} ${awayTeamName} (${statusText}${liveInning ? ` ${liveInning}` : ''})`);
+                            game.time = gameTime;
+                            game.venue = venueName || game.venue;
+                            game.homeScore = newHomeScore;
+                            game.awayScore = newAwayScore;
+                            game.status = statusText;
+                            game.gameSno = cpblGame.GameSno;
+                            if (liveInning) {
+                                game.liveInning = liveInning;
+                            } else {
+                                delete game.liveInning;
                             }
+                            updated = true;
                         }
-                    });
-                });
+                    } else {
+                        console.log(`[REFRESH] Adding missing game on ${gameDate}: ${homeTeamName} vs ${awayTeamName}`);
+                        const newGame = {
+                            date: gameDate,
+                            time: gameTime,
+                            homeTeam: homeTeamName,
+                            awayTeam: awayTeamName,
+                            venue: venueName,
+                            status: statusText,
+                            homeScore: newHomeScore,
+                            awayScore: newAwayScore,
+                            gameSno: cpblGame.GameSno
+                        };
+
+                        if (liveInning) {
+                            newGame.liveInning = liveInning;
+                        }
+
+                        localData.games.push(newGame);
+                        updated = true;
+                    }
+                }
             } else {
                 console.log(`[REFRESH] No GameDatas returned for month ${month}`);
             }
         }
+
+        localData.games.sort((a, b) => {
+            const timeA = a.time || '00:00';
+            const timeB = b.time || '00:00';
+            return new Date(`${a.date}T${timeA}:00`) - new Date(`${b.date}T${timeB}:00`);
+        });
 
         if (updated) {
             fs.writeFileSync(filePath, JSON.stringify(localData, null, 2), 'utf8');
