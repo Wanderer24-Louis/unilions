@@ -1,7 +1,7 @@
 // 賽程頁面 JavaScript 功能
 
 let scheduleData = [];
-let filterMode = 'month'; // 'week', 'month', 'all'
+let filterMode = 'week'; // 'week', 'month', 'all'
 let gameType = 'A'; // 'A'=例行賽, 'E'=季後賽
 
 // 載入賽程資料
