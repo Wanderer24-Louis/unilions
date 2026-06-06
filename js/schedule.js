@@ -43,6 +43,16 @@ function renderTeamCell(teamName, explicitLogo = '') {
     `;
 }
 
+function renderMatchupCell(game, scoreDisplay) {
+    return `
+        <div class="matchup-display">
+            ${renderTeamCell(game.awayTeam, game.awayLogo)}
+            <span class="matchup-score">${scoreDisplay}</span>
+            ${renderTeamCell(game.homeTeam, game.homeLogo)}
+        </div>
+    `;
+}
+
 // 載入賽程資料
 async function loadScheduleData(refresh = false, kindCode = 'A') {
     try {
@@ -194,11 +204,9 @@ function displayScheduleTable() {
                     <tr>
                         <th>日期</th>
                         <th>時間</th>
-                        <th>主隊</th>
-                        <th>客隊</th>
+                        <th>對戰</th>
                         <th>球場</th>
                         <th>狀態</th>
-                        <th>比分</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -255,11 +263,9 @@ function displayScheduleTable() {
             <tr>
                 <td>${displayDate}</td>
                 <td>${game.time}</td>
-                <td>${renderTeamCell(game.homeTeam, game.homeLogo)}</td>
-                <td>${renderTeamCell(game.awayTeam, game.awayLogo)}</td>
+                <td>${renderMatchupCell(game, scoreDisplay)}</td>
                 <td>${game.venue}</td>
                 <td>${statusDisplay}</td>
-                <td>${scoreDisplay}</td>
             </tr>
         `;
     });

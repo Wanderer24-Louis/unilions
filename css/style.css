@@ -1530,6 +1530,19 @@ footer {
     display: block;
 }
 
+.matchup-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.matchup-score {
+    min-width: 54px;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
 /* 比賽狀態樣式 */
 .game-status {
     padding: 4px 8px;
@@ -1665,6 +1678,15 @@ footer {
     .team-logo {
         width: 30px;
         height: 30px;
+    }
+
+    .matchup-display {
+        gap: 10px;
+    }
+
+    .matchup-score {
+        min-width: 46px;
+        font-size: 0.9rem;
     }
     
     .venue-info {
