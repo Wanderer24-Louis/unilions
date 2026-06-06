@@ -167,15 +167,46 @@ async function fetchLiveInning(season, kindCode, gameSno) {
             timeout: 10000
         });
 
-        const pageText = cheerio
-            .load(new TextDecoder('utf-8').decode(response.data))
-            .text()
-            .replace(/\s+/g, ' ');
-        const inningMatches = [...pageText.matchAll(/(\d+)\s*局\s*([上下])/g)];
+        const html = new TextDecoder('utf-8').decode(response.data);
+        const $ = cheerio.load(html);
+        const token = $('input[name="__RequestVerificationToken"]').val();
 
-        if (inningMatches.length > 0) {
-            const latest = inningMatches[inningMatches.length - 1];
-            return `${latest[1]}局${latest[2]}`;
+        if (!token) {
+            return '';
+        }
+
+        const payload = qs.stringify({
+            __RequestVerificationToken: token,
+            GameSno: String(gameSno),
+            KindCode: kindCode || 'A',
+            Year: String(season),
+            PrevOrNext: '0'
+        });
+
+        const liveDataResponse = await axios.post('https://cpbl.com.tw/box/getlive', payload, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'X-Requested-With': 'XMLHttpRequest',
+                'Cookie': (response.headers['set-cookie'] || []).join('; '),
+                'Referer': liveUrl,
+                'Origin': 'https://cpbl.com.tw'
+            },
+            timeout: 10000
+        });
+
+        if (!liveDataResponse.data || !liveDataResponse.data.Success || !liveDataResponse.data.LiveLogJson) {
+            return '';
+        }
+
+        const liveLogs = JSON.parse(liveDataResponse.data.LiveLogJson);
+        if (Array.isArray(liveLogs) && liveLogs.length > 0) {
+            const latestLog = liveLogs[liveLogs.length - 1];
+            const inning = latestLog.InningSeq;
+            const half = String(latestLog.VisitingHomeType) === '1' ? '上' : '下';
+            if (inning) {
+                return `${inning}局${half}`;
+            }
         }
     } catch (error) {
         console.error(`[REFRESH] Failed to fetch live inning for game ${gameSno}:`, error.message);
