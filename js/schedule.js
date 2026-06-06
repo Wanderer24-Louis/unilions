@@ -217,7 +217,7 @@ function displayScheduleTable() {
         let scoreDisplay = '-';
         if (game.homeScore !== null && game.homeScore !== undefined && 
             game.awayScore !== null && game.awayScore !== undefined) {
-            scoreDisplay = `${game.homeScore} : ${game.awayScore}`;
+            scoreDisplay = `${game.awayScore} : ${game.homeScore}`;
         }
 
         // 取得星期幾
