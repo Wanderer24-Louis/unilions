@@ -4,6 +4,45 @@ let scheduleData = [];
 let filterMode = 'week'; // 'week', 'month', 'all'
 let gameType = 'A'; // 'A'=例行賽, 'E'=季後賽
 
+const TEAM_LOGOS = {
+    '中信兄弟': 'https://www.cpbl.com.tw/files/file_pool/1/0l109765754453009797/logo_brothers.png',
+    '統一7-ELEVEn獅': 'https://www.cpbl.com.tw/files/file_pool/1/0l109765753819131779/logo_lions.png',
+    '樂天桃猿': 'https://www.cpbl.com.tw/files/file_pool/1/0o012549940550727932/2024_cpbl%e5%85%ad%e9%9a%8alogo_r2_%e5%ae%98%e7%b6%b2.png',
+    '富邦悍將': 'https://www.cpbl.com.tw/files/file_pool/1/0l109765753631383724/logo_fubon.png',
+    '味全龍': 'https://www.cpbl.com.tw/files/file_pool/1/0l109765752096404797/logo_dragon.png',
+    '台鋼雄鷹': 'https://www.cpbl.com.tw/files/file_pool/1/0n062433781050140053/%e5%96%ae%e8%89%b2t-100x100.png'
+};
+
+function getTeamLogo(teamName, explicitLogo = '') {
+    if (explicitLogo) {
+        return explicitLogo;
+    }
+
+    const matchedName = Object.keys(TEAM_LOGOS).find(name => teamName.includes(name));
+    if (matchedName) {
+        return TEAM_LOGOS[matchedName];
+    }
+
+    if (teamName.includes('ELEVEn')) {
+        return TEAM_LOGOS['統一7-ELEVEn獅'];
+    }
+
+    return '';
+}
+
+function renderTeamCell(teamName, explicitLogo = '') {
+    const logo = getTeamLogo(teamName, explicitLogo);
+    if (!logo) {
+        return `<span class="team-name">${teamName}</span>`;
+    }
+
+    return `
+        <div class="team-display" title="${teamName}">
+            <img class="team-logo" src="${logo}" alt="${teamName}">
+        </div>
+    `;
+}
+
 // 載入賽程資料
 async function loadScheduleData(refresh = false, kindCode = 'A') {
     try {
@@ -216,8 +255,8 @@ function displayScheduleTable() {
             <tr>
                 <td>${displayDate}</td>
                 <td>${game.time}</td>
-                <td>${game.homeTeam}</td>
-                <td>${game.awayTeam}</td>
+                <td>${renderTeamCell(game.homeTeam, game.homeLogo)}</td>
+                <td>${renderTeamCell(game.awayTeam, game.awayLogo)}</td>
                 <td>${game.venue}</td>
                 <td>${statusDisplay}</td>
                 <td>${scoreDisplay}</td>

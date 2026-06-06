@@ -92,6 +92,22 @@ function normalizeVenueName(fieldAbbe = '') {
     return VENUE_NAME_MAP[fieldAbbe] || fieldAbbe || '';
 }
 
+function normalizeLogoUrl(logoPath = '') {
+    if (!logoPath) {
+        return '';
+    }
+
+    if (/^https?:\/\//i.test(logoPath)) {
+        return logoPath;
+    }
+
+    if (logoPath.startsWith('/')) {
+        return `https://www.cpbl.com.tw${logoPath}`;
+    }
+
+    return `https://www.cpbl.com.tw/${logoPath}`;
+}
+
 function getGameDate(cpblGame) {
     const source = cpblGame.GameDateTimeS || cpblGame.GameDate || '';
     return source ? source.substring(0, 10) : '';
@@ -413,6 +429,8 @@ async function refreshScheduleData(season, kindCode = 'A') {
                     const homeTeamName = normalizeTeamName(cpblGame.HomeTeamCode, cpblGame.HomeTeamName);
                     const awayTeamName = normalizeTeamName(cpblGame.VisitingTeamCode, cpblGame.VisitingTeamName);
                     const venueName = normalizeVenueName(cpblGame.FieldAbbe);
+                    const homeLogo = normalizeLogoUrl(cpblGame.HomeClubSmallImgPath);
+                    const awayLogo = normalizeLogoUrl(cpblGame.VisitingClubSmallImgPath);
                     const statusText = getGameStatus(cpblGame);
                     const newHomeScore = parseInt(cpblGame.HomeScore || 0, 10);
                     const newAwayScore = parseInt(cpblGame.VisitingScore || 0, 10);
@@ -445,6 +463,8 @@ async function refreshScheduleData(season, kindCode = 'A') {
                             console.log(`[REFRESH] Updating game on ${gameDate}: ${homeTeamName} ${newHomeScore} : ${newAwayScore} ${awayTeamName} (${statusText}${liveInning ? ` ${liveInning}` : ''})`);
                             game.time = gameTime;
                             game.venue = venueName || game.venue;
+                            game.homeLogo = homeLogo || game.homeLogo;
+                            game.awayLogo = awayLogo || game.awayLogo;
                             game.homeScore = newHomeScore;
                             game.awayScore = newAwayScore;
                             game.status = statusText;
@@ -464,6 +484,8 @@ async function refreshScheduleData(season, kindCode = 'A') {
                             homeTeam: homeTeamName,
                             awayTeam: awayTeamName,
                             venue: venueName,
+                            homeLogo,
+                            awayLogo,
                             status: statusText,
                             homeScore: newHomeScore,
                             awayScore: newAwayScore,

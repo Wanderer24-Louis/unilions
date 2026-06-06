@@ -1517,6 +1517,19 @@ footer {
     color: var(--primary-color);
 }
 
+.team-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    display: block;
+}
+
 /* 比賽狀態樣式 */
 .game-status {
     padding: 4px 8px;
@@ -1647,6 +1660,11 @@ footer {
     
     .team-name {
         font-size: 0.85rem;
+    }
+
+    .team-logo {
+        width: 30px;
+        height: 30px;
     }
     
     .venue-info {
