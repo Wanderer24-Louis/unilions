@@ -1539,8 +1539,15 @@ footer {
 
 .matchup-score {
     min-width: 54px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #fff4cc, #ffd700);
+    border: 1px solid rgba(212, 175, 55, 0.45);
     font-weight: bold;
-    color: var(--dark-color);
+    font-size: 1.05rem;
+    color: #8a1c1c;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    text-align: center;
 }
 
 /* 比賽狀態樣式 */
@@ -1686,6 +1693,7 @@ footer {
 
     .matchup-score {
         min-width: 46px;
+        padding: 5px 10px;
         font-size: 0.9rem;
     }
     
