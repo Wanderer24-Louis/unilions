@@ -123,14 +123,14 @@ function getGameStatus(cpblGame) {
     const isGameStop = parseInt(cpblGame.IsGameStop || 0, 10);
     const isPlayBall = cpblGame.IsPlayBall === 'Y';
 
+    if (isGameStop === 1 || cpblGame.GameStatus == 6 || cpblGame.GameResult == 1) {
+        return '延賽';
+    }
     if (cpblGame.GameDateTimeE) {
         return '已結束';
     }
     if (presentStatus === 2 || isPlayBall) {
         return '進行中';
-    }
-    if (isGameStop === 1 || cpblGame.GameStatus == 6 || cpblGame.GameResult == 1) {
-        return '延賽';
     }
     return '未開賽';
 }

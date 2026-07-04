@@ -1482,6 +1482,7 @@ footer {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.95rem;
+    table-layout: fixed;
 }
 
 .schedule-table th {
@@ -1498,6 +1499,11 @@ footer {
     text-align: center;
     border-bottom: 1px solid #eee;
     vertical-align: middle;
+}
+
+.schedule-table th:nth-child(3),
+.schedule-table td:nth-child(3) {
+    width: 130px;
 }
 
 .schedule-table tr:hover {
@@ -1525,8 +1531,8 @@ footer {
 }
 
 .team-logo {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
     display: block;
 }
@@ -1535,17 +1541,17 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
 }
 
 .matchup-score {
-    min-width: 54px;
-    padding: 6px 12px;
+    min-width: 44px;
+    padding: 5px 8px;
     border-radius: 999px;
     background: linear-gradient(135deg, #fff4cc, #ffd700);
     border: 1px solid rgba(212, 175, 55, 0.45);
     font-weight: bold;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     color: #8a1c1c;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
     text-align: center;
@@ -1654,6 +1660,11 @@ footer {
     .schedule-table th,
     .schedule-table td {
         padding: 8px 6px;
+    }
+
+    .schedule-table th:nth-child(3),
+    .schedule-table td:nth-child(3) {
+        width: 112px;
     }
     
     .schedule-table th {
@@ -2909,8 +2920,28 @@ footer {
         padding: 6px 4px;
     }
     
+    .schedule-table th:nth-child(3),
+    .schedule-table td:nth-child(3) {
+        width: 96px;
+    }
+
     .team-name {
         font-size: 0.85rem;
+    }
+
+    .team-logo {
+        width: 24px;
+        height: 24px;
+    }
+
+    .matchup-display {
+        gap: 3px;
+    }
+
+    .matchup-score {
+        min-width: 36px;
+        padding: 4px 6px;
+        font-size: 0.8rem;
     }
     
     .venue-info {
