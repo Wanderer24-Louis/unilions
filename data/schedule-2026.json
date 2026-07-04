@@ -315,21 +315,25 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "未開賽",
+      "status": "已結束",
       "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 89
+      "awayScore": 1,
+      "gameSno": 89,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L015574823122453305/2024_CPBL六隊Logo_R2_官網.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-05-10",
-      "time": "17:05",
+      "time": "17:06",
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "未開賽",
+      "status": "已結束",
       "homeScore": 7,
       "awayScore": 2,
-      "gameSno": 92
+      "gameSno": 92,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L015574823122453305/2024_CPBL六隊Logo_R2_官網.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-05-12",
@@ -337,10 +341,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "亞太棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 94
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 3,
+      "gameSno": 94,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021497845061333235/logo_dragon.png"
     },
     {
       "date": "2026-05-13",
@@ -348,10 +354,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "味全龍",
       "venue": "亞太棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 95
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 1,
+      "gameSno": 95,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021497845061333235/logo_dragon.png"
     },
     {
       "date": "2026-05-15",
@@ -359,21 +367,25 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "亞太棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 99
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 7,
+      "gameSno": 99,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021497108709222204/logo_brothers.png"
     },
     {
       "date": "2026-05-16",
-      "time": "16:05",
+      "time": "16:04",
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "亞太棒球場",
-      "status": "未開賽",
+      "status": "已結束",
       "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 102
+      "awayScore": 1,
+      "gameSno": 102,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021497108709222204/logo_brothers.png"
     },
     {
       "date": "2026-05-17",
@@ -381,10 +393,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "亞太棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 105
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 3,
+      "gameSno": 105,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021497108709222204/logo_brothers.png"
     },
     {
       "date": "2026-05-20",
@@ -392,10 +406,12 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 111
+      "status": "已結束",
+      "homeScore": 9,
+      "awayScore": 2,
+      "gameSno": 111,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021495969510091777/logo_fubon.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-05-21",
@@ -403,21 +419,25 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 112
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 2,
+      "gameSno": 112,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021495969510091777/logo_fubon.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-05-22",
-      "time": "18:35",
+      "time": "18:36",
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 115
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 1,
+      "gameSno": 115,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0M259522048557486065/單色T-100x100.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-05-23",
@@ -425,10 +445,12 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
+      "status": "已結束",
+      "homeScore": 2,
       "awayScore": 0,
-      "gameSno": 116
+      "gameSno": 116,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0M259522048557486065/單色T-100x100.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-05-24",
@@ -436,10 +458,12 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 120
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 7,
+      "gameSno": 120,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0M259522048557486065/單色T-100x100.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-05-26",
@@ -447,21 +471,25 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "嘉義市棒球場",
-      "status": "未開賽",
+      "status": "已結束",
       "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 123
+      "awayScore": 1,
+      "gameSno": 123,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L015574823122453305/2024_CPBL六隊Logo_R2_官網.png"
     },
     {
       "date": "2026-05-27",
-      "time": "18:35",
+      "time": "18:34",
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "嘉義市棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 125
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 5,
+      "gameSno": 125,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L015574823122453305/2024_CPBL六隊Logo_R2_官網.png"
     },
     {
       "date": "2026-05-29",
@@ -469,10 +497,12 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 128
+      "status": "已結束",
+      "homeScore": 8,
+      "awayScore": 7,
+      "gameSno": 128,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021497845061333235/logo_dragon.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-05-30",
@@ -480,10 +510,12 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
+      "status": "已結束",
+      "homeScore": 2,
       "awayScore": 0,
-      "gameSno": 131
+      "gameSno": 131,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021497845061333235/logo_dragon.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-05-31",
@@ -491,10 +523,12 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 134
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4,
+      "gameSno": 134,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021497845061333235/logo_dragon.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-06-02",
@@ -502,21 +536,25 @@
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "臺北大巨蛋",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 137
+      "status": "已結束",
+      "homeScore": 3,
+      "awayScore": 7,
+      "gameSno": 137,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021497108709222204/logo_brothers.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-06-03",
-      "time": "18:35",
+      "time": "18:37",
       "homeTeam": "中信兄弟",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "臺北大巨蛋",
-      "status": "未開賽",
+      "status": "已結束",
       "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 138
+      "awayScore": 2,
+      "gameSno": 138,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021497108709222204/logo_brothers.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-06-05",
@@ -524,10 +562,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "臺北大巨蛋",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 143
+      "status": "已結束",
+      "homeScore": 2,
+      "awayScore": 6,
+      "gameSno": 143,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021495969510091777/logo_fubon.png"
     },
     {
       "date": "2026-06-06",
@@ -535,10 +575,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "臺北大巨蛋",
-      "status": "未開賽",
-      "homeScore": 0,
+      "status": "已結束",
+      "homeScore": 8,
       "awayScore": 0,
-      "gameSno": 145
+      "gameSno": 145,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021495969510091777/logo_fubon.png"
     },
     {
       "date": "2026-06-07",
@@ -546,10 +588,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "富邦悍將",
       "venue": "臺北大巨蛋",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 148
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 4,
+      "gameSno": 148,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021495969510091777/logo_fubon.png"
     },
     {
       "date": "2026-06-10",
@@ -557,10 +601,12 @@
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "樂天桃園",
-      "status": "未開賽",
+      "status": "已結束",
       "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 153
+      "awayScore": 1,
+      "gameSno": 153,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L015574823122453305/2024_CPBL六隊Logo_R2_官網.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-06-11",
@@ -568,21 +614,25 @@
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 155
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 1,
+      "gameSno": 155,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021495969510091777/logo_fubon.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-06-12",
-      "time": "18:35",
+      "time": "18:36",
       "homeTeam": "富邦悍將",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "新莊棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 158
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 5,
+      "gameSno": 158,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021495969510091777/logo_fubon.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-06-13",
@@ -590,10 +640,12 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 160
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 6,
+      "gameSno": 160,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021497845061333235/logo_dragon.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-06-14",
@@ -601,10 +653,12 @@
       "homeTeam": "味全龍",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "天母棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 163
+      "status": "已結束",
+      "homeScore": 5,
+      "awayScore": 7,
+      "gameSno": 163,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021497845061333235/logo_dragon.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-06-16",
@@ -612,10 +666,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "樂天桃猿",
       "venue": "亞太棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
+      "status": "已結束",
+      "homeScore": 1,
       "awayScore": 0,
-      "gameSno": 167
+      "gameSno": 167,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L015574823122453305/2024_CPBL六隊Logo_R2_官網.png"
     },
     {
       "date": "2026-06-18",
@@ -623,10 +679,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "亞太棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 169
+      "status": "已結束",
+      "homeScore": 7,
+      "awayScore": 1,
+      "gameSno": 169,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0M259522048557486065/單色T-100x100.png"
     },
     {
       "date": "2026-06-19",
@@ -634,10 +692,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "台鋼雄鷹",
       "venue": "亞太棒球場",
-      "status": "未開賽",
+      "status": "已結束",
       "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 172
+      "awayScore": 1,
+      "gameSno": 172,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0M259522048557486065/單色T-100x100.png"
     },
     {
       "date": "2026-06-20",
@@ -645,10 +705,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "亞太棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 175
+      "status": "已結束",
+      "homeScore": 1,
+      "awayScore": 7,
+      "gameSno": 175,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021497108709222204/logo_brothers.png"
     },
     {
       "date": "2026-06-21",
@@ -656,10 +718,12 @@
       "homeTeam": "統一7-ELEVEn獅",
       "awayTeam": "中信兄弟",
       "venue": "亞太棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 178
+      "status": "已結束",
+      "homeScore": 4,
+      "awayScore": 6,
+      "gameSno": 178,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021497108709222204/logo_brothers.png"
     },
     {
       "date": "2026-07-03",
@@ -667,21 +731,26 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 181
+      "status": "已結束",
+      "homeScore": 6,
+      "awayScore": 3,
+      "gameSno": 181,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0M259522048557486065/單色T-100x100.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-07-04",
-      "time": "16:05",
+      "time": "16:06",
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖棒球場",
-      "status": "未開賽",
-      "homeScore": 0,
-      "awayScore": 0,
-      "gameSno": 184
+      "status": "進行中",
+      "homeScore": 4,
+      "awayScore": 2,
+      "gameSno": 184,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0M259522048557486065/單色T-100x100.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
+      "liveInning": "6局下"
     },
     {
       "date": "2026-07-05",
@@ -1092,14 +1161,16 @@
     },
     {
       "date": "2026-08-30",
-      "time": "17:05",
+      "time": "16:05",
       "homeTeam": "樂天桃猿",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "臺北大巨蛋",
       "status": "未開賽",
       "homeScore": 0,
       "awayScore": 0,
-      "gameSno": 300
+      "gameSno": 300,
+      "homeLogo": "https://www.cpbl.com.tw/files/atts/0L015574823122453305/2024_CPBL六隊Logo_R2_官網.png",
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-09-01",

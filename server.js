@@ -108,6 +108,82 @@ function normalizeLogoUrl(logoPath = '') {
     return `https://www.cpbl.com.tw/${logoPath}`;
 }
 
+async function fetchScheduleSession(season, month) {
+    const headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    };
+    const monthText = String(month).padStart(2, '0');
+    const candidateUrls = [
+        `https://www.cpbl.com.tw/schedule?year=${season}&month=${monthText}&_=${Date.now()}`,
+        `https://www.cpbl.com.tw/schedule?year=${season}&month=${monthText}`,
+        `https://www.cpbl.com.tw/schedule?year=${season}`,
+        'https://www.cpbl.com.tw/schedule'
+    ];
+
+    for (const url of candidateUrls) {
+        try {
+            console.log(`[REFRESH] Fetching token and cookies from ${url}...`);
+            let response = await axios.get(url, {
+                headers,
+                maxRedirects: 0,
+                validateStatus: status => status >= 200 && status < 400,
+                timeout: 10000
+            });
+            let cookies = response.headers['set-cookie'] || [];
+
+            if (response.status >= 300 && response.status < 400 && response.headers.location) {
+                const redirectUrl = new URL(response.headers.location, url).toString();
+                const cookieHeader = cookies.map(cookie => cookie.split(';')[0]).join('; ');
+
+                console.log(`[REFRESH] Following redirect to ${redirectUrl}...`);
+                response = await axios.get(redirectUrl, {
+                    headers: {
+                        ...headers,
+                        Cookie: cookieHeader
+                    },
+                    maxRedirects: 0,
+                    validateStatus: status => status >= 200 && status < 400,
+                    timeout: 10000
+                });
+
+                cookies = [
+                    ...cookies,
+                    ...(response.headers['set-cookie'] || [])
+                ];
+            }
+
+            if (!cookies || cookies.length === 0) {
+                console.log(`[REFRESH] No cookies found from ${url}, trying fallback...`);
+                continue;
+            }
+
+            const $ = cheerio.load(response.data);
+            const scriptContent = $('script').text();
+            const ajaxTokenMatch = scriptContent.match(/RequestVerificationToken:\s*'([^']+)'/);
+            const token = ajaxTokenMatch
+                ? ajaxTokenMatch[1]
+                : $('input[name="__RequestVerificationToken"]').val();
+
+            if (!token) {
+                console.log(`[REFRESH] No token found from ${url}, trying fallback...`);
+                continue;
+            }
+
+            console.log(`[REFRESH] Session ready from ${url}`);
+            return {
+                cookies,
+                token,
+                referer: url
+            };
+        } catch (error) {
+            const detail = error.response ? error.response.status : error.message;
+            console.log(`[REFRESH] Failed to open ${url}: ${detail}`);
+        }
+    }
+
+    return null;
+}
+
 function getGameDate(cpblGame) {
     const source = cpblGame.GameDateTimeS || cpblGame.GameDate || '';
     return source ? source.substring(0, 10) : '';
@@ -378,161 +454,133 @@ async function refreshScheduleData(season, kindCode = 'A') {
 
         for (const month of months) {
             if (month < 3 || month > 11) continue; 
-            
-            // Step 1: Get Token and Cookie
-            const baseUrl = `https://www.cpbl.com.tw/schedule?year=${season}&month=${month.toString().padStart(2, '0')}&_=${Date.now()}`;
-            console.log(`[REFRESH] Fetching token and cookies from ${baseUrl}...`);
-            
-            const sessionResponse = await axios.get(baseUrl, {
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-                },
-                timeout: 10000
-            });
-
-            const cookies = sessionResponse.headers['set-cookie'];
-            if (!cookies) {
-                console.log(`[REFRESH] No cookies found for month ${month}, skipping...`);
-                continue;
-            }
-
-            const $ = cheerio.load(sessionResponse.data);
-            
-            // Try to find the specific token used in AJAX calls (often longer than the hidden input)
-            let token = '';
-            const scriptContent = $('script').text();
-            const ajaxTokenMatch = scriptContent.match(/RequestVerificationToken:\s*'([^']+)'/);
-            
-            if (ajaxTokenMatch) {
-                token = ajaxTokenMatch[1];
-                console.log(`[REFRESH] Found AJAX token for month ${month}`);
-            } else {
-                token = $('input[name="__RequestVerificationToken"]').val();
-                console.log(`[REFRESH] Using hidden field token for month ${month}`);
-            }
-
-            if (!token) {
-                console.log(`[REFRESH] No token found for month ${month}, skipping...`);
-                continue;
-            }
-
-            // Step 2: Post to get JSON data
-            const apiUrl = 'https://www.cpbl.com.tw/schedule/getgamedatas';
-            const postData = qs.stringify({
-                calendar: `${season}/01/01`,
-                kindCode: kindCode,
-                location: ''
-            });
-
-            console.log(`[REFRESH] Posting to ${apiUrl} for month ${month}...`);
-            const apiResponse = await axios.post(apiUrl, postData, {
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                    'RequestVerificationToken': token,
-                    'Cookie': cookies.join('; '),
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Referer': `https://www.cpbl.com.tw/schedule?year=${season}&month=${month.toString().padStart(2, '0')}`,
-                    'Origin': 'https://www.cpbl.com.tw'
-                },
-                timeout: 10000
-            });
-
-            if (apiResponse.data && apiResponse.data.GameDatas) {
-                const games = JSON.parse(apiResponse.data.GameDatas);
-                console.log(`[REFRESH] Found ${games.length} games in month ${month}`);
-                
-                if (games.length > 0) {
-                    console.log(`[REFRESH] Game object keys: ${Object.keys(games[0]).join(', ')}`);
+            try {
+                const session = await fetchScheduleSession(season, month);
+                if (!session) {
+                    console.log(`[REFRESH] Unable to prepare session for month ${month}, skipping...`);
+                    continue;
                 }
 
-                for (const cpblGame of games) {
-                    const involvesUniLions =
-                        cpblGame.HomeTeamCode === UNI_LIONS_TEAM_CODE ||
-                        cpblGame.VisitingTeamCode === UNI_LIONS_TEAM_CODE;
+                const apiUrl = 'https://www.cpbl.com.tw/schedule/getgamedatas';
+                const postData = qs.stringify({
+                    calendar: `${season}/01/01`,
+                    kindCode: kindCode,
+                    location: ''
+                });
 
-                    if (!involvesUniLions) {
-                        continue;
+                console.log(`[REFRESH] Posting to ${apiUrl} for month ${month}...`);
+                const apiResponse = await axios.post(apiUrl, postData, {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                        'RequestVerificationToken': session.token,
+                        'Cookie': session.cookies.join('; '),
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Referer': session.referer,
+                        'Origin': 'https://www.cpbl.com.tw'
+                    },
+                    timeout: 10000
+                });
+
+                if (apiResponse.data && apiResponse.data.GameDatas) {
+                    const games = JSON.parse(apiResponse.data.GameDatas);
+                    console.log(`[REFRESH] Found ${games.length} games in month ${month}`);
+                    
+                    if (games.length > 0) {
+                        console.log(`[REFRESH] Game object keys: ${Object.keys(games[0]).join(', ')}`);
                     }
 
-                    const gameDate = getGameDate(cpblGame);
-                    const gameTime = getGameTime(cpblGame);
-                    const homeTeamName = normalizeTeamName(cpblGame.HomeTeamCode, cpblGame.HomeTeamName);
-                    const awayTeamName = normalizeTeamName(cpblGame.VisitingTeamCode, cpblGame.VisitingTeamName);
-                    const venueName = normalizeVenueName(cpblGame.FieldAbbe);
-                    const homeLogo = normalizeLogoUrl(cpblGame.HomeClubSmallImgPath);
-                    const awayLogo = normalizeLogoUrl(cpblGame.VisitingClubSmallImgPath);
-                    const statusText = getGameStatus(cpblGame);
-                    const newHomeScore = parseInt(cpblGame.HomeScore || 0, 10);
-                    const newAwayScore = parseInt(cpblGame.VisitingScore || 0, 10);
-                    const liveInning = statusText === '進行中'
-                        ? await fetchLiveInning(season, cpblGame.KindCode || kindCode, cpblGame.GameSno)
-                        : '';
+                    for (const cpblGame of games) {
+                        const involvesUniLions =
+                            cpblGame.HomeTeamCode === UNI_LIONS_TEAM_CODE ||
+                            cpblGame.VisitingTeamCode === UNI_LIONS_TEAM_CODE;
 
-                    const game = findMatchingGame(
-                        localData.games,
-                        cpblGame,
-                        homeTeamName,
-                        awayTeamName,
-                        gameDate,
-                        gameTime
-                    );
+                        if (!involvesUniLions) {
+                            continue;
+                        }
 
-                    if (game) {
-                        const venueChanged = venueName && game.venue !== venueName;
-                        const inningChanged = (game.liveInning || '') !== liveInning;
+                        const gameDate = getGameDate(cpblGame);
+                        const gameTime = getGameTime(cpblGame);
+                        const homeTeamName = normalizeTeamName(cpblGame.HomeTeamCode, cpblGame.HomeTeamName);
+                        const awayTeamName = normalizeTeamName(cpblGame.VisitingTeamCode, cpblGame.VisitingTeamName);
+                        const venueName = normalizeVenueName(cpblGame.FieldAbbe);
+                        const homeLogo = normalizeLogoUrl(cpblGame.HomeClubSmallImgPath);
+                        const awayLogo = normalizeLogoUrl(cpblGame.VisitingClubSmallImgPath);
+                        const statusText = getGameStatus(cpblGame);
+                        const newHomeScore = parseInt(cpblGame.HomeScore || 0, 10);
+                        const newAwayScore = parseInt(cpblGame.VisitingScore || 0, 10);
+                        const liveInning = statusText === '進行中'
+                            ? await fetchLiveInning(season, cpblGame.KindCode || kindCode, cpblGame.GameSno)
+                            : '';
 
-                        if (
-                            game.homeScore !== newHomeScore ||
-                            game.awayScore !== newAwayScore ||
-                            game.status !== statusText ||
-                            venueChanged ||
-                            game.time !== gameTime ||
-                            inningChanged ||
-                            String(game.gameSno || '') !== String(cpblGame.GameSno || '')
-                        ) {
-                            console.log(`[REFRESH] Updating game on ${gameDate}: ${homeTeamName} ${newHomeScore} : ${newAwayScore} ${awayTeamName} (${statusText}${liveInning ? ` ${liveInning}` : ''})`);
-                            game.time = gameTime;
-                            game.venue = venueName || game.venue;
-                            game.homeLogo = homeLogo || game.homeLogo;
-                            game.awayLogo = awayLogo || game.awayLogo;
-                            game.homeScore = newHomeScore;
-                            game.awayScore = newAwayScore;
-                            game.status = statusText;
-                            game.gameSno = cpblGame.GameSno;
-                            if (liveInning) {
-                                game.liveInning = liveInning;
-                            } else {
-                                delete game.liveInning;
+                        const game = findMatchingGame(
+                            localData.games,
+                            cpblGame,
+                            homeTeamName,
+                            awayTeamName,
+                            gameDate,
+                            gameTime
+                        );
+
+                        if (game) {
+                            const venueChanged = venueName && game.venue !== venueName;
+                            const inningChanged = (game.liveInning || '') !== liveInning;
+
+                            if (
+                                game.homeScore !== newHomeScore ||
+                                game.awayScore !== newAwayScore ||
+                                game.status !== statusText ||
+                                venueChanged ||
+                                game.time !== gameTime ||
+                                inningChanged ||
+                                String(game.gameSno || '') !== String(cpblGame.GameSno || '')
+                            ) {
+                                console.log(`[REFRESH] Updating game on ${gameDate}: ${homeTeamName} ${newHomeScore} : ${newAwayScore} ${awayTeamName} (${statusText}${liveInning ? ` ${liveInning}` : ''})`);
+                                game.time = gameTime;
+                                game.venue = venueName || game.venue;
+                                game.homeLogo = homeLogo || game.homeLogo;
+                                game.awayLogo = awayLogo || game.awayLogo;
+                                game.homeScore = newHomeScore;
+                                game.awayScore = newAwayScore;
+                                game.status = statusText;
+                                game.gameSno = cpblGame.GameSno;
+                                if (liveInning) {
+                                    game.liveInning = liveInning;
+                                } else {
+                                    delete game.liveInning;
+                                }
+                                updated = true;
                             }
+                        } else {
+                            console.log(`[REFRESH] Adding missing game on ${gameDate}: ${homeTeamName} vs ${awayTeamName}`);
+                            const newGame = {
+                                date: gameDate,
+                                time: gameTime,
+                                homeTeam: homeTeamName,
+                                awayTeam: awayTeamName,
+                                venue: venueName,
+                                homeLogo,
+                                awayLogo,
+                                status: statusText,
+                                homeScore: newHomeScore,
+                                awayScore: newAwayScore,
+                                gameSno: cpblGame.GameSno
+                            };
+
+                            if (liveInning) {
+                                newGame.liveInning = liveInning;
+                            }
+
+                            localData.games.push(newGame);
                             updated = true;
                         }
-                    } else {
-                        console.log(`[REFRESH] Adding missing game on ${gameDate}: ${homeTeamName} vs ${awayTeamName}`);
-                        const newGame = {
-                            date: gameDate,
-                            time: gameTime,
-                            homeTeam: homeTeamName,
-                            awayTeam: awayTeamName,
-                            venue: venueName,
-                            homeLogo,
-                            awayLogo,
-                            status: statusText,
-                            homeScore: newHomeScore,
-                            awayScore: newAwayScore,
-                            gameSno: cpblGame.GameSno
-                        };
-
-                        if (liveInning) {
-                            newGame.liveInning = liveInning;
-                        }
-
-                        localData.games.push(newGame);
-                        updated = true;
                     }
+                } else {
+                    console.log(`[REFRESH] No GameDatas returned for month ${month}`);
                 }
-            } else {
-                console.log(`[REFRESH] No GameDatas returned for month ${month}`);
+            } catch (monthError) {
+                const detail = monthError.response ? monthError.response.status : monthError.message;
+                console.log(`[REFRESH] Failed to refresh month ${month}: ${detail}`);
             }
         }
 
