@@ -1542,6 +1542,7 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 4px;
+    flex-wrap: nowrap;
 }
 
 .matchup-score {
@@ -1555,6 +1556,8 @@ footer {
     color: #8a1c1c;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
     text-align: center;
+    white-space: nowrap;
+    flex: 0 0 auto;
 }
 
 /* 比賽狀態樣式 */

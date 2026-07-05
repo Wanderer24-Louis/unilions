@@ -744,13 +744,12 @@
       "homeTeam": "台鋼雄鷹",
       "awayTeam": "統一7-ELEVEn獅",
       "venue": "澄清湖棒球場",
-      "status": "進行中",
+      "status": "已結束",
       "homeScore": 4,
-      "awayScore": 2,
+      "awayScore": 5,
       "gameSno": 184,
       "homeLogo": "https://www.cpbl.com.tw/files/atts/0M259522048557486065/單色T-100x100.png",
-      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png",
-      "liveInning": "6局下"
+      "awayLogo": "https://www.cpbl.com.tw/files/atts/0L021496162893869773/logo_lions.png"
     },
     {
       "date": "2026-07-05",
