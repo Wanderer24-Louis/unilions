@@ -110,7 +110,10 @@ function normalizeLogoUrl(logoPath = '') {
 
 async function fetchScheduleSession(season, month) {
     const headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Accept-Language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Upgrade-Insecure-Requests': '1'
     };
     const monthText = String(month).padStart(2, '0');
     const candidateUrls = [
@@ -122,42 +125,66 @@ async function fetchScheduleSession(season, month) {
 
     for (const url of candidateUrls) {
         try {
-            console.log(`[REFRESH] Fetching token and cookies from ${url}...`);
-            let response = await axios.get(url, {
-                headers,
-                maxRedirects: 0,
-                validateStatus: status => status >= 200 && status < 400,
-                timeout: 10000
-            });
-            let cookies = response.headers['set-cookie'] || [];
+            const openWithRedirect = async (startUrl, initialCookieHeader = '') => {
+                let currentUrl = startUrl;
+                let cookies = [];
+                let cookieHeader = initialCookieHeader;
 
-            if (response.status >= 300 && response.status < 400 && response.headers.location) {
-                const redirectUrl = new URL(response.headers.location, url).toString();
-                const cookieHeader = cookies.map(cookie => cookie.split(';')[0]).join('; ');
+                for (let i = 0; i < 4; i += 1) {
+                    console.log(`[REFRESH] Fetching token and cookies from ${currentUrl}...`);
+                    const response = await axios.get(currentUrl, {
+                        headers: {
+                            ...headers,
+                            ...(cookieHeader ? { Cookie: cookieHeader } : {})
+                        },
+                        maxRedirects: 0,
+                        validateStatus: () => true,
+                        timeout: 10000
+                    });
 
-                console.log(`[REFRESH] Following redirect to ${redirectUrl}...`);
-                response = await axios.get(redirectUrl, {
-                    headers: {
-                        ...headers,
-                        Cookie: cookieHeader
-                    },
-                    maxRedirects: 0,
-                    validateStatus: status => status >= 200 && status < 400,
-                    timeout: 10000
-                });
+                    const setCookies = response.headers['set-cookie'] || [];
+                    cookies = [...cookies, ...setCookies];
+                    cookieHeader = cookies
+                        .map(cookie => cookie.split(';')[0])
+                        .filter(Boolean)
+                        .join('; ');
 
-                cookies = [
-                    ...cookies,
-                    ...(response.headers['set-cookie'] || [])
-                ];
+                    if (response.status >= 300 && response.status < 400 && response.headers.location) {
+                        const nextUrl = new URL(response.headers.location, currentUrl).toString();
+                        console.log(`[REFRESH] Following redirect to ${nextUrl}...`);
+                        currentUrl = nextUrl;
+                        continue;
+                    }
+
+                    return {
+                        response,
+                        cookieHeader,
+                        finalUrl: currentUrl
+                    };
+                }
+
+                return null;
+            };
+
+            let opened = await openWithRedirect(url);
+            if (opened && opened.response && opened.response.status === 404) {
+                const warmed = await openWithRedirect('https://www.cpbl.com.tw/');
+                const warmCookieHeader = warmed ? warmed.cookieHeader : '';
+                opened = await openWithRedirect(url, warmCookieHeader);
             }
 
-            if (!cookies || cookies.length === 0) {
+            if (!opened || !opened.response || opened.response.status !== 200) {
+                const status = opened && opened.response ? opened.response.status : 'no_response';
+                console.log(`[REFRESH] Failed to open ${url}: ${status}`);
+                continue;
+            }
+
+            if (!opened.cookieHeader) {
                 console.log(`[REFRESH] No cookies found from ${url}, trying fallback...`);
                 continue;
             }
 
-            const $ = cheerio.load(response.data);
+            const $ = cheerio.load(opened.response.data);
             const scriptContent = $('script').text();
             const ajaxTokenMatch = scriptContent.match(/RequestVerificationToken:\s*'([^']+)'/);
             const token = ajaxTokenMatch
@@ -169,11 +196,11 @@ async function fetchScheduleSession(season, month) {
                 continue;
             }
 
-            console.log(`[REFRESH] Session ready from ${url}`);
+            console.log(`[REFRESH] Session ready from ${opened.finalUrl}`);
             return {
-                cookies,
+                cookieHeader: opened.cookieHeader,
                 token,
-                referer: url
+                referer: opened.finalUrl
             };
         } catch (error) {
             const detail = error.response ? error.response.status : error.message;
@@ -473,7 +500,7 @@ async function refreshScheduleData(season, kindCode = 'A') {
                     headers: {
                         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
                         'RequestVerificationToken': session.token,
-                        'Cookie': session.cookies.join('; '),
+                        'Cookie': session.cookieHeader,
                         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
                         'X-Requested-With': 'XMLHttpRequest',
                         'Referer': session.referer,
