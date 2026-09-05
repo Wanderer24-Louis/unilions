@@ -1,4 +1,4 @@
-﻿const { spawn } = require('child_process');
+const { spawn } = require('child_process');
 const http = require('http');
 
 const child = spawn(process.execPath, ['server.js'], { cwd: process.cwd(), stdio: ['ignore', 'pipe', 'pipe'] });
@@ -28,10 +28,10 @@ function requestOnce() {
 
 (async () => {
   try {
-    await new Promise(r => setTimeout(r, 5000));
+    await new Promise(r => setTimeout(r, 8000));
     const result = await requestOnce();
     console.log('STATUS=' + result.status);
-    console.log(result.body.slice(0, 400));
+    console.log(result.body.slice(0, 500));
   } catch (error) {
     console.error('REQUEST_ERROR=' + error.message);
   } finally {

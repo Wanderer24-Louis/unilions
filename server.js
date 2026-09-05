@@ -35,6 +35,50 @@ const TEAM_NAME_MAP = {
     AAA011: '味全龍',
     AKP011: '台鋼雄鷹'
 };
+
+const SCHEDULE_CACHE = {
+    data: null,
+    timestamp: 0,
+    ttlMs: 5 * 60 * 1000
+};
+
+const REFRESH_LOCK = {
+    running: false,
+    lastRunAt: 0,
+    minIntervalMs: 2 * 60 * 1000
+};
+
+const BROWSER_USER_AGENTS = [
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
+];
+
+function randomPick(list) {
+    return list[Math.floor(Math.random() * list.length)];
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function buildBrowserHeaders(extra = {}) {
+    return {
+        'User-Agent': randomPick(BROWSER_USER_AGENTS),
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'Accept-Language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Upgrade-Insecure-Requests': '1',
+        'sec-ch-ua': '"Chromium";v="128", "Not;A=Brand";v="24", "Google Chrome";v="128"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        ...extra
+    };
+}
+
 const VENUE_NAME_MAP = {
     '亞太主': '亞太棒球場',
     '台南': '台南棒球場',
@@ -109,102 +153,109 @@ function normalizeLogoUrl(logoPath = '') {
 }
 
 async function fetchScheduleSession(season, month) {
-    const headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Accept-Language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Upgrade-Insecure-Requests': '1'
-    };
     const monthText = String(month).padStart(2, '0');
     const candidateUrls = [
-        `https://www.cpbl.com.tw/schedule?year=${season}&month=${monthText}&_=${Date.now()}`,
         `https://www.cpbl.com.tw/schedule?year=${season}&month=${monthText}`,
+        `https://www.cpbl.com.tw/schedule?year=${season}&month=${monthText}&_=${Date.now()}`,
         `https://www.cpbl.com.tw/schedule?year=${season}`,
         'https://www.cpbl.com.tw/schedule'
     ];
 
-    for (const url of candidateUrls) {
-        try {
-            const openWithRedirect = async (startUrl, initialCookieHeader = '') => {
-                let currentUrl = startUrl;
-                let cookies = [];
-                let cookieHeader = initialCookieHeader;
+    const openWithRedirect = async (startUrl, initialCookieHeader = '', attempt = 0) => {
+        let currentUrl = startUrl;
+        let cookies = [];
+        let cookieHeader = initialCookieHeader;
 
-                for (let i = 0; i < 4; i += 1) {
-                    console.log(`[REFRESH] Fetching token and cookies from ${currentUrl}...`);
-                    const response = await axios.get(currentUrl, {
-                        headers: {
-                            ...headers,
-                            ...(cookieHeader ? { Cookie: cookieHeader } : {})
-                        },
-                        maxRedirects: 0,
-                        validateStatus: () => true,
-                        timeout: 10000
-                    });
+        for (let i = 0; i < 5; i += 1) {
+            const headers = buildBrowserHeaders(cookieHeader ? { Cookie: cookieHeader } : {});
+            if (i > 0) {
+                headers.Referer = currentUrl;
+            }
 
-                    const setCookies = response.headers['set-cookie'] || [];
-                    cookies = [...cookies, ...setCookies];
-                    cookieHeader = cookies
-                        .map(cookie => cookie.split(';')[0])
-                        .filter(Boolean)
-                        .join('; ');
+            console.log(`[REFRESH] Fetching token and cookies from ${currentUrl}...`);
+            const response = await axios.get(currentUrl, {
+                headers,
+                maxRedirects: 0,
+                validateStatus: () => true,
+                timeout: 15000,
+                decompress: true
+            });
 
-                    if (response.status >= 300 && response.status < 400 && response.headers.location) {
-                        const nextUrl = new URL(response.headers.location, currentUrl).toString();
-                        console.log(`[REFRESH] Following redirect to ${nextUrl}...`);
-                        currentUrl = nextUrl;
-                        continue;
-                    }
+            const setCookies = response.headers['set-cookie'] || [];
+            cookies = [...cookies, ...setCookies];
+            cookieHeader = cookies
+                .map(cookie => cookie.split(';')[0])
+                .filter(Boolean)
+                .join('; ');
 
-                    return {
-                        response,
-                        cookieHeader,
-                        finalUrl: currentUrl
-                    };
+            if (response.status >= 300 && response.status < 400 && response.headers.location) {
+                const nextUrl = new URL(response.headers.location, currentUrl).toString();
+                console.log(`[REFRESH] Following redirect to ${nextUrl}...`);
+                currentUrl = nextUrl;
+                await sleep(300 + Math.floor(Math.random() * 300));
+                continue;
+            }
+
+            return {
+                response,
+                cookieHeader,
+                finalUrl: currentUrl
+            };
+        }
+
+        return null;
+    };
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+        if (attempt > 0) {
+            const backoffMs = 1500 * Math.pow(2, attempt - 1) + Math.floor(Math.random() * 1000);
+            console.log(`[REFRESH] Retry attempt ${attempt + 1} after ${backoffMs}ms...`);
+            await sleep(backoffMs);
+        }
+
+        for (const url of candidateUrls) {
+            try {
+                let opened = await openWithRedirect(url, '', attempt);
+                if (opened && opened.response && (opened.response.status === 404 || opened.response.status >= 500)) {
+                    const warmed = await openWithRedirect('https://www.cpbl.com.tw/', '', attempt);
+                    const warmCookieHeader = warmed ? warmed.cookieHeader : '';
+                    await sleep(500 + Math.floor(Math.random() * 800));
+                    opened = await openWithRedirect(url, warmCookieHeader, attempt);
                 }
 
-                return null;
-            };
+                if (!opened || !opened.response || opened.response.status !== 200) {
+                    const status = opened && opened.response ? opened.response.status : 'no_response';
+                    console.log(`[REFRESH] Failed to open ${url}: ${status}`);
+                    continue;
+                }
 
-            let opened = await openWithRedirect(url);
-            if (opened && opened.response && opened.response.status === 404) {
-                const warmed = await openWithRedirect('https://www.cpbl.com.tw/');
-                const warmCookieHeader = warmed ? warmed.cookieHeader : '';
-                opened = await openWithRedirect(url, warmCookieHeader);
+                if (!opened.cookieHeader) {
+                    console.log(`[REFRESH] No cookies found from ${url}, trying fallback...`);
+                    continue;
+                }
+
+                const $ = cheerio.load(opened.response.data);
+                const scriptContent = $('script').text();
+                const ajaxTokenMatch = scriptContent.match(/RequestVerificationToken:\s*'([^']+)'/);
+                const token = ajaxTokenMatch
+                    ? ajaxTokenMatch[1]
+                    : $('input[name="__RequestVerificationToken"]').val();
+
+                if (!token) {
+                    console.log(`[REFRESH] No token found from ${url}, trying fallback...`);
+                    continue;
+                }
+
+                console.log(`[REFRESH] Session ready from ${opened.finalUrl} (attempt ${attempt + 1})`);
+                return {
+                    cookieHeader: opened.cookieHeader,
+                    token,
+                    referer: opened.finalUrl
+                };
+            } catch (error) {
+                const detail = error.response ? error.response.status : error.message;
+                console.log(`[REFRESH] Failed to open ${url}: ${detail}`);
             }
-
-            if (!opened || !opened.response || opened.response.status !== 200) {
-                const status = opened && opened.response ? opened.response.status : 'no_response';
-                console.log(`[REFRESH] Failed to open ${url}: ${status}`);
-                continue;
-            }
-
-            if (!opened.cookieHeader) {
-                console.log(`[REFRESH] No cookies found from ${url}, trying fallback...`);
-                continue;
-            }
-
-            const $ = cheerio.load(opened.response.data);
-            const scriptContent = $('script').text();
-            const ajaxTokenMatch = scriptContent.match(/RequestVerificationToken:\s*'([^']+)'/);
-            const token = ajaxTokenMatch
-                ? ajaxTokenMatch[1]
-                : $('input[name="__RequestVerificationToken"]').val();
-
-            if (!token) {
-                console.log(`[REFRESH] No token found from ${url}, trying fallback...`);
-                continue;
-            }
-
-            console.log(`[REFRESH] Session ready from ${opened.finalUrl}`);
-            return {
-                cookieHeader: opened.cookieHeader,
-                token,
-                referer: opened.finalUrl
-            };
-        } catch (error) {
-            const detail = error.response ? error.response.status : error.message;
-            console.log(`[REFRESH] Failed to open ${url}: ${detail}`);
         }
     }
 
@@ -461,27 +512,54 @@ app.get('/api/weather', async (req, res) => {
 // API Endpoint for fetching schedule
 // Helper to refresh schedule data from CPBL
 async function refreshScheduleData(season, kindCode = 'A') {
+    const cacheKey = `${season}-${kindCode}`;
+    const now = Date.now();
+
+    if (REFRESH_LOCK.running) {
+        console.log(`[REFRESH] Lock held, returning cached/on-disk data...`);
+        if (SCHEDULE_CACHE.data && SCHEDULE_CACHE.key === cacheKey) {
+            return SCHEDULE_CACHE.data;
+        }
+        const targetFile = `schedule-${season}.json`;
+        const fallbackPath = path.join(DATA_DIR, targetFile);
+        if (fs.existsSync(fallbackPath)) {
+            return JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
+        }
+        return null;
+    }
+
+    if ((now - REFRESH_LOCK.lastRunAt) < REFRESH_LOCK.minIntervalMs) {
+        console.log(`[REFRESH] Throttled (last run ${Math.floor((now - REFRESH_LOCK.lastRunAt) / 1000)}s ago), using cache...`);
+        if (SCHEDULE_CACHE.data && SCHEDULE_CACHE.key === cacheKey) {
+            return SCHEDULE_CACHE.data;
+        }
+    }
+
+    REFRESH_LOCK.running = true;
     try {
         console.log(`[REFRESH] Refreshing schedule for season ${season}, kindCode ${kindCode}...`);
-        
+        REFRESH_LOCK.lastRunAt = now;
+
         if (season !== '2026') return null;
 
         const targetFile = `schedule-${season}.json`;
         const filePath = path.join(DATA_DIR, targetFile);
-        
+
         if (!fs.existsSync(filePath)) return null;
-        
+
         let localData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
         let updated = false;
 
-        const now = new Date();
-        const currentMonth = now.getMonth() + 1;
+        const today = new Date();
+        const currentMonth = today.getMonth() + 1;
         const months = [currentMonth];
         if (currentMonth > 3) months.push(currentMonth - 1);
+        if (currentMonth < 11) months.push(currentMonth + 1);
 
         for (const month of months) {
-            if (month < 3 || month > 11) continue; 
+            if (month < 3 || month > 11) continue;
             try {
+                await sleep(400 + Math.floor(Math.random() * 600));
                 const session = await fetchScheduleSession(season, month);
                 if (!session) {
                     console.log(`[REFRESH] Unable to prepare session for month ${month}, skipping...`);
@@ -495,21 +573,72 @@ async function refreshScheduleData(season, kindCode = 'A') {
                     location: ''
                 });
 
-                console.log(`[REFRESH] Posting to ${apiUrl} for month ${month}...`);
-                const apiResponse = await axios.post(apiUrl, postData, {
-                    headers: {
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                        'RequestVerificationToken': session.token,
-                        'Cookie': session.cookieHeader,
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'Referer': session.referer,
-                        'Origin': 'https://www.cpbl.com.tw'
-                    },
-                    timeout: 10000
-                });
+                let apiResponse = null;
+                for (let attempt = 0; attempt < 3; attempt += 1) {
+                    if (attempt > 0) {
+                        const backoffMs = 1200 * Math.pow(2, attempt - 1) + Math.floor(Math.random() * 800);
+                        console.log(`[REFRESH] getgamedatas retry attempt ${attempt + 1} after ${backoffMs}ms...`);
+                        await sleep(backoffMs);
+                    }
+                    try {
+                        console.log(`[REFRESH] Posting to ${apiUrl} for month ${month}...`);
+                        const baseHeaders = buildBrowserHeaders({
+                            'RequestVerificationToken': session.token,
+                            'Cookie': session.cookieHeader,
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Referer': session.referer,
+                            'Origin': 'https://www.cpbl.com.tw',
+                            'sec-ch-ua': '"Chromium";v="128", "Not;A=Brand";v="24", "Google Chrome";v="128"',
+                            'sec-ch-ua-mobile': '?0',
+                            'sec-ch-ua-platform': '"Windows"'
+                        });
 
-                if (apiResponse.data && apiResponse.data.GameDatas) {
+                        let currentUrl = apiUrl;
+                        let cookieHeader = session.cookieHeader;
+                        let lastResponse = null;
+
+                        for (let redirectStep = 0; redirectStep < 4; redirectStep += 1) {
+                            const postHeaders = { ...baseHeaders };
+                            if (cookieHeader) {
+                                postHeaders.Cookie = cookieHeader;
+                            }
+                            lastResponse = await axios.post(currentUrl, postData, {
+                                headers: postHeaders,
+                                timeout: 15000,
+                                decompress: true,
+                                maxRedirects: 0,
+                                validateStatus: () => true
+                            });
+
+                            const setCookies = lastResponse.headers['set-cookie'] || [];
+                            if (setCookies.length > 0) {
+                                const fresh = setCookies.map(c => c.split(';')[0]).filter(Boolean).join('; ');
+                                cookieHeader = cookieHeader ? `${cookieHeader}; ${fresh}` : fresh;
+                            }
+
+                            if (lastResponse.status >= 300 && lastResponse.status < 400 && lastResponse.headers.location) {
+                                const nextUrl = new URL(lastResponse.headers.location, currentUrl).toString();
+                                console.log(`[REFRESH] getgamedatas redirect to ${nextUrl}...`);
+                                currentUrl = nextUrl;
+                                await sleep(300 + Math.floor(Math.random() * 300));
+                                continue;
+                            }
+
+                            break;
+                        }
+
+                        apiResponse = lastResponse;
+                        if (apiResponse && apiResponse.status === 200 && apiResponse.data && apiResponse.data.GameDatas) {
+                            break;
+                        }
+                        console.log(`[REFRESH] getgamedatas bad response status=${apiResponse ? apiResponse.status : 'unknown'}`);
+                    } catch (postError) {
+                        console.log(`[REFRESH] getgamedatas post error: ${postError.message}`);
+                    }
+                }
+
+                if (apiResponse && apiResponse.data && apiResponse.data.GameDatas) {
                     const games = JSON.parse(apiResponse.data.GameDatas);
                     console.log(`[REFRESH] Found ${games.length} games in month ${month}`);
                     
@@ -622,10 +751,22 @@ async function refreshScheduleData(season, kindCode = 'A') {
             console.log(`[REFRESH] Saved updated schedule to ${targetFile}`);
         }
 
+        SCHEDULE_CACHE.data = localData;
+        SCHEDULE_CACHE.key = cacheKey;
+        SCHEDULE_CACHE.timestamp = Date.now();
+
         return localData;
     } catch (error) {
         console.error('[REFRESH] Error refreshing schedule:', error.message);
+        const targetFile = `schedule-${season}.json`;
+        const fallbackPath = path.join(DATA_DIR, targetFile);
+        if (fs.existsSync(fallbackPath)) {
+            console.log('[REFRESH] Falling back to on-disk data...');
+            return JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
+        }
         return null;
+    } finally {
+        REFRESH_LOCK.running = false;
     }
 }
 
@@ -634,31 +775,50 @@ app.get('/api/schedule', async (req, res) => {
         const season = req.query.season || new Date().getFullYear().toString();
         const kindCode = req.query.kindCode;
         const refresh = req.query.refresh === '1';
-        
+        const cacheKey = `${season}-${kindCode}`;
+
         let targetFile = `schedule-${season}.json`;
-        
+
         if (kindCode) {
              const specificFile = `schedule-${season}-${kindCode}.json`;
              if (fs.existsSync(path.join(DATA_DIR, specificFile))) {
                  targetFile = specificFile;
              }
         }
-        
+
         const filePath = path.join(DATA_DIR, targetFile);
-        
-        if (refresh) {
-            const refreshedData = await refreshScheduleData(season, kindCode);
-            if (refreshedData) {
-                return res.json(refreshedData);
+
+        if (!refresh) {
+            const now = Date.now();
+            if (SCHEDULE_CACHE.data && SCHEDULE_CACHE.key === cacheKey && (now - SCHEDULE_CACHE.timestamp) < SCHEDULE_CACHE.ttlMs) {
+                return res.json(SCHEDULE_CACHE.data);
             }
+            if (fs.existsSync(filePath)) {
+                const raw = fs.readFileSync(filePath, 'utf8');
+                const parsed = JSON.parse(raw);
+                SCHEDULE_CACHE.data = parsed;
+                SCHEDULE_CACHE.key = cacheKey;
+                SCHEDULE_CACHE.timestamp = now;
+                return res.json(parsed);
+            }
+            return res.status(404).json({ error: 'Schedule not found', season, kindCode });
+        }
+
+        const refreshedData = await refreshScheduleData(season, kindCode);
+        if (refreshedData) {
+            return res.json(refreshedData);
         }
 
         if (fs.existsSync(filePath)) {
             const data = fs.readFileSync(filePath, 'utf8');
-            res.json(JSON.parse(data));
-        } else {
-            res.status(404).json({ error: 'Schedule not found', season, kindCode });
+            const parsed = JSON.parse(data);
+            SCHEDULE_CACHE.data = parsed;
+            SCHEDULE_CACHE.key = cacheKey;
+            SCHEDULE_CACHE.timestamp = Date.now();
+            return res.json(parsed);
         }
+
+        res.status(404).json({ error: 'Schedule not found', season, kindCode });
     } catch (error) {
         console.error('Error fetching schedule:', error);
         res.status(500).json({ error: 'Failed to fetch schedule' });
